@@ -1,8 +1,13 @@
 {
   "name": "@cybrid/cybrid-api-bank-typescript",
-  "version": "0.3.17",
-  "description": "OpenAPI client for @cybrid/cybrid-api-bank-typescript",
-  "author": "OpenAPI-Generator",
+  "version": "0.3.23",
+  "description": "View our documentation at https://github.com/Cybrid-app/cybrid-api-bank-typescript/",
+  "author": "Cybrid",
+  "keywords": [
+  "cybrid",
+    "@cybrid/cybrid-api-bank-typescript"
+  ],
+  "license": "Apache-2.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts" : {
