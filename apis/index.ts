@@ -7,4 +7,5 @@ export * from './PricesBankApi';
 export * from './QuotesBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
+export * from './TradingConfigurationsBankApi';
 export * from './VerificationKeysBankApi';

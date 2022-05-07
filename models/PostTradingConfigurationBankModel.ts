@@ -12,50 +12,24 @@
  */
 
 import {
-    AttestationDetailsBankModel,
+    PostFeeBankModel,
 } from './';
 
 /**
  * @export
- * @interface IdentityRecordBankModel
+ * @interface PostTradingConfigurationBankModel
  */
-export interface IdentityRecordBankModel {
+export interface PostTradingConfigurationBankModel {
     /**
-     * Auto-generated unique identifier for the identity record.
+     * The asset code.
      * @type {string}
-     * @memberof IdentityRecordBankModel
+     * @memberof PostTradingConfigurationBankModel
      */
-    guid?: string;
+    asset: string;
     /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
+     * The fees associated with the configuration
+     * @type {Array<PostFeeBankModel>}
+     * @memberof PostTradingConfigurationBankModel
      */
-    customer_guid?: string;
-    /**
-     * The identity record\'s type.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
-     */
-    type?: IdentityRecordBankModelTypeEnum;
-    /**
-     * @type {AttestationDetailsBankModel}
-     * @memberof IdentityRecordBankModel
-     */
-    attestation_details?: AttestationDetailsBankModel;
-    /**
-     * ISO8601 datetime the customer was created at.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
-     */
-    created_at?: string;
+    fees: Array<PostFeeBankModel>;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum IdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
-}
-

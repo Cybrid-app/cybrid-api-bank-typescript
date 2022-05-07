@@ -14,23 +14,20 @@
 import { Observable } from 'rxjs';
 import { BaseAPI, HttpHeaders, HttpQuery, throwIfNullOrUndefined, encodeURI, OperationOpts, RawAjaxResponse } from '../runtime';
 import {
-    PostVerificationKeyBankModel,
-    VerificationKeyBankModel,
-    VerificationKeyListBankModel,
+    PostTradingConfigurationBankModel,
+    TradingConfigurationBankModel,
+    TradingConfigurationListBankModel,
 } from '../models';
 
-export interface CreateVerificationKeyRequest {
-    bankGuid: string;
-    postVerificationKeyBankModel: PostVerificationKeyBankModel;
+export interface CreateTradingConfigurationRequest {
+    postTradingConfigurationBankModel: PostTradingConfigurationBankModel;
 }
 
-export interface GetVerificationKeyRequest {
-    bankGuid: string;
-    verificationKeyGuid: string;
+export interface GetTradingConfigurationRequest {
+    tradingConfigurationGuid: string;
 }
 
-export interface ListVerificationKeysRequest {
-    bankGuid: string;
+export interface ListTradingConfigurationsRequest {
     page?: number;
     perPage?: number;
 }
@@ -38,17 +35,16 @@ export interface ListVerificationKeysRequest {
 /**
  * no description
  */
-export class VerificationKeysBankApi extends BaseAPI {
+export class TradingConfigurationsBankApi extends BaseAPI {
 
     /**
-     * Creates a verification key.   Example code (python) for generating a Verification Key  ```python import base64  from cryptography.hazmat.primitives import hashes from cryptography.hazmat.primitives import serialization from cryptography.hazmat.primitives.asymmetric import padding from cryptography.hazmat.primitives.asymmetric import rsa  nonce = \"wen moon\" private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048) signature = base64.b64encode(private_key.sign(     data=nonce.encode(\'ascii\'), padding=padding.PKCS1v15(), algorithm=hashes.SHA512())).decode(\'ascii\') public_key = base64.b64encode(private_key.public_key().public_bytes(     encoding=serialization.Encoding.DER, format=serialization.PublicFormat.SubjectPublicKeyInfo)).decode(\'ascii\') ````  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the verification in our private key store | | pending | The Platform is verifying the verification key\'s signature | | verified | The Platform has verified the verification key\'s signature and the key can be used | | failed | The Platform was not able to verify the verification key\'s signature and the key cannot be used |    Required scope: **banks:write**
-     * Create VerificationKey
+     * Creates a trading configuration.  Required scope: **banks:write**
+     * Create TradingConfiguration
      */
-    createVerificationKey({ bankGuid, postVerificationKeyBankModel }: CreateVerificationKeyRequest): Observable<VerificationKeyBankModel>
-    createVerificationKey({ bankGuid, postVerificationKeyBankModel }: CreateVerificationKeyRequest, opts?: OperationOpts): Observable<RawAjaxResponse<VerificationKeyBankModel>>
-    createVerificationKey({ bankGuid, postVerificationKeyBankModel }: CreateVerificationKeyRequest, opts?: OperationOpts): Observable<VerificationKeyBankModel | RawAjaxResponse<VerificationKeyBankModel>> {
-        throwIfNullOrUndefined(bankGuid, 'bankGuid', 'createVerificationKey');
-        throwIfNullOrUndefined(postVerificationKeyBankModel, 'postVerificationKeyBankModel', 'createVerificationKey');
+    createTradingConfiguration({ postTradingConfigurationBankModel }: CreateTradingConfigurationRequest): Observable<TradingConfigurationBankModel>
+    createTradingConfiguration({ postTradingConfigurationBankModel }: CreateTradingConfigurationRequest, opts?: OperationOpts): Observable<RawAjaxResponse<TradingConfigurationBankModel>>
+    createTradingConfiguration({ postTradingConfigurationBankModel }: CreateTradingConfigurationRequest, opts?: OperationOpts): Observable<TradingConfigurationBankModel | RawAjaxResponse<TradingConfigurationBankModel>> {
+        throwIfNullOrUndefined(postTradingConfigurationBankModel, 'postTradingConfigurationBankModel', 'createTradingConfiguration');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
@@ -62,23 +58,22 @@ export class VerificationKeysBankApi extends BaseAPI {
             ),
         };
 
-        return this.request<VerificationKeyBankModel>({
-            url: '/api/banks/{bank_guid}/verification_keys'.replace('{bank_guid}', encodeURI(bankGuid)),
+        return this.request<TradingConfigurationBankModel>({
+            url: '/api/trading_configurations',
             method: 'POST',
             headers,
-            body: postVerificationKeyBankModel,
+            body: postTradingConfigurationBankModel,
         }, opts?.responseOpts);
     };
 
     /**
-     * Retrieves a verification key.  Required scope: **banks:read**
-     * Get VerificationKey
+     * Retrieves a trading configuration.  Required scope: **banks:read**
+     * Get TradingConfiguration
      */
-    getVerificationKey({ bankGuid, verificationKeyGuid }: GetVerificationKeyRequest): Observable<VerificationKeyBankModel>
-    getVerificationKey({ bankGuid, verificationKeyGuid }: GetVerificationKeyRequest, opts?: OperationOpts): Observable<RawAjaxResponse<VerificationKeyBankModel>>
-    getVerificationKey({ bankGuid, verificationKeyGuid }: GetVerificationKeyRequest, opts?: OperationOpts): Observable<VerificationKeyBankModel | RawAjaxResponse<VerificationKeyBankModel>> {
-        throwIfNullOrUndefined(bankGuid, 'bankGuid', 'getVerificationKey');
-        throwIfNullOrUndefined(verificationKeyGuid, 'verificationKeyGuid', 'getVerificationKey');
+    getTradingConfiguration({ tradingConfigurationGuid }: GetTradingConfigurationRequest): Observable<TradingConfigurationBankModel>
+    getTradingConfiguration({ tradingConfigurationGuid }: GetTradingConfigurationRequest, opts?: OperationOpts): Observable<RawAjaxResponse<TradingConfigurationBankModel>>
+    getTradingConfiguration({ tradingConfigurationGuid }: GetTradingConfigurationRequest, opts?: OperationOpts): Observable<TradingConfigurationBankModel | RawAjaxResponse<TradingConfigurationBankModel>> {
+        throwIfNullOrUndefined(tradingConfigurationGuid, 'tradingConfigurationGuid', 'getTradingConfiguration');
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
@@ -91,21 +86,20 @@ export class VerificationKeysBankApi extends BaseAPI {
             ),
         };
 
-        return this.request<VerificationKeyBankModel>({
-            url: '/api/banks/{bank_guid}/verification_keys/{verification_key_guid}'.replace('{bank_guid}', encodeURI(bankGuid)).replace('{verification_key_guid}', encodeURI(verificationKeyGuid)),
+        return this.request<TradingConfigurationBankModel>({
+            url: '/api/trading_configurations/{trading_configuration_guid}'.replace('{trading_configuration_guid}', encodeURI(tradingConfigurationGuid)),
             method: 'GET',
             headers,
         }, opts?.responseOpts);
     };
 
     /**
-     * Retrieves a listing of verification keys of a bank.  Required scope: **banks:read**
-     * Get Verification Keys list
+     * Retrieves a listing of trading configurations for a bank.  Required scope: **banks:read**
+     * List trading configurations
      */
-    listVerificationKeys({ bankGuid, page, perPage }: ListVerificationKeysRequest): Observable<VerificationKeyListBankModel>
-    listVerificationKeys({ bankGuid, page, perPage }: ListVerificationKeysRequest, opts?: OperationOpts): Observable<RawAjaxResponse<VerificationKeyListBankModel>>
-    listVerificationKeys({ bankGuid, page, perPage }: ListVerificationKeysRequest, opts?: OperationOpts): Observable<VerificationKeyListBankModel | RawAjaxResponse<VerificationKeyListBankModel>> {
-        throwIfNullOrUndefined(bankGuid, 'bankGuid', 'listVerificationKeys');
+    listTradingConfigurations({ page, perPage }: ListTradingConfigurationsRequest): Observable<TradingConfigurationListBankModel>
+    listTradingConfigurations({ page, perPage }: ListTradingConfigurationsRequest, opts?: OperationOpts): Observable<RawAjaxResponse<TradingConfigurationListBankModel>>
+    listTradingConfigurations({ page, perPage }: ListTradingConfigurationsRequest, opts?: OperationOpts): Observable<TradingConfigurationListBankModel | RawAjaxResponse<TradingConfigurationListBankModel>> {
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
@@ -123,8 +117,8 @@ export class VerificationKeysBankApi extends BaseAPI {
         if (page != null) { query['page'] = page; }
         if (perPage != null) { query['per_page'] = perPage; }
 
-        return this.request<VerificationKeyListBankModel>({
-            url: '/api/banks/{bank_guid}/verification_keys'.replace('{bank_guid}', encodeURI(bankGuid)),
+        return this.request<TradingConfigurationListBankModel>({
+            url: '/api/trading_configurations',
             method: 'GET',
             headers,
             query,

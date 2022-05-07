@@ -11,51 +11,37 @@
  * Do not edit the class manually.
  */
 
-import {
-    AttestationDetailsBankModel,
-} from './';
-
 /**
  * @export
- * @interface IdentityRecordBankModel
+ * @interface PostFeeBankModel
  */
-export interface IdentityRecordBankModel {
+export interface PostFeeBankModel {
     /**
-     * Auto-generated unique identifier for the identity record.
+     * The fee\'s type
      * @type {string}
-     * @memberof IdentityRecordBankModel
+     * @memberof PostFeeBankModel
      */
-    guid?: string;
+    type: PostFeeBankModelTypeEnum;
     /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
+     * The percentage amount, in basis points, to apply when charging a fee.
+     * @type {number}
+     * @memberof PostFeeBankModel
      */
-    customer_guid?: string;
+    spread_fee?: number;
     /**
-     * The identity record\'s type.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
+     * The fixed amount, in the currency of the parent trading configuration, to apply when charging a fee.
+     * @type {number}
+     * @memberof PostFeeBankModel
      */
-    type?: IdentityRecordBankModelTypeEnum;
-    /**
-     * @type {AttestationDetailsBankModel}
-     * @memberof IdentityRecordBankModel
-     */
-    attestation_details?: AttestationDetailsBankModel;
-    /**
-     * ISO8601 datetime the customer was created at.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
-     */
-    created_at?: string;
+    fixed_fee?: number;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum IdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
+export enum PostFeeBankModelTypeEnum {
+    Spread = 'spread',
+    Fixed = 'fixed'
 }
 
