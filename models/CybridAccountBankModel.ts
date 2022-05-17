@@ -13,47 +13,60 @@
 
 /**
  * @export
- * @interface PostQuoteBankModel
+ * @interface CybridAccountBankModel
  */
-export interface PostQuoteBankModel {
+export interface CybridAccountBankModel {
     /**
-     * The unique identifier for the customer.
+     * The account type.
      * @type {string}
-     * @memberof PostQuoteBankModel
+     * @memberof CybridAccountBankModel
      */
-    customer_guid: string;
+    type?: CybridAccountBankModelTypeEnum;
     /**
-     * Symbol the quote is being requested for. Format is \"asset-counter_asset\" in uppercase. See the Symbols API for a complete list of cryptocurrencies supported.
+     * Auto-generated unique identifier for the account.
      * @type {string}
-     * @memberof PostQuoteBankModel
+     * @memberof CybridAccountBankModel
      */
-    symbol: string;
+    guid?: string;
     /**
-     * The direction of the quote: either \'buy\' or \'sell\'.
+     * ISO8601 datetime the account was created at.
      * @type {string}
-     * @memberof PostQuoteBankModel
+     * @memberof CybridAccountBankModel
      */
-    side: PostQuoteBankModelSideEnum;
+    created_at?: string;
     /**
-     * The amount to be received in base units of the currency: currency is \"asset\" for buy and \"counter_asset\" for sell.
-     * @type {number}
-     * @memberof PostQuoteBankModel
+     * The asset code.
+     * @type {string}
+     * @memberof CybridAccountBankModel
      */
-    receive_amount?: number;
+    asset_code?: string;
     /**
-     * The amount to be delivered in base units of the currency: currency is \"counter_asset\" for buy and \"asset\" for sell.
-     * @type {number}
-     * @memberof PostQuoteBankModel
+     * The name of the account.
+     * @type {string}
+     * @memberof CybridAccountBankModel
      */
-    deliver_amount?: number;
+    name?: string;
+    /**
+     * The environment the account is configured for.
+     * @type {string}
+     * @memberof CybridAccountBankModel
+     */
+    environment?: CybridAccountBankModelEnvironmentEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum PostQuoteBankModelSideEnum {
-    Buy = 'buy',
-    Sell = 'sell'
+export enum CybridAccountBankModelTypeEnum {
+    Fee = 'fee'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum CybridAccountBankModelEnvironmentEnum {
+    Sandbox = 'sandbox',
+    Production = 'production'
 }
 

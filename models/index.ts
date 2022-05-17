@@ -7,6 +7,7 @@ export * from './BankBankModel';
 export * from './BankListBankModel';
 export * from './CustomerBankModel';
 export * from './CustomerListBankModel';
+export * from './CybridAccountBankModel';
 export * from './ExchangeAccountBankModel';
 export * from './ExchangeBankModel';
 export * from './FeeBankModel';
