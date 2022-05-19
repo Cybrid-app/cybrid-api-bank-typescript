@@ -12,6 +12,7 @@ export * from './ExchangeAccountBankModel';
 export * from './ExchangeBankModel';
 export * from './FeeBankModel';
 export * from './IdentityRecordBankModel';
+export * from './IdentityRecordListBankModel';
 export * from './PostAccountBankModel';
 export * from './PostBankBankModel';
 export * from './PostCustomerBankModel';

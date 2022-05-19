@@ -11,118 +11,36 @@
  * Do not edit the class manually.
  */
 
-import { Observable } from 'rxjs';
-import { BaseAPI, HttpHeaders, HttpQuery, throwIfNullOrUndefined, encodeURI, OperationOpts, RawAjaxResponse } from '../runtime';
 import {
-    PostQuoteBankModel,
-    QuoteBankModel,
-    QuoteListBankModel,
-} from '../models';
-
-export interface CreateQuoteRequest {
-    postQuoteBankModel: PostQuoteBankModel;
-}
-
-export interface GetQuoteRequest {
-    quoteGuid: string;
-}
-
-export interface ListQuotesRequest {
-    page?: number;
-    perPage?: number;
-}
+    IdentityRecordBankModel,
+} from './';
 
 /**
- * no description
+ * @export
+ * @interface IdentityRecordListBankModel
  */
-export class QuotesBankApi extends BaseAPI {
-
+export interface IdentityRecordListBankModel {
     /**
-     * Creates a quote.  Required scope: **quotes:execute**
-     * Create Quote
+     * The total number of records available.
+     * @type {number}
+     * @memberof IdentityRecordListBankModel
      */
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest): Observable<QuoteBankModel>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<RawAjaxResponse<QuoteBankModel>>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | RawAjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(postQuoteBankModel, 'postQuoteBankModel', 'createQuote');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes',
-            method: 'POST',
-            headers,
-            body: postQuoteBankModel,
-        }, opts?.responseOpts);
-    };
-
+    total: number;
     /**
-     * Retrieves a quote.  Required scope: **quotes:read**
-     * Get Quote
+     * The page index to retrieve.
+     * @type {number}
+     * @memberof IdentityRecordListBankModel
      */
-    getQuote({ quoteGuid }: GetQuoteRequest): Observable<QuoteBankModel>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<RawAjaxResponse<QuoteBankModel>>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | RawAjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(quoteGuid, 'quoteGuid', 'getQuote');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes/{quote_guid}'.replace('{quote_guid}', encodeURI(quoteGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
+    page: number;
     /**
-     * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
-     * Get quotes list
+     * The number of entities per page to return.
+     * @type {number}
+     * @memberof IdentityRecordListBankModel
      */
-    listQuotes({ page, perPage }: ListQuotesRequest): Observable<QuoteListBankModel>
-    listQuotes({ page, perPage }: ListQuotesRequest, opts?: OperationOpts): Observable<RawAjaxResponse<QuoteListBankModel>>
-    listQuotes({ page, perPage }: ListQuotesRequest, opts?: OperationOpts): Observable<QuoteListBankModel | RawAjaxResponse<QuoteListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-
-        return this.request<QuoteListBankModel>({
-            url: '/api/quotes',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+    per_page: number;
+    /**
+     * @type {Array<IdentityRecordBankModel>}
+     * @memberof IdentityRecordListBankModel
+     */
+    objects: Array<IdentityRecordBankModel>;
 }
