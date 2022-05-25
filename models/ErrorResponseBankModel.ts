@@ -13,60 +13,25 @@
 
 /**
  * @export
- * @interface CybridAccountBankModel
+ * @interface ErrorResponseBankModel
  */
-export interface CybridAccountBankModel {
+export interface ErrorResponseBankModel {
     /**
-     * The account type.
-     * @type {string}
-     * @memberof CybridAccountBankModel
+     * Status code for Http Request
+     * @type {number}
+     * @memberof ErrorResponseBankModel
      */
-    type?: CybridAccountBankModelTypeEnum;
+    status: number;
     /**
-     * Auto-generated unique identifier for the account.
+     * Error message
      * @type {string}
-     * @memberof CybridAccountBankModel
+     * @memberof ErrorResponseBankModel
      */
-    guid?: string;
+    error_message: string;
     /**
-     * ISO8601 datetime the account was created at.
+     * Message code for Error
      * @type {string}
-     * @memberof CybridAccountBankModel
+     * @memberof ErrorResponseBankModel
      */
-    created_at?: string;
-    /**
-     * The asset code.
-     * @type {string}
-     * @memberof CybridAccountBankModel
-     */
-    asset_code?: string;
-    /**
-     * The name of the account.
-     * @type {string}
-     * @memberof CybridAccountBankModel
-     */
-    name?: string;
-    /**
-     * The environment the account is configured for.
-     * @type {string}
-     * @memberof CybridAccountBankModel
-     */
-    environment?: CybridAccountBankModelEnvironmentEnum;
+    message_code: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum CybridAccountBankModelTypeEnum {
-    Fee = 'fee'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum CybridAccountBankModelEnvironmentEnum {
-    Sandbox = 'sandbox',
-    Production = 'production'
-}
-
