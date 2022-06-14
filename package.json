@@ -1,6 +1,6 @@
 {
   "name": "@cybrid/cybrid-api-bank-typescript",
-  "version": "0.26.3",
+  "version": "0.26.4",
   "description": "View our documentation at https://github.com/Cybrid-app/cybrid-api-bank-typescript/",
   "author": "Cybrid",
   "keywords": [
@@ -15,9 +15,9 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "rxjs": "^6.3.3"
+    "rxjs": "^7.2.0"
   },
   "devDependencies": {
-    "typescript": "^3.7"
+    "typescript": "^4.0"
   }
 }
