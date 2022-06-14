@@ -11,6 +11,7 @@ export * from './CybridAccountBankModel';
 export * from './ErrorResponseBankModel';
 export * from './ExchangeAccountBankModel';
 export * from './ExchangeBankModel';
+export * from './ExchangeListBankModel';
 export * from './FeeBankModel';
 export * from './IdentityRecordBankModel';
 export * from './IdentityRecordListBankModel';

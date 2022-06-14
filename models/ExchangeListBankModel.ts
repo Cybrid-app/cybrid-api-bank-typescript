@@ -12,50 +12,36 @@
  */
 
 import {
-    AttestationDetailsBankModel,
+    ExchangeBankModel,
 } from './';
 
 /**
  * @export
- * @interface IdentityRecordBankModel
+ * @interface ExchangeListBankModel
  */
-export interface IdentityRecordBankModel {
+export interface ExchangeListBankModel {
     /**
-     * Auto-generated unique identifier for the identity record.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
+     * The total number of records available.
+     * @type {number}
+     * @memberof ExchangeListBankModel
      */
-    guid?: string;
+    total: number;
     /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
+     * The page index to retrieve.
+     * @type {number}
+     * @memberof ExchangeListBankModel
      */
-    customer_guid?: string;
+    page: number;
     /**
-     * The identity record\'s type.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
+     * The number of entities per page to return.
+     * @type {number}
+     * @memberof ExchangeListBankModel
      */
-    type?: IdentityRecordBankModelTypeEnum;
+    per_page: number;
     /**
-     * @type {AttestationDetailsBankModel}
-     * @memberof IdentityRecordBankModel
+     * Array of exchange entities
+     * @type {Array<ExchangeBankModel>}
+     * @memberof ExchangeListBankModel
      */
-    attestation_details?: AttestationDetailsBankModel;
-    /**
-     * ISO8601 datetime the customer was created at.
-     * @type {string}
-     * @memberof IdentityRecordBankModel
-     */
-    created_at?: string;
+    objects: Array<ExchangeBankModel>;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum IdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
-}
-
