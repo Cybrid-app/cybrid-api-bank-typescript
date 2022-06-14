@@ -17,11 +17,11 @@ export class ServerConfiguration<T extends { [key: string]: string }> {
     }
 
     public getConfiguration(): T {
-        return this.variableConfiguration
+        return this.variableConfiguration;
     }
 
     public getDescription(): string {
-        return this.description
+        return this.description;
     }
 
     /**
@@ -34,10 +34,10 @@ export class ServerConfiguration<T extends { [key: string]: string }> {
             var re = new RegExp("{" + key + "}","g");
             replacedUrl = replacedUrl.replace(re, this.variableConfiguration[key]);
         }
-        return replacedUrl
+        return replacedUrl;
     }
 }
 
-const server1 = new ServerConfiguration<{  "defaultHost": string  }>("https://bank.demo.cybrid.app", {  "defaultHost": "https://bank.demo.cybrid.app"  }, "")
+const server1 = new ServerConfiguration<{  "defaultHost": string  }>("https://bank.demo.cybrid.app", {  "defaultHost": "https://bank.demo.cybrid.app"  }, "");
 
 export const servers = [server1];
