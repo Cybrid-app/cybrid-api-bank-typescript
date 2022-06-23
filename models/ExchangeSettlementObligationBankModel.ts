@@ -11,127 +11,58 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    PostQuoteBankModel,
-    QuoteBankModel,
-    QuoteListBankModel,
-} from '../models';
-
-export interface CreateQuoteRequest {
-    postQuoteBankModel: PostQuoteBankModel;
-}
-
-export interface GetQuoteRequest {
-    quoteGuid: string;
-}
-
-export interface ListQuotesRequest {
-    page?: number;
-    perPage?: number;
+/**
+ * @export
+ * @interface ExchangeSettlementObligationBankModel
+ */
+export interface ExchangeSettlementObligationBankModel {
+    /**
+     * Auto-generated unique identifier for the exchange settlement obligation.
+     * @type {string}
+     * @memberof ExchangeSettlementObligationBankModel
+     */
     guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
+    /**
+     * The identifier of the exchange settlement that corresponds to this obligation.
+     * @type {string}
+     * @memberof ExchangeSettlementObligationBankModel
+     */
+    exchange_settlement_guid?: string;
+    /**
+     * The asset code.
+     * @type {string}
+     * @memberof ExchangeSettlementObligationBankModel
+     */
+    asset?: string;
+    /**
+     * The exchange settlement\'s state
+     * @type {string}
+     * @memberof ExchangeSettlementObligationBankModel
+     */
+    state?: ExchangeSettlementObligationBankModelStateEnum;
+    /**
+     * The account\'s payable estimate for this obligation.
+     * @type {number}
+     * @memberof ExchangeSettlementObligationBankModel
+     */
+    payable_amount_estimate?: number;
+    /**
+     * The account\'s receivable estimate for this obligation.
+     * @type {number}
+     * @memberof ExchangeSettlementObligationBankModel
+     */
+    receivable_amount_estimate?: number;
 }
 
 /**
- * no description
+ * @export
+ * @enum {string}
  */
-export class QuotesBankApi extends BaseAPI {
-
-    /**
-     * Creates a quote.  Required scope: **quotes:execute**
-     * Create Quote
-     */
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest): Observable<QuoteBankModel>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteBankModel>>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | AjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(postQuoteBankModel, 'postQuoteBankModel', 'createQuote');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes',
-            method: 'POST',
-            headers,
-            body: postQuoteBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a quote.  Required scope: **quotes:read**
-     * Get Quote
-     */
-    getQuote({ quoteGuid }: GetQuoteRequest): Observable<QuoteBankModel>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteBankModel>>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | AjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(quoteGuid, 'quoteGuid', 'getQuote');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes/{quote_guid}'.replace('{quote_guid}', encodeURI(quoteGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
-     * Get quotes list
-     */
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest): Observable<QuoteListBankModel>
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteListBankModel>>
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest, opts?: OperationOpts): Observable<QuoteListBankModel | AjaxResponse<QuoteListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-
-        return this.request<QuoteListBankModel>({
-            url: '/api/quotes',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+export enum ExchangeSettlementObligationBankModelStateEnum {
+    Storing = 'storing',
+    PendingCreated = 'pending__created',
+    PendingApproved = 'pending__approved',
+    FailedCreation = 'failed_creation',
+    TradesCompleted = 'trades_completed'
 }
+

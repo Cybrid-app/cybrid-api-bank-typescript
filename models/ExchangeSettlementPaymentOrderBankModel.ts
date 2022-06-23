@@ -11,127 +11,105 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    PostQuoteBankModel,
-    QuoteBankModel,
-    QuoteListBankModel,
-} from '../models';
-
-export interface CreateQuoteRequest {
-    postQuoteBankModel: PostQuoteBankModel;
-}
-
-export interface GetQuoteRequest {
-    quoteGuid: string;
-}
-
-export interface ListQuotesRequest {
-    page?: number;
-    perPage?: number;
+/**
+ * @export
+ * @interface ExchangeSettlementPaymentOrderBankModel
+ */
+export interface ExchangeSettlementPaymentOrderBankModel {
+    /**
+     * Auto-generated unique identifier for the exchange settlement payment order.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
     guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
+    /**
+     * The identifier of the exchange settlement obligation that this payment is associated with.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    exchange_settlement_obligation_guid?: string;
+    /**
+     * The sequence number of the payment order
+     * @type {number}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    sequence_number?: number;
+    /**
+     * The amount expected to be received as part of this payment.
+     * @type {number}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    payment_amount?: number;
+    /**
+     * The identifier of the internal account that is expected to originate the payment.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    internal_account_guid?: string;
+    /**
+     * The type of the internal account that is expected to originate the payment.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    internal_account_type?: ExchangeSettlementPaymentOrderBankModelInternalAccountTypeEnum;
+    /**
+     * The identifier of the external account that is expected to receive the payment.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    external_account_guid?: string;
+    /**
+     * The type of the external account that is expected to receive the payment.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    external_account_type?: ExchangeSettlementPaymentOrderBankModelExternalAccountTypeEnum;
+    /**
+     * The exchange settlement payment order\'s state
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    state?: ExchangeSettlementPaymentOrderBankModelStateEnum;
+    /**
+     * ISO8601 datetime the exchange settlement payment order was created at.
+     * @type {string}
+     * @memberof ExchangeSettlementPaymentOrderBankModel
+     */
+    created_at?: string;
 }
 
 /**
- * no description
+ * @export
+ * @enum {string}
  */
-export class QuotesBankApi extends BaseAPI {
-
-    /**
-     * Creates a quote.  Required scope: **quotes:execute**
-     * Create Quote
-     */
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest): Observable<QuoteBankModel>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteBankModel>>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | AjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(postQuoteBankModel, 'postQuoteBankModel', 'createQuote');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes',
-            method: 'POST',
-            headers,
-            body: postQuoteBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a quote.  Required scope: **quotes:read**
-     * Get Quote
-     */
-    getQuote({ quoteGuid }: GetQuoteRequest): Observable<QuoteBankModel>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteBankModel>>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | AjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(quoteGuid, 'quoteGuid', 'getQuote');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes/{quote_guid}'.replace('{quote_guid}', encodeURI(quoteGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
-     * Get quotes list
-     */
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest): Observable<QuoteListBankModel>
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteListBankModel>>
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest, opts?: OperationOpts): Observable<QuoteListBankModel | AjaxResponse<QuoteListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-
-        return this.request<QuoteListBankModel>({
-            url: '/api/quotes',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+export enum ExchangeSettlementPaymentOrderBankModelInternalAccountTypeEnum {
+    Wallet = 'internal_wallet',
+    BankAccount = 'internal_bank_account'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ExchangeSettlementPaymentOrderBankModelExternalAccountTypeEnum {
+    Wallet = 'external_wallet',
+    BankAccount = 'external_bank_account'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ExchangeSettlementPaymentOrderBankModelStateEnum {
+    Storing = 'storing',
+    PendingCreated = 'pending__created',
+    PendingPrincipalReserved = 'pending__principal_reserved',
+    PendingTransactionsClaimed = 'pending__transactions_claimed',
+    NotApproved = 'not_approved',
+    InProgress = 'in_progress',
+    NotOwing = 'not_owing',
+    AmountIncorrect = 'amount_incorrect',
+    InvalidPrincipal = 'invalid_principal',
+    Nsf = 'nsf',
+    Sent = 'sent',
+    Rejected = 'rejected'
+}
+
