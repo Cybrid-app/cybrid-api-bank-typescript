@@ -1,4 +1,4 @@
-## @cybrid/cybrid-api-bank-typescript@0.31.12
+## @cybrid/cybrid-api-bank-typescript@0.31.14
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.31.12 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.31.14 --save
 ```
 
 _unPublished (not recommended):_
