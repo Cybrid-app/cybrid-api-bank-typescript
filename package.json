@@ -1,6 +1,6 @@
 {
   "name": "@cybrid/cybrid-api-bank-typescript",
-  "version": "0.34.4",
+  "version": "0.34.5",
   "description": "View our documentation at https://github.com/Cybrid-app/cybrid-api-bank-typescript/",
   "author": "Cybrid",
   "keywords": [
@@ -11,7 +11,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "files": [
-    "./dist/"
+    "dist/"
   ],
   "scripts" : {
     "build": "node_modules/.bin/tsc --outDir dist/",
