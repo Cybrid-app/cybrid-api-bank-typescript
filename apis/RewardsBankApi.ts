@@ -13,41 +13,31 @@
 
 import type { Observable } from 'rxjs';
 import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
+import { BaseAPI, throwIfNullOrUndefined } from '../runtime';
+import type { OperationOpts, HttpHeaders } from '../runtime';
 import type {
     ErrorResponseBankModel,
-    PostVerificationKeyBankModel,
-    VerificationKeyBankModel,
-    VerificationKeyListBankModel,
+    PostRewardBankModel,
+    RewardBankModel,
 } from '../models';
 
-export interface CreateVerificationKeyRequest {
-    postVerificationKeyBankModel: PostVerificationKeyBankModel;
-}
-
-export interface GetVerificationKeyRequest {
-    verificationKeyGuid: string;
-}
-
-export interface ListVerificationKeysRequest {
-    page?: number;
-    perPage?: number;
+export interface CreateRewardsRequest {
+    postRewardBankModel: PostRewardBankModel;
 }
 
 /**
  * no description
  */
-export class VerificationKeysBankApi extends BaseAPI {
+export class RewardsBankApi extends BaseAPI {
 
     /**
-     * Creates a verification key.   Example code (python) for generating a Verification Key  ```python import base64  from cryptography.hazmat.primitives import hashes from cryptography.hazmat.primitives import serialization from cryptography.hazmat.primitives.asymmetric import padding from cryptography.hazmat.primitives.asymmetric import rsa  nonce = \"wen moon\" private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048) signature = base64.b64encode(private_key.sign(     data=nonce.encode(\'ascii\'), padding=padding.PKCS1v15(), algorithm=hashes.SHA512())).decode(\'ascii\') public_key = base64.b64encode(private_key.public_key().public_bytes(     encoding=serialization.Encoding.DER, format=serialization.PublicFormat.SubjectPublicKeyInfo)).decode(\'ascii\')  ### DISCLAIMER:- Since NO ENCRYPTION is used in the key storage/formatting. Please DO NOT use this code in production environment. private_pem = private_key.private_bytes(encoding=serialization.Encoding.PEM, format=serialization.PrivateFormat.TraditionalOpenSSL,        encryption_algorithm=serialization.NoEncryption())  ## Store the private_key in a file verification_key.pem with open (\"verification_key.pem\", \'wb\') as pem_out:    pem_out.write(private_pem)    pem_out.close()  print(\"Public Key: \", public_key) print(\"Signature: \", signature)  ````  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the verification in our private key store | | pending | The Platform is verifying the verification key\'s signature | | verified | The Platform has verified the verification key\'s signature and the key can be used | | failed | The Platform was not able to verify the verification key\'s signature and the key cannot be used |    Required scope: **banks:write**
-     * Create VerificationKey
+     * Creates a reward.  Required scope: **rewards:execute**
+     * Create Reward
      */
-    createVerificationKey({ postVerificationKeyBankModel }: CreateVerificationKeyRequest): Observable<VerificationKeyBankModel>
-    createVerificationKey({ postVerificationKeyBankModel }: CreateVerificationKeyRequest, opts?: OperationOpts): Observable<AjaxResponse<VerificationKeyBankModel>>
-    createVerificationKey({ postVerificationKeyBankModel }: CreateVerificationKeyRequest, opts?: OperationOpts): Observable<VerificationKeyBankModel | AjaxResponse<VerificationKeyBankModel>> {
-        throwIfNullOrUndefined(postVerificationKeyBankModel, 'postVerificationKeyBankModel', 'createVerificationKey');
+    createRewards({ postRewardBankModel }: CreateRewardsRequest): Observable<RewardBankModel>
+    createRewards({ postRewardBankModel }: CreateRewardsRequest, opts?: OperationOpts): Observable<AjaxResponse<RewardBankModel>>
+    createRewards({ postRewardBankModel }: CreateRewardsRequest, opts?: OperationOpts): Observable<RewardBankModel | AjaxResponse<RewardBankModel>> {
+        throwIfNullOrUndefined(postRewardBankModel, 'postRewardBankModel', 'createRewards');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
@@ -55,76 +45,17 @@ export class VerificationKeysBankApi extends BaseAPI {
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['banks:write'])
+                    ? this.configuration.accessToken('oauth2', ['rewards:execute'])
                     : this.configuration.accessToken }
                 : undefined
             ),
         };
 
-        return this.request<VerificationKeyBankModel>({
-            url: '/api/bank_verification_keys',
+        return this.request<RewardBankModel>({
+            url: '/api/rewards',
             method: 'POST',
             headers,
-            body: postVerificationKeyBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a verification key.  Required scope: **banks:read**
-     * Get VerificationKey
-     */
-    getVerificationKey({ verificationKeyGuid }: GetVerificationKeyRequest): Observable<VerificationKeyBankModel>
-    getVerificationKey({ verificationKeyGuid }: GetVerificationKeyRequest, opts?: OperationOpts): Observable<AjaxResponse<VerificationKeyBankModel>>
-    getVerificationKey({ verificationKeyGuid }: GetVerificationKeyRequest, opts?: OperationOpts): Observable<VerificationKeyBankModel | AjaxResponse<VerificationKeyBankModel>> {
-        throwIfNullOrUndefined(verificationKeyGuid, 'verificationKeyGuid', 'getVerificationKey');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['banks:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<VerificationKeyBankModel>({
-            url: '/api/bank_verification_keys/{verification_key_guid}'.replace('{verification_key_guid}', encodeURI(verificationKeyGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a listing of verification keys of a bank.  Required scope: **banks:read**
-     * Get Verification Keys list
-     */
-    listVerificationKeys({ page, perPage }: ListVerificationKeysRequest): Observable<VerificationKeyListBankModel>
-    listVerificationKeys({ page, perPage }: ListVerificationKeysRequest, opts?: OperationOpts): Observable<AjaxResponse<VerificationKeyListBankModel>>
-    listVerificationKeys({ page, perPage }: ListVerificationKeysRequest, opts?: OperationOpts): Observable<VerificationKeyListBankModel | AjaxResponse<VerificationKeyListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['banks:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-
-        return this.request<VerificationKeyListBankModel>({
-            url: '/api/bank_verification_keys',
-            method: 'GET',
-            headers,
-            query,
+            body: postRewardBankModel,
         }, opts?.responseOpts);
     };
 

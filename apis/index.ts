@@ -5,6 +5,7 @@ export * from './CustomersBankApi';
 export * from './IdentityRecordsBankApi';
 export * from './PricesBankApi';
 export * from './QuotesBankApi';
+export * from './RewardsBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
 export * from './TradingConfigurationsBankApi';

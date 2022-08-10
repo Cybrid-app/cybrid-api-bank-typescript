@@ -13,101 +13,31 @@
 
 /**
  * @export
- * @interface AccountBankModel
+ * @interface PostRewardBankModel
  */
-export interface AccountBankModel {
+export interface PostRewardBankModel {
     /**
-     * The account type.
+     * The unique identifier for the customer.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof PostRewardBankModel
      */
-    type?: AccountBankModelTypeEnum;
+    customer_guid: string;
     /**
-     * The account provider, if applicable.
+     * Symbol the quote is being requested for. Format is \"asset-counter_asset\" in uppercase. See the Symbols API for a complete list of cryptocurrencies supported.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof PostRewardBankModel
      */
-    provider?: AccountBankModelProviderEnum;
+    symbol: string;
     /**
-     * Auto-generated unique identifier for the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    guid?: string;
-    /**
-     * ISO8601 datetime the account was created at.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    created_at?: string;
-    /**
-     * The asset code.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    asset?: string;
-    /**
-     * The name of the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    name?: string;
-    /**
-     * The bank identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    bank_guid?: string;
-    /**
-     * The customer identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    customer_guid?: string;
-    /**
-     * The amount of funds that are in the account, in base units of the asset.
+     * The amount to be received in base units of the currency: currency is \"asset\" for buy and \"counter_asset\" for sell.
      * @type {number}
-     * @memberof AccountBankModel
+     * @memberof PostRewardBankModel
      */
-    platform_balance?: number;
+    receive_amount?: number;
     /**
-     * The amount of funds that are in the account, in base units of the asset, that are available for use on the platform.
+     * The amount to be delivered in base units of the currency: currency is \"counter_asset\" for buy and \"asset\" for sell.
      * @type {number}
-     * @memberof AccountBankModel
+     * @memberof PostRewardBankModel
      */
-    platform_available?: number;
-    /**
-     * The account\'s state.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    state?: AccountBankModelStateEnum;
+    deliver_amount?: number;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelTypeEnum {
-    Backstopped = 'backstopped',
-    Trading = 'trading',
-    Fee = 'fee',
-    Savings = 'savings',
-    Staking = 'staking'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelProviderEnum {
-    Compound = 'compound'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelStateEnum {
-    Storing = 'storing',
-    Created = 'created'
-}
-

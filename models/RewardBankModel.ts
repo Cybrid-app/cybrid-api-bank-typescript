@@ -13,101 +13,81 @@
 
 /**
  * @export
- * @interface AccountBankModel
+ * @interface RewardBankModel
  */
-export interface AccountBankModel {
+export interface RewardBankModel {
     /**
-     * The account type.
+     * Auto-generated unique identifier for the reward.
      * @type {string}
-     * @memberof AccountBankModel
-     */
-    type?: AccountBankModelTypeEnum;
-    /**
-     * The account provider, if applicable.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    provider?: AccountBankModelProviderEnum;
-    /**
-     * Auto-generated unique identifier for the account.
-     * @type {string}
-     * @memberof AccountBankModel
+     * @memberof RewardBankModel
      */
     guid?: string;
     /**
-     * ISO8601 datetime the account was created at.
+     * The associated customer\'s identifier.
      * @type {string}
-     * @memberof AccountBankModel
-     */
-    created_at?: string;
-    /**
-     * The asset code.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    asset?: string;
-    /**
-     * The name of the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    name?: string;
-    /**
-     * The bank identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    bank_guid?: string;
-    /**
-     * The customer identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
+     * @memberof RewardBankModel
      */
     customer_guid?: string;
     /**
-     * The amount of funds that are in the account, in base units of the asset.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_balance?: number;
-    /**
-     * The amount of funds that are in the account, in base units of the asset, that are available for use on the platform.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_available?: number;
-    /**
-     * The account\'s state.
+     * The associated quote\'s identifier.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof RewardBankModel
      */
-    state?: AccountBankModelStateEnum;
+    quote_guid?: string;
+    /**
+     * The associated trade\'s identifier.
+     * @type {string}
+     * @memberof RewardBankModel
+     */
+    trade_guid?: string;
+    /**
+     * The trade symbol the pricing is related to. Format is asset-counter_asset, e.g., BTC-USD.
+     * @type {string}
+     * @memberof RewardBankModel
+     */
+    symbol?: string;
+    /**
+     * The trade\'s state
+     * @type {string}
+     * @memberof RewardBankModel
+     */
+    state?: RewardBankModelStateEnum;
+    /**
+     * The amount to be received in base units of the currency: currency is \"asset\" for buy and \"counter_asset\" for sell.
+     * @type {number}
+     * @memberof RewardBankModel
+     */
+    receive_amount?: number;
+    /**
+     * The amount to be delivered in base units of the currency: currency is \"counter_asset\" for buy and \"asset\" for sell.
+     * @type {number}
+     * @memberof RewardBankModel
+     */
+    deliver_amount?: number;
+    /**
+     * The fee associated with the trade. Denominated in \"counter_asset\" base units
+     * @type {number}
+     * @memberof RewardBankModel
+     */
+    fee?: number;
+    /**
+     * ISO8601 datetime the bank was created at.
+     * @type {string}
+     * @memberof RewardBankModel
+     */
+    created_at?: string;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum AccountBankModelTypeEnum {
-    Backstopped = 'backstopped',
-    Trading = 'trading',
-    Fee = 'fee',
-    Savings = 'savings',
-    Staking = 'staking'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelProviderEnum {
-    Compound = 'compound'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelStateEnum {
+export enum RewardBankModelStateEnum {
     Storing = 'storing',
-    Created = 'created'
+    Initiating = 'initiating',
+    Pending = 'pending',
+    Settling = 'settling',
+    Completed = 'completed',
+    Failed = 'failed'
 }
 
