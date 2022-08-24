@@ -12,36 +12,36 @@
  */
 
 import type {
-    AssetBankModel,
+    RewardBankModel,
 } from './';
 
 /**
  * @export
- * @interface AssetListBankModel
+ * @interface RewardListBankModel
  */
-export interface AssetListBankModel {
+export interface RewardListBankModel {
     /**
      * The total number of records available.
      * @type {number}
-     * @memberof AssetListBankModel
+     * @memberof RewardListBankModel
      */
     total: number;
     /**
      * The page index to retrieve.
      * @type {number}
-     * @memberof AssetListBankModel
+     * @memberof RewardListBankModel
      */
     page: number;
     /**
      * The number of entities per page to return.
      * @type {number}
-     * @memberof AssetListBankModel
+     * @memberof RewardListBankModel
      */
     per_page: number;
     /**
-     * Array of bank entities
-     * @type {Array<AssetBankModel>}
-     * @memberof AssetListBankModel
+     * Array of reward entities
+     * @type {Array<RewardBankModel>}
+     * @memberof RewardListBankModel
      */
-    objects: Array<AssetBankModel>;
+    objects: Array<RewardBankModel>;
 }
