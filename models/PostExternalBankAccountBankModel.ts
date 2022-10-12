@@ -11,39 +11,54 @@
  * Do not edit the class manually.
  */
 
-import type {
-    PostIdentityRecordAttestationDetailsBankModel,
-} from './';
-
 /**
  * @export
- * @interface PostIdentityRecordBankModel
+ * @interface PostExternalBankAccountBankModel
  */
-export interface PostIdentityRecordBankModel {
+export interface PostExternalBankAccountBankModel {
     /**
-     * The customer\'s identifier.
+     * The name of the account.
      * @type {string}
-     * @memberof PostIdentityRecordBankModel
+     * @memberof PostExternalBankAccountBankModel
      */
-    customer_guid: string;
+    name: string;
     /**
-     * The identity record\'s type.
+     * The account type
      * @type {string}
-     * @memberof PostIdentityRecordBankModel
+     * @memberof PostExternalBankAccountBankModel
      */
-    type: PostIdentityRecordBankModelTypeEnum;
+    account_kind: PostExternalBankAccountBankModelAccountKindEnum;
     /**
-     * @type {PostIdentityRecordAttestationDetailsBankModel}
-     * @memberof PostIdentityRecordBankModel
+     * The customer identifier.
+     * @type {string}
+     * @memberof PostExternalBankAccountBankModel
      */
-    attestation_details: PostIdentityRecordAttestationDetailsBankModel;
+    customer_guid?: string | null;
+    /**
+     * The asset code.
+     * @type {string}
+     * @memberof PostExternalBankAccountBankModel
+     */
+    asset: string;
+    /**
+     * The public token for the account.
+     * @type {string}
+     * @memberof PostExternalBankAccountBankModel
+     */
+    plaid_public_token?: string | null;
+    /**
+     * The account identifier in plaid.
+     * @type {string}
+     * @memberof PostExternalBankAccountBankModel
+     */
+    plaid_account_id?: string | null;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum PostIdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
+export enum PostExternalBankAccountBankModelAccountKindEnum {
+    Plaid = 'plaid'
 }
 

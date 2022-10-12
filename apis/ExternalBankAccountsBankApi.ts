@@ -11,39 +11,127 @@
  * Do not edit the class manually.
  */
 
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
-    PostIdentityRecordAttestationDetailsBankModel,
-} from './';
+    ErrorResponseBankModel,
+    ExternalBankAccountBankModel,
+    ExternalBankAccountListBankModel,
+    PostExternalBankAccountBankModel,
+} from '../models';
 
-/**
- * @export
- * @interface PostIdentityRecordBankModel
- */
-export interface PostIdentityRecordBankModel {
-    /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityRecordBankModel
-     */
-    customer_guid: string;
-    /**
-     * The identity record\'s type.
-     * @type {string}
-     * @memberof PostIdentityRecordBankModel
-     */
-    type: PostIdentityRecordBankModelTypeEnum;
-    /**
-     * @type {PostIdentityRecordAttestationDetailsBankModel}
-     * @memberof PostIdentityRecordBankModel
-     */
-    attestation_details: PostIdentityRecordAttestationDetailsBankModel;
+export interface CreateExternalBankAccountRequest {
+    postExternalBankAccountBankModel: PostExternalBankAccountBankModel;
+}
+
+export interface GetExternalBankAccountRequest {
+    externalBankAccountGuid: string;
+}
+
+export interface ListExternalBankAccountsRequest {
+    page?: number;
+    perPage?: number;
+    guid?: string;
+    bankGuid?: string;
+    customerGuid?: string;
 }
 
 /**
- * @export
- * @enum {string}
+ * no description
  */
-export enum PostIdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
-}
+export class ExternalBankAccountsBankApi extends BaseAPI {
 
+    /**
+     * Create an ExternalBankAccount.  Required scope: **external_bank_accounts:execute**
+     * Create ExternalBankAccount
+     */
+    createExternalBankAccount({ postExternalBankAccountBankModel }: CreateExternalBankAccountRequest): Observable<ExternalBankAccountBankModel>
+    createExternalBankAccount({ postExternalBankAccountBankModel }: CreateExternalBankAccountRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalBankAccountBankModel>>
+    createExternalBankAccount({ postExternalBankAccountBankModel }: CreateExternalBankAccountRequest, opts?: OperationOpts): Observable<ExternalBankAccountBankModel | AjaxResponse<ExternalBankAccountBankModel>> {
+        throwIfNullOrUndefined(postExternalBankAccountBankModel, 'postExternalBankAccountBankModel', 'createExternalBankAccount');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['external_bank_accounts:execute'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<ExternalBankAccountBankModel>({
+            url: '/api/external_bank_accounts',
+            method: 'POST',
+            headers,
+            body: postExternalBankAccountBankModel,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves an external bank account.  Required scope: **external_bank_accounts:read**
+     * Get External Bank Account
+     */
+    getExternalBankAccount({ externalBankAccountGuid }: GetExternalBankAccountRequest): Observable<ExternalBankAccountBankModel>
+    getExternalBankAccount({ externalBankAccountGuid }: GetExternalBankAccountRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalBankAccountBankModel>>
+    getExternalBankAccount({ externalBankAccountGuid }: GetExternalBankAccountRequest, opts?: OperationOpts): Observable<ExternalBankAccountBankModel | AjaxResponse<ExternalBankAccountBankModel>> {
+        throwIfNullOrUndefined(externalBankAccountGuid, 'externalBankAccountGuid', 'getExternalBankAccount');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['external_bank_accounts:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<ExternalBankAccountBankModel>({
+            url: '/api/external_bank_accounts/{external_bank_account_guid}'.replace('{external_bank_account_guid}', encodeURI(externalBankAccountGuid)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves a listing of external bank accounts.  Required scope: **external_bank_accounts:read**
+     * Get external bank accounts list
+     */
+    listExternalBankAccounts({ page, perPage, guid, bankGuid, customerGuid }: ListExternalBankAccountsRequest): Observable<ExternalBankAccountListBankModel>
+    listExternalBankAccounts({ page, perPage, guid, bankGuid, customerGuid }: ListExternalBankAccountsRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalBankAccountListBankModel>>
+    listExternalBankAccounts({ page, perPage, guid, bankGuid, customerGuid }: ListExternalBankAccountsRequest, opts?: OperationOpts): Observable<ExternalBankAccountListBankModel | AjaxResponse<ExternalBankAccountListBankModel>> {
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['external_bank_accounts:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (perPage != null) { query['per_page'] = perPage; }
+        if (guid != null) { query['guid'] = guid; }
+        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
+        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+
+        return this.request<ExternalBankAccountListBankModel>({
+            url: '/api/external_bank_accounts',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
+}

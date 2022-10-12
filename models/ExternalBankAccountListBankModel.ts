@@ -12,38 +12,36 @@
  */
 
 import type {
-    PostIdentityRecordAttestationDetailsBankModel,
+    ExternalBankAccountBankModel,
 } from './';
 
 /**
  * @export
- * @interface PostIdentityRecordBankModel
+ * @interface ExternalBankAccountListBankModel
  */
-export interface PostIdentityRecordBankModel {
+export interface ExternalBankAccountListBankModel {
     /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityRecordBankModel
+     * The total number of records available.
+     * @type {number}
+     * @memberof ExternalBankAccountListBankModel
      */
-    customer_guid: string;
+    total: number;
     /**
-     * The identity record\'s type.
-     * @type {string}
-     * @memberof PostIdentityRecordBankModel
+     * The page index to retrieve.
+     * @type {number}
+     * @memberof ExternalBankAccountListBankModel
      */
-    type: PostIdentityRecordBankModelTypeEnum;
+    page: number;
     /**
-     * @type {PostIdentityRecordAttestationDetailsBankModel}
-     * @memberof PostIdentityRecordBankModel
+     * The number of entities per page to return.
+     * @type {number}
+     * @memberof ExternalBankAccountListBankModel
      */
-    attestation_details: PostIdentityRecordAttestationDetailsBankModel;
+    per_page: number;
+    /**
+     * Array of external bank account entities
+     * @type {Array<ExternalBankAccountBankModel>}
+     * @memberof ExternalBankAccountListBankModel
+     */
+    objects: Array<ExternalBankAccountBankModel>;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
-}
-

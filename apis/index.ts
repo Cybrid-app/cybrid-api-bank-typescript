@@ -2,6 +2,7 @@ export * from './AccountsBankApi';
 export * from './AssetsBankApi';
 export * from './BanksBankApi';
 export * from './CustomersBankApi';
+export * from './ExternalBankAccountsBankApi';
 export * from './FeeConfigurationsBankApi';
 export * from './IdentityRecordsBankApi';
 export * from './PricesBankApi';

@@ -11,39 +11,80 @@
  * Do not edit the class manually.
  */
 
-import type {
-    PostIdentityRecordAttestationDetailsBankModel,
-} from './';
-
 /**
  * @export
- * @interface PostIdentityRecordBankModel
+ * @interface ExternalBankAccountBankModel
  */
-export interface PostIdentityRecordBankModel {
+export interface ExternalBankAccountBankModel {
     /**
-     * The customer\'s identifier.
+     * Auto-generated unique identifier for the account.
      * @type {string}
-     * @memberof PostIdentityRecordBankModel
+     * @memberof ExternalBankAccountBankModel
      */
-    customer_guid: string;
+    guid?: string;
     /**
-     * The identity record\'s type.
+     * The name of the account.
      * @type {string}
-     * @memberof PostIdentityRecordBankModel
+     * @memberof ExternalBankAccountBankModel
      */
-    type: PostIdentityRecordBankModelTypeEnum;
+    name?: string;
     /**
-     * @type {PostIdentityRecordAttestationDetailsBankModel}
-     * @memberof PostIdentityRecordBankModel
+     * The asset code.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
      */
-    attestation_details: PostIdentityRecordAttestationDetailsBankModel;
+    asset_code?: string;
+    /**
+     * The type of account.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
+     */
+    account_kind?: ExternalBankAccountBankModelAccountKindEnum;
+    /**
+     * The environment that the external bank account is operating in.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
+     */
+    environment?: ExternalBankAccountBankModelEnvironmentEnum;
+    /**
+     * The bank identifier.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
+     */
+    bank_guid?: string | null;
+    /**
+     * The customer identifier.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
+     */
+    customer_guid?: string | null;
+    /**
+     * ISO8601 datetime the exchange was created at.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
+     */
+    created_at?: string;
+    /**
+     * The Plaid access token for the account.
+     * @type {string}
+     * @memberof ExternalBankAccountBankModel
+     */
+    plaid_access_token?: string | null;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum PostIdentityRecordBankModelTypeEnum {
-    Attestation = 'attestation'
+export enum ExternalBankAccountBankModelAccountKindEnum {
+    Plaid = 'plaid'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ExternalBankAccountBankModelEnvironmentEnum {
+    Sandbox = 'sandbox',
+    Production = 'production'
 }
 
