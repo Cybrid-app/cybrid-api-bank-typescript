@@ -13,47 +13,120 @@
 
 /**
  * @export
- * @interface AssetBankModel
+ * @interface IdentityVerificationBankModel
  */
-export interface AssetBankModel {
+export interface IdentityVerificationBankModel {
     /**
-     * The asset type.
+     * Auto-generated unique identifier for the identity verification.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationBankModel
      */
-    type: AssetBankModelTypeEnum;
+    guid?: string;
     /**
-     * The unique code for the asset.
+     * The customer\'s identifier.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationBankModel
      */
-    code: string;
+    customer_guid?: string;
     /**
-     * The name of the asset.
+     * The type of identity verification.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationBankModel
      */
-    name: string;
+    type?: IdentityVerificationBankModelTypeEnum;
     /**
-     * The currency symbol for the asset.
+     * The identity verification method.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationBankModel
      */
-    symbol: string;
+    method?: IdentityVerificationBankModelMethodEnum;
     /**
-     * The number of decimals for the default unit of the asset.
-     * @type {number}
-     * @memberof AssetBankModel
+     * ISO8601 datetime the customer was created at.
+     * @type {string}
+     * @memberof IdentityVerificationBankModel
      */
-    decimals: number;
+    created_at?: string;
+    /**
+     * The state of the verification process.
+     * @type {string}
+     * @memberof IdentityVerificationBankModel
+     */
+    state?: IdentityVerificationBankModelStateEnum;
+    /**
+     * The outcome of the verification process.
+     * @type {string}
+     * @memberof IdentityVerificationBankModel
+     */
+    outcome?: IdentityVerificationBankModelOutcomeEnum;
+    /**
+     * The reason codes explaining the outcome.
+     * @type {Array<string>}
+     * @memberof IdentityVerificationBankModel
+     */
+    failure_codes?: Array<IdentityVerificationBankModelFailureCodesEnum>;
+    /**
+     * The Persona identifier of the backing inquiry.
+     * @type {string}
+     * @memberof IdentityVerificationBankModel
+     */
+    persona_inquiry_id?: string | null;
+    /**
+     * The Persona state of the backing inquiry.
+     * @type {string}
+     * @memberof IdentityVerificationBankModel
+     */
+    persona_state?: IdentityVerificationBankModelPersonaStateEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum AssetBankModelTypeEnum {
-    Fiat = 'fiat',
-    Crypto = 'crypto'
+export enum IdentityVerificationBankModelTypeEnum {
+    Kyc = 'kyc'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IdentityVerificationBankModelMethodEnum {
+    IdAndSelfie = 'id_and_selfie'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IdentityVerificationBankModelStateEnum {
+    Storing = 'storing',
+    Waiting = 'waiting',
+    Expired = 'expired',
+    Completed = 'completed'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IdentityVerificationBankModelOutcomeEnum {
+    Passed = 'passed',
+    Failed = 'failed'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IdentityVerificationBankModelFailureCodesEnum {
+    RequestedFailure = 'requested_failure'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IdentityVerificationBankModelPersonaStateEnum {
+    Waiting = 'waiting',
+    Pending = 'pending',
+    Reviewing = 'reviewing',
+    Expired = 'expired',
+    Completed = 'completed',
+    Unknown = 'unknown'
 }
 

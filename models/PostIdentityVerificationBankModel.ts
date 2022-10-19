@@ -13,47 +13,55 @@
 
 /**
  * @export
- * @interface AssetBankModel
+ * @interface PostIdentityVerificationBankModel
  */
-export interface AssetBankModel {
+export interface PostIdentityVerificationBankModel {
     /**
-     * The asset type.
+     * The type of identity verification.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof PostIdentityVerificationBankModel
      */
-    type: AssetBankModelTypeEnum;
+    type: PostIdentityVerificationBankModelTypeEnum;
     /**
-     * The unique code for the asset.
+     * The identity verification method.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof PostIdentityVerificationBankModel
      */
-    code: string;
+    method: PostIdentityVerificationBankModelMethodEnum;
     /**
-     * The name of the asset.
+     * The customer\'s identifier.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof PostIdentityVerificationBankModel
      */
-    name: string;
+    customer_guid?: string;
     /**
-     * The currency symbol for the asset.
-     * @type {string}
-     * @memberof AssetBankModel
+     * The optional expected behaviour to simulate.
+     * @type {Array<string>}
+     * @memberof PostIdentityVerificationBankModel
      */
-    symbol: string;
-    /**
-     * The number of decimals for the default unit of the asset.
-     * @type {number}
-     * @memberof AssetBankModel
-     */
-    decimals: number;
+    expected_behaviours?: Array<PostIdentityVerificationBankModelExpectedBehavioursEnum>;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum AssetBankModelTypeEnum {
-    Fiat = 'fiat',
-    Crypto = 'crypto'
+export enum PostIdentityVerificationBankModelTypeEnum {
+    Kyc = 'kyc'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostIdentityVerificationBankModelMethodEnum {
+    IdAndSelfie = 'id_and_selfie'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostIdentityVerificationBankModelExpectedBehavioursEnum {
+    PassedImmediately = 'passed_immediately',
+    FailedImmediately = 'failed_immediately'
 }
 

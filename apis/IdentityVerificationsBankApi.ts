@@ -11,49 +11,127 @@
  * Do not edit the class manually.
  */
 
-/**
- * @export
- * @interface AssetBankModel
- */
-export interface AssetBankModel {
-    /**
-     * The asset type.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    type: AssetBankModelTypeEnum;
-    /**
-     * The unique code for the asset.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    code: string;
-    /**
-     * The name of the asset.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    name: string;
-    /**
-     * The currency symbol for the asset.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    symbol: string;
-    /**
-     * The number of decimals for the default unit of the asset.
-     * @type {number}
-     * @memberof AssetBankModel
-     */
-    decimals: number;
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
+import type {
+    ErrorResponseBankModel,
+    IdentityVerificationBankModel,
+    IdentityVerificationListBankModel,
+    PostIdentityVerificationBankModel,
+} from '../models';
+
+export interface CreateIdentityVerificationRequest {
+    postIdentityVerificationBankModel: PostIdentityVerificationBankModel;
+}
+
+export interface GetIdentityVerificationRequest {
+    identityVerificationGuid: string;
+}
+
+export interface ListIdentityVerificationsRequest {
+    page?: number;
+    perPage?: number;
+    guid?: string;
+    bankGuid?: string;
+    customerGuid?: string;
 }
 
 /**
- * @export
- * @enum {string}
+ * no description
  */
-export enum AssetBankModelTypeEnum {
-    Fiat = 'fiat',
-    Crypto = 'crypto'
-}
+export class IdentityVerificationsBankApi extends BaseAPI {
 
+    /**
+     * Create an Identity Verification.  Required scope: **customers:write**
+     * Create Identity Verification
+     */
+    createIdentityVerification({ postIdentityVerificationBankModel }: CreateIdentityVerificationRequest): Observable<IdentityVerificationBankModel>
+    createIdentityVerification({ postIdentityVerificationBankModel }: CreateIdentityVerificationRequest, opts?: OperationOpts): Observable<AjaxResponse<IdentityVerificationBankModel>>
+    createIdentityVerification({ postIdentityVerificationBankModel }: CreateIdentityVerificationRequest, opts?: OperationOpts): Observable<IdentityVerificationBankModel | AjaxResponse<IdentityVerificationBankModel>> {
+        throwIfNullOrUndefined(postIdentityVerificationBankModel, 'postIdentityVerificationBankModel', 'createIdentityVerification');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['customers:write'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<IdentityVerificationBankModel>({
+            url: '/api/identity_verifications',
+            method: 'POST',
+            headers,
+            body: postIdentityVerificationBankModel,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves an identity verification.  Required scope: **customers:read**
+     * Get Identity Verification
+     */
+    getIdentityVerification({ identityVerificationGuid }: GetIdentityVerificationRequest): Observable<IdentityVerificationBankModel>
+    getIdentityVerification({ identityVerificationGuid }: GetIdentityVerificationRequest, opts?: OperationOpts): Observable<AjaxResponse<IdentityVerificationBankModel>>
+    getIdentityVerification({ identityVerificationGuid }: GetIdentityVerificationRequest, opts?: OperationOpts): Observable<IdentityVerificationBankModel | AjaxResponse<IdentityVerificationBankModel>> {
+        throwIfNullOrUndefined(identityVerificationGuid, 'identityVerificationGuid', 'getIdentityVerification');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['customers:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<IdentityVerificationBankModel>({
+            url: '/api/identity_verifications/{identity_verification_guid}'.replace('{identity_verification_guid}', encodeURI(identityVerificationGuid)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves a list of identity verifications.  Required scope: **customers:read**
+     * List Identity Verifications
+     */
+    listIdentityVerifications({ page, perPage, guid, bankGuid, customerGuid }: ListIdentityVerificationsRequest): Observable<IdentityVerificationListBankModel>
+    listIdentityVerifications({ page, perPage, guid, bankGuid, customerGuid }: ListIdentityVerificationsRequest, opts?: OperationOpts): Observable<AjaxResponse<IdentityVerificationListBankModel>>
+    listIdentityVerifications({ page, perPage, guid, bankGuid, customerGuid }: ListIdentityVerificationsRequest, opts?: OperationOpts): Observable<IdentityVerificationListBankModel | AjaxResponse<IdentityVerificationListBankModel>> {
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['customers:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (perPage != null) { query['per_page'] = perPage; }
+        if (guid != null) { query['guid'] = guid; }
+        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
+        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+
+        return this.request<IdentityVerificationListBankModel>({
+            url: '/api/identity_verifications',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
+}

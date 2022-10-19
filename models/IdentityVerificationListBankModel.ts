@@ -11,49 +11,36 @@
  * Do not edit the class manually.
  */
 
+import type {
+    IdentityVerificationBankModel,
+} from './';
+
 /**
  * @export
- * @interface AssetBankModel
+ * @interface IdentityVerificationListBankModel
  */
-export interface AssetBankModel {
+export interface IdentityVerificationListBankModel {
     /**
-     * The asset type.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    type: AssetBankModelTypeEnum;
-    /**
-     * The unique code for the asset.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    code: string;
-    /**
-     * The name of the asset.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    name: string;
-    /**
-     * The currency symbol for the asset.
-     * @type {string}
-     * @memberof AssetBankModel
-     */
-    symbol: string;
-    /**
-     * The number of decimals for the default unit of the asset.
+     * The total number of records available.
      * @type {number}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationListBankModel
      */
-    decimals: number;
+    total: number;
+    /**
+     * The page index to retrieve.
+     * @type {number}
+     * @memberof IdentityVerificationListBankModel
+     */
+    page: number;
+    /**
+     * The number of entities per page to return.
+     * @type {number}
+     * @memberof IdentityVerificationListBankModel
+     */
+    per_page: number;
+    /**
+     * @type {Array<IdentityVerificationBankModel>}
+     * @memberof IdentityVerificationListBankModel
+     */
+    objects: Array<IdentityVerificationBankModel>;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum AssetBankModelTypeEnum {
-    Fiat = 'fiat',
-    Crypto = 'crypto'
-}
-
