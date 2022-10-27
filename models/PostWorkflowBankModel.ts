@@ -11,37 +11,85 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TradeBankModel,
-} from './';
+/**
+ * @export
+ * @interface PostWorkflowBankModel
+ */
+export interface PostWorkflowBankModel {
+    /**
+     * The workflow type.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    type: PostWorkflowBankModelTypeEnum;
+    /**
+     * The Plaid workflow kind.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    kind?: PostWorkflowBankModelKindEnum;
+    /**
+     * The customer identifier associated with the workflow.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    customer_guid?: string;
+    /**
+     * The external bank account identifier associated with the workflow.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    external_bank_account_guid?: string;
+    /**
+     * The language to initialize Plaid link.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    language?: PostWorkflowBankModelLanguageEnum;
+    /**
+     * The customization name for Plaid link.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    link_customization_name?: string;
+    /**
+     * The redirect URI for Plaid link.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    redirect_uri?: string | null;
+    /**
+     * The Android package name for Plaid link.
+     * @type {string}
+     * @memberof PostWorkflowBankModel
+     */
+    android_package_name?: string | null;
+}
 
 /**
  * @export
- * @interface TradeListBankModel
+ * @enum {string}
  */
-export interface TradeListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TradeBankModel>}
-     * @memberof TradeListBankModel
-     */
-    objects: Array<TradeBankModel>;
+export enum PostWorkflowBankModelTypeEnum {
+    Plaid = 'plaid'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostWorkflowBankModelKindEnum {
+    Create = 'link_token_create',
+    Update = 'link_token_update'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostWorkflowBankModelLanguageEnum {
+    En = 'en',
+    Fr = 'fr',
+    Es = 'es',
+    Nl = 'nl',
+    De = 'de'
+}
+

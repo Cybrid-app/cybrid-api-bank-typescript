@@ -12,3 +12,4 @@ export * from './RewardsBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
 export * from './VerificationKeysBankApi';
+export * from './WorkflowsBankApi';

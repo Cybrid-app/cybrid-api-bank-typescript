@@ -11,37 +11,42 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TradeBankModel,
-} from './';
+/**
+ * @export
+ * @interface WorkflowBankModel
+ */
+export interface WorkflowBankModel {
+    /**
+     * Auto-generated unique identifier for the workflow.
+     * @type {string}
+     * @memberof WorkflowBankModel
+     */
+    guid?: string;
+    /**
+     * The associated customer\'s identifier.
+     * @type {string}
+     * @memberof WorkflowBankModel
+     */
+    customer_guid?: string;
+    /**
+     * The type of workflow.
+     * @type {string}
+     * @memberof WorkflowBankModel
+     */
+    type?: WorkflowBankModelTypeEnum;
+    /**
+     * ISO8601 datetime the bank was created at.
+     * @type {string}
+     * @memberof WorkflowBankModel
+     */
+    created_at?: string;
+}
 
 /**
  * @export
- * @interface TradeListBankModel
+ * @enum {string}
  */
-export interface TradeListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TradeBankModel>}
-     * @memberof TradeListBankModel
-     */
-    objects: Array<TradeBankModel>;
+export enum WorkflowBankModelTypeEnum {
+    Plaid = 'plaid'
 }
+

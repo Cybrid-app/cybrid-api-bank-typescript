@@ -11,37 +11,128 @@
  * Do not edit the class manually.
  */
 
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
-    TradeBankModel,
-} from './';
+    ErrorResponseBankModel,
+    PostWorkflowBankModel,
+    WorkflowBankModel,
+    WorkflowWithDetailsBankModel,
+    WorkflowsListBankModel,
+} from '../models';
+
+export interface CreateWorkflowRequest {
+    postWorkflowBankModel: PostWorkflowBankModel;
+}
+
+export interface GetWorkflowRequest {
+    workflowGuid: string;
+}
+
+export interface ListWorkflowsRequest {
+    page?: number;
+    perPage?: number;
+    guid?: string;
+    bankGuid?: string;
+    customerGuid?: string;
+}
 
 /**
- * @export
- * @interface TradeListBankModel
+ * no description
  */
-export interface TradeListBankModel {
+export class WorkflowsBankApi extends BaseAPI {
+
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TradeListBankModel
+     * Creates a workflow.  Required scope: **workflows:execute**
+     * Create Workflow
      */
-    total: number;
+    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest): Observable<WorkflowBankModel>
+    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowBankModel>>
+    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<WorkflowBankModel | AjaxResponse<WorkflowBankModel>> {
+        throwIfNullOrUndefined(postWorkflowBankModel, 'postWorkflowBankModel', 'createWorkflow');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['workflows:execute'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<WorkflowBankModel>({
+            url: '/api/workflows',
+            method: 'POST',
+            headers,
+            body: postWorkflowBankModel,
+        }, opts?.responseOpts);
+    };
+
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TradeListBankModel
+     * Retrieves a workflow.  Required scope: **workflows:read**
+     * Get Workflow
      */
-    page: number;
+    getWorkflow({ workflowGuid }: GetWorkflowRequest): Observable<WorkflowWithDetailsBankModel>
+    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowWithDetailsBankModel>>
+    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<WorkflowWithDetailsBankModel | AjaxResponse<WorkflowWithDetailsBankModel>> {
+        throwIfNullOrUndefined(workflowGuid, 'workflowGuid', 'getWorkflow');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<WorkflowWithDetailsBankModel>({
+            url: '/api/workflows/{workflow_guid}'.replace('{workflow_guid}', encodeURI(workflowGuid)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TradeListBankModel
+     * Retrieves a listing of workflows.  Required scope: **workflows:read**
+     * Get workflows list
      */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TradeBankModel>}
-     * @memberof TradeListBankModel
-     */
-    objects: Array<TradeBankModel>;
+    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest): Observable<WorkflowsListBankModel>
+    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowsListBankModel>>
+    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<WorkflowsListBankModel | AjaxResponse<WorkflowsListBankModel>> {
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (perPage != null) { query['per_page'] = perPage; }
+        if (guid != null) { query['guid'] = guid; }
+        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
+        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+
+        return this.request<WorkflowsListBankModel>({
+            url: '/api/workflows',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
 }

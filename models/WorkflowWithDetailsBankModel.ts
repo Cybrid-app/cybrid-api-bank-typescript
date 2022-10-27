@@ -12,36 +12,12 @@
  */
 
 import type {
-    TradeBankModel,
+    WorkflowBankModel,
+    WorkflowWithDetailsAllOfBankModel,
 } from './';
 
 /**
+ * @type WorkflowWithDetailsBankModel
  * @export
- * @interface TradeListBankModel
  */
-export interface TradeListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TradeBankModel>}
-     * @memberof TradeListBankModel
-     */
-    objects: Array<TradeBankModel>;
-}
+export type WorkflowWithDetailsBankModel = WorkflowBankModel & WorkflowWithDetailsAllOfBankModel;
