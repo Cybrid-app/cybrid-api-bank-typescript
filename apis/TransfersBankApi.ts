@@ -17,41 +17,41 @@ import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
     ErrorResponseBankModel,
-    PostWorkflowBankModel,
-    WorkflowBankModel,
-    WorkflowWithDetailsBankModel,
-    WorkflowsListBankModel,
+    PostTransferBankModel,
+    TransferBankModel,
+    TransferListBankModel,
 } from '../models';
 
-export interface CreateWorkflowRequest {
-    postWorkflowBankModel: PostWorkflowBankModel;
+export interface CreateTransferRequest {
+    postTransferBankModel: PostTransferBankModel;
 }
 
-export interface GetWorkflowRequest {
-    workflowGuid: string;
+export interface GetTransferRequest {
+    transferGuid: string;
 }
 
-export interface ListWorkflowsRequest {
+export interface ListTransfersRequest {
     page?: number;
     perPage?: number;
     guid?: string;
     bankGuid?: string;
     customerGuid?: string;
+    accountGuid?: string;
 }
 
 /**
  * no description
  */
-export class WorkflowsBankApi extends BaseAPI {
+export class TransfersBankApi extends BaseAPI {
 
     /**
-     * Creates a workflow.  Required scope: **workflows:execute**
-     * Create Workflow
+     * Creates a transfer.  Required scope: **transfers:execute**
+     * Create Transfer
      */
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest): Observable<WorkflowBankModel>
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowBankModel>>
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<WorkflowBankModel | AjaxResponse<WorkflowBankModel>> {
-        throwIfNullOrUndefined(postWorkflowBankModel, 'postWorkflowBankModel', 'createWorkflow');
+    createTransfer({ postTransferBankModel }: CreateTransferRequest): Observable<TransferBankModel>
+    createTransfer({ postTransferBankModel }: CreateTransferRequest, opts?: OperationOpts): Observable<AjaxResponse<TransferBankModel>>
+    createTransfer({ postTransferBankModel }: CreateTransferRequest, opts?: OperationOpts): Observable<TransferBankModel | AjaxResponse<TransferBankModel>> {
+        throwIfNullOrUndefined(postTransferBankModel, 'postTransferBankModel', 'createTransfer');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
@@ -59,61 +59,61 @@ export class WorkflowsBankApi extends BaseAPI {
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:execute'])
+                    ? this.configuration.accessToken('oauth2', ['transfers:execute'])
                     : this.configuration.accessToken }
                 : undefined
             ),
         };
 
-        return this.request<WorkflowBankModel>({
-            url: '/api/workflows',
+        return this.request<TransferBankModel>({
+            url: '/api/transfers',
             method: 'POST',
             headers,
-            body: postWorkflowBankModel,
+            body: postTransferBankModel,
         }, opts?.responseOpts);
     };
 
     /**
-     * Retrieves a workflow.  Required scope: **workflows:read**
-     * Get Workflow
+     * Retrieves a transfer.  Required scope: **transfers:read**
+     * Get Transfer
      */
-    getWorkflow({ workflowGuid }: GetWorkflowRequest): Observable<WorkflowWithDetailsBankModel>
-    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowWithDetailsBankModel>>
-    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<WorkflowWithDetailsBankModel | AjaxResponse<WorkflowWithDetailsBankModel>> {
-        throwIfNullOrUndefined(workflowGuid, 'workflowGuid', 'getWorkflow');
+    getTransfer({ transferGuid }: GetTransferRequest): Observable<TransferBankModel>
+    getTransfer({ transferGuid }: GetTransferRequest, opts?: OperationOpts): Observable<AjaxResponse<TransferBankModel>>
+    getTransfer({ transferGuid }: GetTransferRequest, opts?: OperationOpts): Observable<TransferBankModel | AjaxResponse<TransferBankModel>> {
+        throwIfNullOrUndefined(transferGuid, 'transferGuid', 'getTransfer');
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
+                    ? this.configuration.accessToken('oauth2', ['transfers:read'])
                     : this.configuration.accessToken }
                 : undefined
             ),
         };
 
-        return this.request<WorkflowWithDetailsBankModel>({
-            url: '/api/workflows/{workflow_guid}'.replace('{workflow_guid}', encodeURI(workflowGuid)),
+        return this.request<TransferBankModel>({
+            url: '/api/transfers/{transfer_guid}'.replace('{transfer_guid}', encodeURI(transferGuid)),
             method: 'GET',
             headers,
         }, opts?.responseOpts);
     };
 
     /**
-     * Retrieves a listing of workflows.  Required scope: **workflows:read**
-     * Get workflows list
+     * Retrieves a listing of transfers.  Required scope: **transfers:read**
+     * Get transfers list
      */
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest): Observable<WorkflowsListBankModel>
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowsListBankModel>>
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<WorkflowsListBankModel | AjaxResponse<WorkflowsListBankModel>> {
+    listTransfers({ page, perPage, guid, bankGuid, customerGuid, accountGuid }: ListTransfersRequest): Observable<TransferListBankModel>
+    listTransfers({ page, perPage, guid, bankGuid, customerGuid, accountGuid }: ListTransfersRequest, opts?: OperationOpts): Observable<AjaxResponse<TransferListBankModel>>
+    listTransfers({ page, perPage, guid, bankGuid, customerGuid, accountGuid }: ListTransfersRequest, opts?: OperationOpts): Observable<TransferListBankModel | AjaxResponse<TransferListBankModel>> {
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
+                    ? this.configuration.accessToken('oauth2', ['transfers:read'])
                     : this.configuration.accessToken }
                 : undefined
             ),
@@ -126,9 +126,10 @@ export class WorkflowsBankApi extends BaseAPI {
         if (guid != null) { query['guid'] = guid; }
         if (bankGuid != null) { query['bank_guid'] = bankGuid; }
         if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+        if (accountGuid != null) { query['account_guid'] = accountGuid; }
 
-        return this.request<WorkflowsListBankModel>({
-            url: '/api/workflows',
+        return this.request<TransferListBankModel>({
+            url: '/api/transfers',
             method: 'GET',
             headers,
             query,

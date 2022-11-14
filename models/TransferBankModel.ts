@@ -11,128 +11,98 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    PostWorkflowBankModel,
-    WorkflowBankModel,
-    WorkflowWithDetailsBankModel,
-    WorkflowsListBankModel,
-} from '../models';
-
-export interface CreateWorkflowRequest {
-    postWorkflowBankModel: PostWorkflowBankModel;
-}
-
-export interface GetWorkflowRequest {
-    workflowGuid: string;
-}
-
-export interface ListWorkflowsRequest {
-    page?: number;
-    perPage?: number;
+/**
+ * @export
+ * @interface TransferBankModel
+ */
+export interface TransferBankModel {
+    /**
+     * Auto-generated unique identifier for the trade.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
     guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
+    /**
+     * The type of transfer.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    transfer_type?: TransferBankModelTransferTypeEnum;
+    /**
+     * The associated customer\'s identifier.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    customer_guid?: string;
+    /**
+     * The associated quote\'s identifier.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    quote_guid?: string;
+    /**
+     * The asset the transfer is related to, e.g., USD.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    asset?: string;
+    /**
+     * The direction of the quote: either \'buy\' or \'sell\'.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    side?: TransferBankModelSideEnum;
+    /**
+     * The trade\'s state
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    state?: TransferBankModelStateEnum;
+    /**
+     * The amount being transferred.
+     * @type {number}
+     * @memberof TransferBankModel
+     */
+    amount?: number;
+    /**
+     * The fee associated with the trade.
+     * @type {number}
+     * @memberof TransferBankModel
+     */
+    fee?: number;
+    /**
+     * ISO8601 datetime the bank was created at.
+     * @type {string}
+     * @memberof TransferBankModel
+     */
+    created_at?: string;
 }
 
 /**
- * no description
+ * @export
+ * @enum {string}
  */
-export class WorkflowsBankApi extends BaseAPI {
-
-    /**
-     * Creates a workflow.  Required scope: **workflows:execute**
-     * Create Workflow
-     */
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest): Observable<WorkflowBankModel>
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowBankModel>>
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<WorkflowBankModel | AjaxResponse<WorkflowBankModel>> {
-        throwIfNullOrUndefined(postWorkflowBankModel, 'postWorkflowBankModel', 'createWorkflow');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<WorkflowBankModel>({
-            url: '/api/workflows',
-            method: 'POST',
-            headers,
-            body: postWorkflowBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a workflow.  Required scope: **workflows:read**
-     * Get Workflow
-     */
-    getWorkflow({ workflowGuid }: GetWorkflowRequest): Observable<WorkflowWithDetailsBankModel>
-    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowWithDetailsBankModel>>
-    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<WorkflowWithDetailsBankModel | AjaxResponse<WorkflowWithDetailsBankModel>> {
-        throwIfNullOrUndefined(workflowGuid, 'workflowGuid', 'getWorkflow');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<WorkflowWithDetailsBankModel>({
-            url: '/api/workflows/{workflow_guid}'.replace('{workflow_guid}', encodeURI(workflowGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a listing of workflows.  Required scope: **workflows:read**
-     * Get workflows list
-     */
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest): Observable<WorkflowsListBankModel>
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowsListBankModel>>
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<WorkflowsListBankModel | AjaxResponse<WorkflowsListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-
-        return this.request<WorkflowsListBankModel>({
-            url: '/api/workflows',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+export enum TransferBankModelTransferTypeEnum {
+    Savings = 'savings',
+    Funding = 'funding'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum TransferBankModelSideEnum {
+    Deposit = 'deposit',
+    Withdrawal = 'withdrawal'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum TransferBankModelStateEnum {
+    Storing = 'storing',
+    Initiating = 'initiating',
+    Pending = 'pending',
+    Completed = 'completed',
+    Failed = 'failed'
+}
+

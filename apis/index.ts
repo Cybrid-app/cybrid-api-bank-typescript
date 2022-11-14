@@ -11,5 +11,6 @@ export * from './QuotesBankApi';
 export * from './RewardsBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
+export * from './TransfersBankApi';
 export * from './VerificationKeysBankApi';
 export * from './WorkflowsBankApi';

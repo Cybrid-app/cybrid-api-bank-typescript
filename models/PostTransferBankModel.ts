@@ -11,128 +11,55 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    PostWorkflowBankModel,
-    WorkflowBankModel,
-    WorkflowWithDetailsBankModel,
-    WorkflowsListBankModel,
-} from '../models';
-
-export interface CreateWorkflowRequest {
-    postWorkflowBankModel: PostWorkflowBankModel;
-}
-
-export interface GetWorkflowRequest {
-    workflowGuid: string;
-}
-
-export interface ListWorkflowsRequest {
-    page?: number;
-    perPage?: number;
-    guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
+/**
+ * @export
+ * @interface PostTransferBankModel
+ */
+export interface PostTransferBankModel {
+    /**
+     * The associated quote\'s identifier.
+     * @type {string}
+     * @memberof PostTransferBankModel
+     */
+    quote_guid: string;
+    /**
+     * The type of transfer.
+     * @type {string}
+     * @memberof PostTransferBankModel
+     */
+    transfer_type: PostTransferBankModelTransferTypeEnum;
+    /**
+     * The customer\'s fiat asset external bank account\'s identifier.
+     * @type {string}
+     * @memberof PostTransferBankModel
+     */
+    external_bank_account_guid?: string;
+    /**
+     * The optional expected error to simulate transfer failure.
+     * @type {string}
+     * @memberof PostTransferBankModel
+     */
+    expected_error?: PostTransferBankModelExpectedErrorEnum;
 }
 
 /**
- * no description
+ * @export
+ * @enum {string}
  */
-export class WorkflowsBankApi extends BaseAPI {
-
-    /**
-     * Creates a workflow.  Required scope: **workflows:execute**
-     * Create Workflow
-     */
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest): Observable<WorkflowBankModel>
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowBankModel>>
-    createWorkflow({ postWorkflowBankModel }: CreateWorkflowRequest, opts?: OperationOpts): Observable<WorkflowBankModel | AjaxResponse<WorkflowBankModel>> {
-        throwIfNullOrUndefined(postWorkflowBankModel, 'postWorkflowBankModel', 'createWorkflow');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<WorkflowBankModel>({
-            url: '/api/workflows',
-            method: 'POST',
-            headers,
-            body: postWorkflowBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a workflow.  Required scope: **workflows:read**
-     * Get Workflow
-     */
-    getWorkflow({ workflowGuid }: GetWorkflowRequest): Observable<WorkflowWithDetailsBankModel>
-    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowWithDetailsBankModel>>
-    getWorkflow({ workflowGuid }: GetWorkflowRequest, opts?: OperationOpts): Observable<WorkflowWithDetailsBankModel | AjaxResponse<WorkflowWithDetailsBankModel>> {
-        throwIfNullOrUndefined(workflowGuid, 'workflowGuid', 'getWorkflow');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<WorkflowWithDetailsBankModel>({
-            url: '/api/workflows/{workflow_guid}'.replace('{workflow_guid}', encodeURI(workflowGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a listing of workflows.  Required scope: **workflows:read**
-     * Get workflows list
-     */
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest): Observable<WorkflowsListBankModel>
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<AjaxResponse<WorkflowsListBankModel>>
-    listWorkflows({ page, perPage, guid, bankGuid, customerGuid }: ListWorkflowsRequest, opts?: OperationOpts): Observable<WorkflowsListBankModel | AjaxResponse<WorkflowsListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['workflows:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-
-        return this.request<WorkflowsListBankModel>({
-            url: '/api/workflows',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+export enum PostTransferBankModelTransferTypeEnum {
+    Funding = 'funding'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostTransferBankModelExpectedErrorEnum {
+    Pending = 'pending',
+    InProgress = 'in_progress',
+    Completed = 'completed',
+    Failed = 'failed',
+    Cancelled = 'cancelled',
+    ManualIntervention = 'manual_intervention',
+    Reversed = 'reversed'
+}
+
