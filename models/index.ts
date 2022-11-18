@@ -17,6 +17,8 @@ export * from './IdentityRecordBankModel';
 export * from './IdentityRecordListBankModel';
 export * from './IdentityVerificationBankModel';
 export * from './IdentityVerificationListBankModel';
+export * from './IdentityVerificationWithDetailsAllOfBankModel';
+export * from './IdentityVerificationWithDetailsBankModel';
 export * from './PatchBankBankModel';
 export * from './PostAccountBankModel';
 export * from './PostBankBankModel';
