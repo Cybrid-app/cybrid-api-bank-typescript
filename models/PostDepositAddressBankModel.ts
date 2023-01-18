@@ -13,87 +13,13 @@
 
 /**
  * @export
- * @interface AccountBankModel
+ * @interface PostDepositAddressBankModel
  */
-export interface AccountBankModel {
+export interface PostDepositAddressBankModel {
     /**
-     * The account type.
+     * The trading account guid.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof PostDepositAddressBankModel
      */
-    type?: AccountBankModelTypeEnum;
-    /**
-     * Auto-generated unique identifier for the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    guid?: string;
-    /**
-     * ISO8601 datetime the account was created at.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    created_at?: string;
-    /**
-     * The asset code.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    asset?: string;
-    /**
-     * The name of the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    name?: string;
-    /**
-     * The bank identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    bank_guid?: string;
-    /**
-     * The customer identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    customer_guid?: string;
-    /**
-     * The amount of funds that are in the account, in base units of the asset.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_balance?: number;
-    /**
-     * The amount of funds that are in the account, in base units of the asset, that are available for use on the platform.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_available?: number;
-    /**
-     * The account\'s state.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    state?: AccountBankModelStateEnum;
+    account_guid: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelTypeEnum {
-    Backstopped = 'backstopped',
-    Trading = 'trading',
-    Fee = 'fee',
-    Fiat = 'fiat'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelStateEnum {
-    Storing = 'storing',
-    Created = 'created'
-}
-

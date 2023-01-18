@@ -11,89 +11,127 @@
  * Do not edit the class manually.
  */
 
-/**
- * @export
- * @interface AccountBankModel
- */
-export interface AccountBankModel {
-    /**
-     * The account type.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    type?: AccountBankModelTypeEnum;
-    /**
-     * Auto-generated unique identifier for the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
+import type {
+    DepositAddressBankModel,
+    DepositAddressListBankModel,
+    ErrorResponseBankModel,
+    PostDepositAddressBankModel,
+} from '../models';
+
+export interface CreateDepositAddressRequest {
+    postDepositAddressBankModel: PostDepositAddressBankModel;
+}
+
+export interface GetDepositAddressRequest {
+    depositAddressGuid: string;
+}
+
+export interface ListDepositAddressesRequest {
+    page?: number;
+    perPage?: number;
     guid?: string;
-    /**
-     * ISO8601 datetime the account was created at.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    created_at?: string;
-    /**
-     * The asset code.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    asset?: string;
-    /**
-     * The name of the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    name?: string;
-    /**
-     * The bank identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    bank_guid?: string;
-    /**
-     * The customer identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    customer_guid?: string;
-    /**
-     * The amount of funds that are in the account, in base units of the asset.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_balance?: number;
-    /**
-     * The amount of funds that are in the account, in base units of the asset, that are available for use on the platform.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_available?: number;
-    /**
-     * The account\'s state.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    state?: AccountBankModelStateEnum;
+    bankGuid?: string;
+    customerGuid?: string;
 }
 
 /**
- * @export
- * @enum {string}
+ * no description
  */
-export enum AccountBankModelTypeEnum {
-    Backstopped = 'backstopped',
-    Trading = 'trading',
-    Fee = 'fee',
-    Fiat = 'fiat'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelStateEnum {
-    Storing = 'storing',
-    Created = 'created'
-}
+export class DepositAddressesBankApi extends BaseAPI {
 
+    /**
+     * Create an Deposit Address.  Required scope: **deposit_addresses:execute**
+     * Create Deposit Address
+     */
+    createDepositAddress({ postDepositAddressBankModel }: CreateDepositAddressRequest): Observable<DepositAddressBankModel>
+    createDepositAddress({ postDepositAddressBankModel }: CreateDepositAddressRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositAddressBankModel>>
+    createDepositAddress({ postDepositAddressBankModel }: CreateDepositAddressRequest, opts?: OperationOpts): Observable<DepositAddressBankModel | AjaxResponse<DepositAddressBankModel>> {
+        throwIfNullOrUndefined(postDepositAddressBankModel, 'postDepositAddressBankModel', 'createDepositAddress');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['deposit_addresses:execute'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<DepositAddressBankModel>({
+            url: '/api/deposit_addresses',
+            method: 'POST',
+            headers,
+            body: postDepositAddressBankModel,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves a deposit address.  Required scope: **deposit_addresses:read**
+     * Get Deposit Address
+     */
+    getDepositAddress({ depositAddressGuid }: GetDepositAddressRequest): Observable<DepositAddressBankModel>
+    getDepositAddress({ depositAddressGuid }: GetDepositAddressRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositAddressBankModel>>
+    getDepositAddress({ depositAddressGuid }: GetDepositAddressRequest, opts?: OperationOpts): Observable<DepositAddressBankModel | AjaxResponse<DepositAddressBankModel>> {
+        throwIfNullOrUndefined(depositAddressGuid, 'depositAddressGuid', 'getDepositAddress');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['deposit_addresses:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<DepositAddressBankModel>({
+            url: '/api/deposit_addresses/{deposit_address_guid}'.replace('{deposit_address_guid}', encodeURI(depositAddressGuid)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves a list of deposit addresses.  Required scope: **deposit_addresses:read**
+     * List Deposit Addresses
+     */
+    listDepositAddresses({ page, perPage, guid, bankGuid, customerGuid }: ListDepositAddressesRequest): Observable<DepositAddressListBankModel>
+    listDepositAddresses({ page, perPage, guid, bankGuid, customerGuid }: ListDepositAddressesRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositAddressListBankModel>>
+    listDepositAddresses({ page, perPage, guid, bankGuid, customerGuid }: ListDepositAddressesRequest, opts?: OperationOpts): Observable<DepositAddressListBankModel | AjaxResponse<DepositAddressListBankModel>> {
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['deposit_addresses:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (perPage != null) { query['per_page'] = perPage; }
+        if (guid != null) { query['guid'] = guid; }
+        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
+        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+
+        return this.request<DepositAddressListBankModel>({
+            url: '/api/deposit_addresses',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
+}

@@ -13,87 +13,85 @@
 
 /**
  * @export
- * @interface AccountBankModel
+ * @interface DepositAddressBankModel
  */
-export interface AccountBankModel {
+export interface DepositAddressBankModel {
     /**
-     * The account type.
+     * Auto-generated unique identifier for the identity verification.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    type?: AccountBankModelTypeEnum;
+    guid: string;
     /**
-     * Auto-generated unique identifier for the account.
+     * The address\' bank identifier.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    guid?: string;
+    bank_guid: string;
     /**
-     * ISO8601 datetime the account was created at.
+     * The address\' customer identifier.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    created_at?: string;
+    customer_guid: string;
     /**
-     * The asset code.
+     * The address\' account identifier.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    asset?: string;
+    account_guid: string;
     /**
-     * The name of the account.
+     * ISO8601 datetime the address was created at.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    name?: string;
+    created_at: string;
     /**
-     * The bank identifier associated with the account.
+     * The asset the transfer is related to, e.g., USD.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    bank_guid?: string;
+    asset: string;
     /**
-     * The customer identifier associated with the account.
+     * The state of the address.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    customer_guid?: string;
+    state: DepositAddressBankModelStateEnum;
     /**
-     * The amount of funds that are in the account, in base units of the asset.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_balance?: number;
-    /**
-     * The amount of funds that are in the account, in base units of the asset, that are available for use on the platform.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_available?: number;
-    /**
-     * The account\'s state.
+     * The blockchain address.
      * @type {string}
-     * @memberof AccountBankModel
+     * @memberof DepositAddressBankModel
      */
-    state?: AccountBankModelStateEnum;
+    address?: string;
+    /**
+     * The blockchain address format.
+     * @type {string}
+     * @memberof DepositAddressBankModel
+     */
+    format?: DepositAddressBankModelFormatEnum;
+    /**
+     * The blockchain address tag.
+     * @type {string}
+     * @memberof DepositAddressBankModel
+     */
+    tag?: string;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum AccountBankModelTypeEnum {
-    Backstopped = 'backstopped',
-    Trading = 'trading',
-    Fee = 'fee',
-    Fiat = 'fiat'
+export enum DepositAddressBankModelStateEnum {
+    Storing = 'storing',
+    Created = 'created'
 }
 /**
  * @export
  * @enum {string}
  */
-export enum AccountBankModelStateEnum {
-    Storing = 'storing',
-    Created = 'created'
+export enum DepositAddressBankModelFormatEnum {
+    Standard = 'standard',
+    Legacy = 'legacy'
 }
 

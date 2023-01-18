@@ -11,89 +11,36 @@
  * Do not edit the class manually.
  */
 
-/**
- * @export
- * @interface AccountBankModel
- */
-export interface AccountBankModel {
-    /**
-     * The account type.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    type?: AccountBankModelTypeEnum;
-    /**
-     * Auto-generated unique identifier for the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    guid?: string;
-    /**
-     * ISO8601 datetime the account was created at.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    created_at?: string;
-    /**
-     * The asset code.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    asset?: string;
-    /**
-     * The name of the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    name?: string;
-    /**
-     * The bank identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    bank_guid?: string;
-    /**
-     * The customer identifier associated with the account.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    customer_guid?: string;
-    /**
-     * The amount of funds that are in the account, in base units of the asset.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_balance?: number;
-    /**
-     * The amount of funds that are in the account, in base units of the asset, that are available for use on the platform.
-     * @type {number}
-     * @memberof AccountBankModel
-     */
-    platform_available?: number;
-    /**
-     * The account\'s state.
-     * @type {string}
-     * @memberof AccountBankModel
-     */
-    state?: AccountBankModelStateEnum;
-}
+import type {
+    DepositAddressBankModel,
+} from './';
 
 /**
  * @export
- * @enum {string}
+ * @interface DepositAddressListBankModel
  */
-export enum AccountBankModelTypeEnum {
-    Backstopped = 'backstopped',
-    Trading = 'trading',
-    Fee = 'fee',
-    Fiat = 'fiat'
+export interface DepositAddressListBankModel {
+    /**
+     * The total number of records available.
+     * @type {number}
+     * @memberof DepositAddressListBankModel
+     */
+    total: number;
+    /**
+     * The page index to retrieve.
+     * @type {number}
+     * @memberof DepositAddressListBankModel
+     */
+    page: number;
+    /**
+     * The number of entities per page to return.
+     * @type {number}
+     * @memberof DepositAddressListBankModel
+     */
+    per_page: number;
+    /**
+     * @type {Array<DepositAddressBankModel>}
+     * @memberof DepositAddressListBankModel
+     */
+    objects: Array<DepositAddressBankModel>;
 }
-/**
- * @export
- * @enum {string}
- */
-export enum AccountBankModelStateEnum {
-    Storing = 'storing',
-    Created = 'created'
-}
-
