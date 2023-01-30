@@ -32,6 +32,7 @@ export * from './PostFeeConfigurationBankModel';
 export * from './PostIdentityRecordAttestationDetailsBankModel';
 export * from './PostIdentityRecordBankModel';
 export * from './PostIdentityVerificationBankModel';
+export * from './PostOneTimeAddressBankModel';
 export * from './PostQuoteBankModel';
 export * from './PostRewardBankModel';
 export * from './PostTradeBankModel';

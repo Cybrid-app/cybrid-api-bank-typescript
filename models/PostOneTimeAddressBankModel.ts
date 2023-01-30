@@ -13,61 +13,19 @@
 
 /**
  * @export
- * @interface WorkflowBankModel
+ * @interface PostOneTimeAddressBankModel
  */
-export interface WorkflowBankModel {
+export interface PostOneTimeAddressBankModel {
     /**
-     * Auto-generated unique identifier for the workflow.
+     * The blockchain wallet address to transfer crypto to.
      * @type {string}
-     * @memberof WorkflowBankModel
+     * @memberof PostOneTimeAddressBankModel
      */
-    guid?: string;
+    address: string;
     /**
-     * The associated customer\'s identifier.
+     * The blockchain tag to use when transferring crypto.
      * @type {string}
-     * @memberof WorkflowBankModel
+     * @memberof PostOneTimeAddressBankModel
      */
-    customer_guid?: string;
-    /**
-     * The type of workflow.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    type?: WorkflowBankModelTypeEnum;
-    /**
-     * The state of the workflow.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    state?: WorkflowBankModelStateEnum;
-    /**
-     * The failure code for failed workflows.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    failure_code?: string | null;
-    /**
-     * ISO8601 datetime the bank was created at.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    created_at?: string;
+    tag?: string | null;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum WorkflowBankModelTypeEnum {
-    Plaid = 'plaid'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum WorkflowBankModelStateEnum {
-    Storing = 'storing',
-    Completed = 'completed',
-    Failed = 'failed'
-}
-
