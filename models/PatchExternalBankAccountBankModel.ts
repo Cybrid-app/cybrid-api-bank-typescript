@@ -13,31 +13,23 @@
 
 /**
  * @export
- * @interface PatchBankBankModel
+ * @interface PatchExternalBankAccountBankModel
  */
-export interface PatchBankBankModel {
+export interface PatchExternalBankAccountBankModel {
     /**
-     * The bank\'s name.
+     * The state of the external bank account.
      * @type {string}
-     * @memberof PatchBankBankModel
+     * @memberof PatchExternalBankAccountBankModel
      */
-    name?: string;
-    /**
-     * The bank\'s list of supported trading symbols.
-     * @type {Array<string>}
-     * @memberof PatchBankBankModel
-     */
-    supported_trading_symbols?: Array<string>;
-    /**
-     * The bank\'s list of supported fiat assets.
-     * @type {Array<string>}
-     * @memberof PatchBankBankModel
-     */
-    supported_fiat_account_assets?: Array<string>;
-    /**
-     * The bank\'s list of supported country codes.
-     * @type {Array<string>}
-     * @memberof PatchBankBankModel
-     */
-    supported_country_codes?: Array<string>;
+    state: PatchExternalBankAccountBankModelStateEnum;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PatchExternalBankAccountBankModelStateEnum {
+    Completed = 'completed',
+    RefreshRequired = 'refresh_required'
+}
+

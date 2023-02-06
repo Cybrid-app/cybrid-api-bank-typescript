@@ -22,6 +22,7 @@ export * from './IdentityVerificationListBankModel';
 export * from './IdentityVerificationWithDetailsAllOfBankModel';
 export * from './IdentityVerificationWithDetailsBankModel';
 export * from './PatchBankBankModel';
+export * from './PatchExternalBankAccountBankModel';
 export * from './PostAccountBankModel';
 export * from './PostBankBankModel';
 export * from './PostCustomerBankModel';
