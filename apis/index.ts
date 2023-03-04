@@ -4,7 +4,6 @@ export * from './BanksBankApi';
 export * from './CustomersBankApi';
 export * from './DepositAddressesBankApi';
 export * from './ExternalBankAccountsBankApi';
-export * from './FeeConfigurationsBankApi';
 export * from './IdentityRecordsBankApi';
 export * from './IdentityVerificationsBankApi';
 export * from './PricesBankApi';
