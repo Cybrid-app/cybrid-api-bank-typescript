@@ -13,34 +13,43 @@
 
 /**
  * @export
- * @interface IdentityVerificationWithDetailsAllOfBankModel
+ * @interface PostCustomerAddressBankModel
  */
-export interface IdentityVerificationWithDetailsAllOfBankModel {
+export interface PostCustomerAddressBankModel {
     /**
-     * The Persona identifier of the backing inquiry.
+     * The first line of the address.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostCustomerAddressBankModel
      */
-    persona_inquiry_id?: string | null;
+    street: string;
     /**
-     * The Persona state of the backing inquiry.
+     * The optional second line of the address.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostCustomerAddressBankModel
      */
-    persona_state?: IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum;
+    street2?: string | null;
+    /**
+     * The city of the address.
+     * @type {string}
+     * @memberof PostCustomerAddressBankModel
+     */
+    city: string;
+    /**
+     * The provide/state/region of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostCustomerAddressBankModel
+     */
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostCustomerAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof PostCustomerAddressBankModel
+     */
+    country_code: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum {
-    Waiting = 'waiting',
-    Pending = 'pending',
-    Reviewing = 'reviewing',
-    Processing = 'processing',
-    Expired = 'expired',
-    Completed = 'completed',
-    Unknown = 'unknown'
-}
-

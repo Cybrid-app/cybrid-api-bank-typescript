@@ -12,35 +12,27 @@
  */
 
 /**
+ * The customer\'s name; required when method is set to \'attested\'.
  * @export
- * @interface IdentityVerificationWithDetailsAllOfBankModel
+ * @interface PostIdentityVerificationNameBankModel
  */
-export interface IdentityVerificationWithDetailsAllOfBankModel {
+export interface PostIdentityVerificationNameBankModel {
     /**
-     * The Persona identifier of the backing inquiry.
+     * The customer\'s first name.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostIdentityVerificationNameBankModel
      */
-    persona_inquiry_id?: string | null;
+    first: string;
     /**
-     * The Persona state of the backing inquiry.
+     * The customer\'s middle name.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostIdentityVerificationNameBankModel
      */
-    persona_state?: IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum;
+    middle?: string | null;
+    /**
+     * The customer\'s last name.
+     * @type {string}
+     * @memberof PostIdentityVerificationNameBankModel
+     */
+    last: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum {
-    Waiting = 'waiting',
-    Pending = 'pending',
-    Reviewing = 'reviewing',
-    Processing = 'processing',
-    Expired = 'expired',
-    Completed = 'completed',
-    Unknown = 'unknown'
-}
-

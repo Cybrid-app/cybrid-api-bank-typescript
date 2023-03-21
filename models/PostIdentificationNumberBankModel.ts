@@ -13,34 +13,37 @@
 
 /**
  * @export
- * @interface IdentityVerificationWithDetailsAllOfBankModel
+ * @interface PostIdentificationNumberBankModel
  */
-export interface IdentityVerificationWithDetailsAllOfBankModel {
+export interface PostIdentificationNumberBankModel {
     /**
-     * The Persona identifier of the backing inquiry.
+     * The source of the identification number.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostIdentificationNumberBankModel
      */
-    persona_inquiry_id?: string | null;
+    type: PostIdentificationNumberBankModelTypeEnum;
     /**
-     * The Persona state of the backing inquiry.
+     * The ISO 3166 country 2-Alpha country code of the identification number issuer.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostIdentificationNumberBankModel
      */
-    persona_state?: IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum;
+    issuing_country_code: string;
+    /**
+     * The identification number.
+     * @type {string}
+     * @memberof PostIdentificationNumberBankModel
+     */
+    identification_number: string;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum {
-    Waiting = 'waiting',
-    Pending = 'pending',
-    Reviewing = 'reviewing',
-    Processing = 'processing',
-    Expired = 'expired',
-    Completed = 'completed',
-    Unknown = 'unknown'
+export enum PostIdentificationNumberBankModelTypeEnum {
+    DriversLicense = 'drivers_license',
+    Passport = 'passport',
+    PassportCard = 'passport_card',
+    ResidenceCard = 'residence_card'
 }
 

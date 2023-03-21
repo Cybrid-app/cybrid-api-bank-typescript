@@ -12,35 +12,45 @@
  */
 
 /**
+ * The customer\'s address; required when method is set to \'attested\'.
  * @export
- * @interface IdentityVerificationWithDetailsAllOfBankModel
+ * @interface PostIdentityVerificationAddressBankModel
  */
-export interface IdentityVerificationWithDetailsAllOfBankModel {
+export interface PostIdentityVerificationAddressBankModel {
     /**
-     * The Persona identifier of the backing inquiry.
+     * The first line of the address.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostIdentityVerificationAddressBankModel
      */
-    persona_inquiry_id?: string | null;
+    street: string;
     /**
-     * The Persona state of the backing inquiry.
+     * The optional second line of the address.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsAllOfBankModel
+     * @memberof PostIdentityVerificationAddressBankModel
      */
-    persona_state?: IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum;
+    street2?: string | null;
+    /**
+     * The city of the address.
+     * @type {string}
+     * @memberof PostIdentityVerificationAddressBankModel
+     */
+    city: string;
+    /**
+     * The provide/state/region of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostIdentityVerificationAddressBankModel
+     */
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostIdentityVerificationAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof PostIdentityVerificationAddressBankModel
+     */
+    country_code: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum IdentityVerificationWithDetailsAllOfBankModelPersonaStateEnum {
-    Waiting = 'waiting',
-    Pending = 'pending',
-    Reviewing = 'reviewing',
-    Processing = 'processing',
-    Expired = 'expired',
-    Completed = 'completed',
-    Unknown = 'unknown'
-}
-
