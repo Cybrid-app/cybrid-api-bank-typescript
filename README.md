@@ -143,7 +143,7 @@ An `Organization` can have multiple `banks`, in either `Sandbox` or `Production`
 `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
-## @cybrid/cybrid-api-bank-typescript@0.68.54
+## @cybrid/cybrid-api-bank-typescript@0.68.55
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -181,7 +181,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.68.54 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.68.55 --save
 ```
 
 _unPublished (not recommended):_
