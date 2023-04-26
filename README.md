@@ -69,7 +69,7 @@ curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"scope\": \"banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write banks:read banks:write banks:execute customers:read accounts:read quotes:read trades:read transfers:read external_bank_accounts:read workflows:read deposit_addresses:read'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write banks:read banks:write banks:execute customers:read accounts:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read workflows:read deposit_addresses:read'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -79,20 +79,20 @@ The Cybrid platform supports the use of scopes to control the level of access a 
 
 The following scopes are available on the platform and can be requested when generating either an Organization, Bank or Customer token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
 
-| Resource              | Read scope (Token Type)                                    | Write scope (Token Type)                      | Execute scope (Token Type)                      |
-|-----------------------|------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------|
-| Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)               |
-| Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                    |
-| Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                        |
-| Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)      |
-| External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer) |
-| Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                 |
-| Price                 | prices:read (Bank, Customer)                               |                                               |                                                 |
-| Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Bank, Customer)                 |
-| Reward                | rewards:read (Bank, Customer)                              |                                               | rewards:execute (Bank)                          |
-| Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Bank, Customer)                 |
-| Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Bank, Customer)              |
-| Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)              |
+| Resource              | Read scope (Token Type)                                    | Write scope (Token Type)                      | Execute scope (Token Type)                       |
+|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)                |
+| Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                     |
+| Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                         |
+| Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)       |
+| External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer)  |
+| Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                  |
+| Price                 | prices:read (Bank, Customer)                               |                                               |                                                  |
+| Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Organization, Bank, Customer)    |
+| Reward                | rewards:read (Bank, Customer)                              |                                               | rewards:execute (Bank)                           |
+| Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Organization, Bank, Customer)    |
+| Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Organization, Bank, Customer) |
+| Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)               |
 
 ## Available Endpoints
 
@@ -126,7 +126,7 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 
 An `Organization` is meant to represent the organization partnering with Cybrid to use our platform.
 
-An `Organization` does not directly interact with `customers`. Instead, an Organization has one or more `banks`, which encompass the financial service offerings of the platform.
+An `Organization` typically does not directly interact with `customers`. Instead, an Organization has one or more `banks`, which encompass the financial service offerings of the platform.
 
 **Banks**
 
@@ -143,7 +143,7 @@ An `Organization` can have multiple `banks`, in either `Sandbox` or `Production`
 `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
-## @cybrid/cybrid-api-bank-typescript@0.68.63
+## @cybrid/cybrid-api-bank-typescript@0.68.65
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -181,7 +181,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.68.63 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.68.65 --save
 ```
 
 _unPublished (not recommended):_
