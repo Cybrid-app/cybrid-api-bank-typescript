@@ -11,37 +11,91 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TransferBankModel,
-} from './';
+/**
+ * @export
+ * @interface ExternalWalletBankModel
+ */
+export interface ExternalWalletBankModel {
+    /**
+     * Auto-generated unique identifier for the account.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    guid?: string;
+    /**
+     * The name of the account.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    name?: string;
+    /**
+     * The asset code.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    asset_code?: string;
+    /**
+     * The type of account.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    account_kind?: ExternalWalletBankModelAccountKindEnum;
+    /**
+     * The environment that the exchange is operating in.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    environment?: ExternalWalletBankModelEnvironmentEnum;
+    /**
+     * The exchange identifier.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    exchange_guid?: string;
+    /**
+     * ISO8601 datetime the exchange was created at.
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    created_at?: string;
+    /**
+     * The state of an external wallet
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    state?: ExternalWalletBankModelStateEnum;
+    /**
+     * The failure code of an external wallet (if any)
+     * @type {string}
+     * @memberof ExternalWalletBankModel
+     */
+    failure_code?: string | null;
+}
 
 /**
  * @export
- * @interface TransferListBankModel
+ * @enum {string}
  */
-export interface TransferListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TransferBankModel>}
-     * @memberof TransferListBankModel
-     */
-    objects: Array<TransferBankModel>;
+export enum ExternalWalletBankModelAccountKindEnum {
+    FireblocksExternalWallet = 'fireblocks_external_wallet',
+    CircleWireExternalWallet = 'circle_wire_external_wallet'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ExternalWalletBankModelEnvironmentEnum {
+    Sandbox = 'sandbox',
+    Production = 'production'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ExternalWalletBankModelStateEnum {
+    Storing = 'storing',
+    Pending = 'pending',
+    Failed = 'failed',
+    Completed = 'completed'
+}
+

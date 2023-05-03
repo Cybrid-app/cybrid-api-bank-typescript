@@ -12,6 +12,7 @@ export * from './DepositAddressListBankModel';
 export * from './ErrorResponseBankModel';
 export * from './ExternalBankAccountBankModel';
 export * from './ExternalBankAccountListBankModel';
+export * from './ExternalWalletBankModel';
 export * from './IdentityRecordBankModel';
 export * from './IdentityRecordListBankModel';
 export * from './IdentityVerificationBankModel';
