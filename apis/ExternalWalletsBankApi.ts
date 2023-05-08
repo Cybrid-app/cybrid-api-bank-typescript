@@ -17,20 +17,24 @@ import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
     ErrorResponseBankModel,
-    PostQuoteBankModel,
-    QuoteBankModel,
-    QuoteListBankModel,
+    ExternalWalletBankModel,
+    ExternalWalletListBankModel,
+    PostExternalWalletBankModel,
 } from '../models';
 
-export interface CreateQuoteRequest {
-    postQuoteBankModel: PostQuoteBankModel;
+export interface CreateExternalWalletRequest {
+    postExternalWalletBankModel: PostExternalWalletBankModel;
 }
 
-export interface GetQuoteRequest {
-    quoteGuid: string;
+export interface DeleteExternalWalletRequest {
+    externalWalletGuid: string;
 }
 
-export interface ListQuotesRequest {
+export interface GetExternalWalletRequest {
+    externalWalletGuid: string;
+}
+
+export interface ListExternalWalletsRequest {
     page?: number;
     perPage?: number;
     guid?: string;
@@ -41,16 +45,16 @@ export interface ListQuotesRequest {
 /**
  * no description
  */
-export class QuotesBankApi extends BaseAPI {
+export class ExternalWalletsBankApi extends BaseAPI {
 
     /**
-     * Creates a quote.  Required scope: **quotes:execute**
-     * Create Quote
+     * Create an ExternalWallet.  Required scope: **external_wallets:execute**
+     * Create ExternalWallet
      */
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest): Observable<QuoteBankModel>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteBankModel>>
-    createQuote({ postQuoteBankModel }: CreateQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | AjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(postQuoteBankModel, 'postQuoteBankModel', 'createQuote');
+    createExternalWallet({ postExternalWalletBankModel }: CreateExternalWalletRequest): Observable<ExternalWalletBankModel>
+    createExternalWallet({ postExternalWalletBankModel }: CreateExternalWalletRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalWalletBankModel>>
+    createExternalWallet({ postExternalWalletBankModel }: CreateExternalWalletRequest, opts?: OperationOpts): Observable<ExternalWalletBankModel | AjaxResponse<ExternalWalletBankModel>> {
+        throwIfNullOrUndefined(postExternalWalletBankModel, 'postExternalWalletBankModel', 'createExternalWallet');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
@@ -58,61 +62,88 @@ export class QuotesBankApi extends BaseAPI {
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:execute'])
+                    ? this.configuration.accessToken('oauth2', ['external_wallets:execute'])
                     : this.configuration.accessToken }
                 : undefined
             ),
         };
 
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes',
+        return this.request<ExternalWalletBankModel>({
+            url: '/api/external_wallets',
             method: 'POST',
             headers,
-            body: postQuoteBankModel,
+            body: postExternalWalletBankModel,
         }, opts?.responseOpts);
     };
 
     /**
-     * Retrieves a quote.  Required scope: **quotes:read**
-     * Get Quote
+     * Deletes an external wallet.  Required scope: **external_wallets:execute**
+     * Delete External Wallet
      */
-    getQuote({ quoteGuid }: GetQuoteRequest): Observable<QuoteBankModel>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteBankModel>>
-    getQuote({ quoteGuid }: GetQuoteRequest, opts?: OperationOpts): Observable<QuoteBankModel | AjaxResponse<QuoteBankModel>> {
-        throwIfNullOrUndefined(quoteGuid, 'quoteGuid', 'getQuote');
+    deleteExternalWallet({ externalWalletGuid }: DeleteExternalWalletRequest): Observable<ExternalWalletBankModel>
+    deleteExternalWallet({ externalWalletGuid }: DeleteExternalWalletRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalWalletBankModel>>
+    deleteExternalWallet({ externalWalletGuid }: DeleteExternalWalletRequest, opts?: OperationOpts): Observable<ExternalWalletBankModel | AjaxResponse<ExternalWalletBankModel>> {
+        throwIfNullOrUndefined(externalWalletGuid, 'externalWalletGuid', 'deleteExternalWallet');
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
+                    ? this.configuration.accessToken('oauth2', ['external_wallets:execute'])
                     : this.configuration.accessToken }
                 : undefined
             ),
         };
 
-        return this.request<QuoteBankModel>({
-            url: '/api/quotes/{quote_guid}'.replace('{quote_guid}', encodeURI(quoteGuid)),
+        return this.request<ExternalWalletBankModel>({
+            url: '/api/external_wallets/{external_wallet_guid}'.replace('{external_wallet_guid}', encodeURI(externalWalletGuid)),
+            method: 'DELETE',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves an external_wallet.  Required scope: **external_wallets:read**
+     * Get External Wallet
+     */
+    getExternalWallet({ externalWalletGuid }: GetExternalWalletRequest): Observable<ExternalWalletBankModel>
+    getExternalWallet({ externalWalletGuid }: GetExternalWalletRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalWalletBankModel>>
+    getExternalWallet({ externalWalletGuid }: GetExternalWalletRequest, opts?: OperationOpts): Observable<ExternalWalletBankModel | AjaxResponse<ExternalWalletBankModel>> {
+        throwIfNullOrUndefined(externalWalletGuid, 'externalWalletGuid', 'getExternalWallet');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['external_wallets:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<ExternalWalletBankModel>({
+            url: '/api/external_wallets/{external_wallet_guid}'.replace('{external_wallet_guid}', encodeURI(externalWalletGuid)),
             method: 'GET',
             headers,
         }, opts?.responseOpts);
     };
 
     /**
-     * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
-     * Get quotes list
+     * Retrieves a listing of external wallets.  Required scope: **external_wallets:read**
+     * Get external wallets list
      */
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest): Observable<QuoteListBankModel>
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest, opts?: OperationOpts): Observable<AjaxResponse<QuoteListBankModel>>
-    listQuotes({ page, perPage, guid, bankGuid, customerGuid }: ListQuotesRequest, opts?: OperationOpts): Observable<QuoteListBankModel | AjaxResponse<QuoteListBankModel>> {
+    listExternalWallets({ page, perPage, guid, bankGuid, customerGuid }: ListExternalWalletsRequest): Observable<ExternalWalletListBankModel>
+    listExternalWallets({ page, perPage, guid, bankGuid, customerGuid }: ListExternalWalletsRequest, opts?: OperationOpts): Observable<AjaxResponse<ExternalWalletListBankModel>>
+    listExternalWallets({ page, perPage, guid, bankGuid, customerGuid }: ListExternalWalletsRequest, opts?: OperationOpts): Observable<ExternalWalletListBankModel | AjaxResponse<ExternalWalletListBankModel>> {
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
             // oauth required
             ...(this.configuration.accessToken != null
                 ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['quotes:read'])
+                    ? this.configuration.accessToken('oauth2', ['external_wallets:read'])
                     : this.configuration.accessToken }
                 : undefined
             ),
@@ -126,8 +157,8 @@ export class QuotesBankApi extends BaseAPI {
         if (bankGuid != null) { query['bank_guid'] = bankGuid; }
         if (customerGuid != null) { query['customer_guid'] = customerGuid; }
 
-        return this.request<QuoteListBankModel>({
-            url: '/api/quotes',
+        return this.request<ExternalWalletListBankModel>({
+            url: '/api/external_wallets',
             method: 'GET',
             headers,
             query,
