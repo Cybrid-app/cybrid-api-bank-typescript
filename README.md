@@ -108,7 +108,6 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 | Bank         | Account              | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             |
 | Bank         | Asset                | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     |
 | Bank         | Bank                 | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc                             |
-| Bank         | BankVerificationKey  | /api/bank_verification_keys    | Create, list and retrive verification keys, used for signing identities                           |
 | Bank         | Customer             | /api/customers                 | Create and list customers                                                                         |
 | Bank         | DepositAddress       | /api/deposit_addresses         | Create, get and list deposit addresses                                                            |
 | Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
@@ -145,7 +144,7 @@ An `Organization` can have multiple `banks`, in either `Sandbox` or `Production`
 `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
-## @cybrid/cybrid-api-bank-typescript@0.72.1
+## @cybrid/cybrid-api-bank-typescript@0.73.0
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -183,7 +182,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.72.1 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.73.0 --save
 ```
 
 _unPublished (not recommended):_
