@@ -11,37 +11,13 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TradeBankModel,
-} from './';
-
 /**
+ * The owner of the entity.
  * @export
- * @interface TradeListBankModel
+ * @enum {string}
  */
-export interface TradeListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TradeListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TradeBankModel>}
-     * @memberof TradeListBankModel
-     */
-    objects: Array<TradeBankModel>;
+export enum ListRequestOwnerBankModel {
+    Bank = 'bank',
+    Customer = 'customer'
 }
+
