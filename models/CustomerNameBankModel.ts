@@ -12,12 +12,26 @@
  */
 
 /**
- * The owner of the entity.
  * @export
- * @enum {string}
+ * @interface CustomerNameBankModel
  */
-export enum ListRequestOwnerBankModel {
-    Bank = 'bank',
-    Customer = 'customer'
+export interface CustomerNameBankModel {
+    /**
+     * The customer\'s first name.
+     * @type {string}
+     * @memberof CustomerNameBankModel
+     */
+    first?: string | null;
+    /**
+     * The customer\'s middle name.
+     * @type {string}
+     * @memberof CustomerNameBankModel
+     */
+    middle?: string | null;
+    /**
+     * The customer\'s last name.
+     * @type {string}
+     * @memberof CustomerNameBankModel
+     */
+    last?: string | null;
 }
-

@@ -12,12 +12,44 @@
  */
 
 /**
- * The owner of the entity.
  * @export
- * @enum {string}
+ * @interface CustomerAddressBankModel
  */
-export enum ListRequestOwnerBankModel {
-    Bank = 'bank',
-    Customer = 'customer'
+export interface CustomerAddressBankModel {
+    /**
+     * The first line of the address.
+     * @type {string}
+     * @memberof CustomerAddressBankModel
+     */
+    street?: string | null;
+    /**
+     * The optional second line of the address.
+     * @type {string}
+     * @memberof CustomerAddressBankModel
+     */
+    street2?: string | null;
+    /**
+     * The city of the address.
+     * @type {string}
+     * @memberof CustomerAddressBankModel
+     */
+    city?: string | null;
+    /**
+     * The provide/state/region of the address; not used by all countries.
+     * @type {string}
+     * @memberof CustomerAddressBankModel
+     */
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof CustomerAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof CustomerAddressBankModel
+     */
+    country_code?: string | null;
 }
-
