@@ -11,91 +11,35 @@
  * Do not edit the class manually.
  */
 
-import type {
-    CustomerAddressBankModel,
-    CustomerNameBankModel,
-} from './';
-
 /**
+ * The source account in the transfer. Can be omitted for crypto deposits.
  * @export
- * @interface CustomerBankModel
+ * @interface TransferSourceAccountBankModel
  */
-export interface CustomerBankModel {
+export interface TransferSourceAccountBankModel {
     /**
-     * Auto-generated unique identifier for the customer.
+     * Auto-generated unique identifier for the transfer account.
      * @type {string}
-     * @memberof CustomerBankModel
+     * @memberof TransferSourceAccountBankModel
      */
     guid?: string;
     /**
-     * Auto-generated unique identifier for the customer\'s bank.
+     * The type of transfer account.
      * @type {string}
-     * @memberof CustomerBankModel
+     * @memberof TransferSourceAccountBankModel
      */
-    bank_guid?: string;
-    /**
-     * The customer\'s type.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    type?: CustomerBankModelTypeEnum;
-    /**
-     * ISO8601 datetime the customer was created at.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    created_at?: string;
-    /**
-     * The customer\'s state.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    state?: CustomerBankModelStateEnum;
-    /**
-     * @type {CustomerNameBankModel}
-     * @memberof CustomerBankModel
-     */
-    name?: CustomerNameBankModel | null;
-    /**
-     * @type {CustomerAddressBankModel}
-     * @memberof CustomerBankModel
-     */
-    address?: CustomerAddressBankModel | null;
-    /**
-     * The customer\'s DOB. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    date_of_birth?: string | null;
-    /**
-     * The customer\'s phone number. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    phone_number?: string | null;
-    /**
-     * The customer\'s phone number. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    email_address?: string | null;
+    type?: TransferSourceAccountBankModelTypeEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum CustomerBankModelTypeEnum {
-    Individual = 'individual'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum CustomerBankModelStateEnum {
-    Storing = 'storing',
-    Unverified = 'unverified',
-    Verified = 'verified',
-    Rejected = 'rejected'
+export enum TransferSourceAccountBankModelTypeEnum {
+    Trading = 'trading',
+    Fiat = 'fiat',
+    ExternalBankAccount = 'external_bank_account',
+    ExternalWallet = 'external_wallet',
+    OneTimeAddress = 'one_time_address'
 }
 
