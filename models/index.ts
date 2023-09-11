@@ -41,8 +41,6 @@ export * from './PostTransferBankModel';
 export * from './PostWorkflowBankModel';
 export * from './QuoteBankModel';
 export * from './QuoteListBankModel';
-export * from './RewardBankModel';
-export * from './RewardListBankModel';
 export * from './SymbolPriceBankModel';
 export * from './TradeBankModel';
 export * from './TradeListBankModel';

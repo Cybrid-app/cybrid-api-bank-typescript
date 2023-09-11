@@ -91,7 +91,6 @@ The following scopes are available on the platform and can be requested when gen
 | User                  |                                                            |                                               | users:execute (Organization)                     |
 | Price                 | prices:read (Bank, Customer)                               |                                               |                                                  |
 | Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Organization, Bank, Customer)    |
-| Reward                | rewards:read (Bank, Customer)                              |                                               | rewards:execute (Bank)                           |
 | Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Organization, Bank, Customer)    |
 | Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Organization, Bank, Customer) |
 | Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)               |
@@ -117,7 +116,6 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 | Bank         | IdentityVerification | /api/identity_verifications    | Create and list identity verifications, which are performed on customers for KYC                  |
 | Bank         | Price                | /api/prices                    | Get the current prices for assets on the platform                                                 |
 | Bank         | Quote                | /api/quotes                    | Create and list quotes, which are required to execute trades                                      |
-| Bank         | Reward               | /api/rewards                   | Create a new reward (automates quote/trade for simplicity)                                        |
 | Bank         | Symbol               | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                                           |
 | Bank         | Trade                | /api/trades                    | Create and list trades, which buy or sell cryptocurrency                                          |
 | Bank         | Transfer             | /api/transfers                 | Create, get and list transfers (e.g., funding, book)                                              |
@@ -146,7 +144,7 @@ An `Organization` can have multiple `banks`, in either `Sandbox` or `Production`
 `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
-## @cybrid/cybrid-api-bank-typescript@0.92.5
+## @cybrid/cybrid-api-bank-typescript@0.93.0
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -184,7 +182,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.92.5 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.93.0 --save
 ```
 
 _unPublished (not recommended):_

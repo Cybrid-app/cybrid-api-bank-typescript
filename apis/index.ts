@@ -8,7 +8,6 @@ export * from './ExternalWalletsBankApi';
 export * from './IdentityVerificationsBankApi';
 export * from './PricesBankApi';
 export * from './QuotesBankApi';
-export * from './RewardsBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
 export * from './TransfersBankApi';
