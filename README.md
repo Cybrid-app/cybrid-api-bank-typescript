@@ -66,7 +66,7 @@ curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
   }' -H \"Content-Type: application/json\"
 
 # When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'
@@ -144,7 +144,7 @@ An `Organization` can have multiple `banks`, in either `Sandbox` or `Production`
 `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
-## @cybrid/cybrid-api-bank-typescript@0.94.51
+## @cybrid/cybrid-api-bank-typescript@0.94.52
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -182,7 +182,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.94.51 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.94.52 --save
 ```
 
 _unPublished (not recommended):_
