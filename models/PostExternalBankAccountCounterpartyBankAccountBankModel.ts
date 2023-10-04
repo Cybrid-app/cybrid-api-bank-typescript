@@ -12,26 +12,37 @@
  */
 
 /**
+ * The counterparty\'s name on the account.
  * @export
- * @interface PostCustomerNameBankModel
+ * @interface PostExternalBankAccountCounterpartyBankAccountBankModel
  */
-export interface PostCustomerNameBankModel {
+export interface PostExternalBankAccountCounterpartyBankAccountBankModel {
     /**
-     * The customer\'s first name.
+     * The type of routing number.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyBankAccountBankModel
      */
-    first: string;
+    routing_number_type: PostExternalBankAccountCounterpartyBankAccountBankModelRoutingNumberTypeEnum;
     /**
-     * The customer\'s middle name.
+     * The routing number.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyBankAccountBankModel
      */
-    middle?: string | null;
+    routing_number: string;
     /**
-     * The customer\'s last name.
+     * The account number.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyBankAccountBankModel
      */
-    last: string;
+    account_number: string;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostExternalBankAccountCounterpartyBankAccountBankModelRoutingNumberTypeEnum {
+    Cpa = 'CPA',
+    Aba = 'ABA'
+}
+

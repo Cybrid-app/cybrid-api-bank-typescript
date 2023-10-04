@@ -12,26 +12,27 @@
  */
 
 /**
+ * The counterparty\'s name on the account.
  * @export
- * @interface PostCustomerNameBankModel
+ * @interface PostExternalBankAccountCounterpartyNameBankModel
  */
-export interface PostCustomerNameBankModel {
+export interface PostExternalBankAccountCounterpartyNameBankModel {
     /**
      * The customer\'s first name.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyNameBankModel
      */
     first: string;
     /**
      * The customer\'s middle name.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyNameBankModel
      */
     middle?: string | null;
     /**
      * The customer\'s last name.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyNameBankModel
      */
     last: string;
 }

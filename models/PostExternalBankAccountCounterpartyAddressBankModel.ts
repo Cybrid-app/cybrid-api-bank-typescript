@@ -12,26 +12,45 @@
  */
 
 /**
+ * The counterparty\'s address on the account.
  * @export
- * @interface PostCustomerNameBankModel
+ * @interface PostExternalBankAccountCounterpartyAddressBankModel
  */
-export interface PostCustomerNameBankModel {
+export interface PostExternalBankAccountCounterpartyAddressBankModel {
     /**
-     * The customer\'s first name.
+     * The first line of the address.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyAddressBankModel
      */
-    first: string;
+    street: string;
     /**
-     * The customer\'s middle name.
+     * The optional second line of the address.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyAddressBankModel
      */
-    middle?: string | null;
+    street2?: string | null;
     /**
-     * The customer\'s last name.
+     * The city of the address.
      * @type {string}
-     * @memberof PostCustomerNameBankModel
+     * @memberof PostExternalBankAccountCounterpartyAddressBankModel
      */
-    last: string;
+    city: string;
+    /**
+     * The provide/state/region of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostExternalBankAccountCounterpartyAddressBankModel
+     */
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostExternalBankAccountCounterpartyAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof PostExternalBankAccountCounterpartyAddressBankModel
+     */
+    country_code: string;
 }
