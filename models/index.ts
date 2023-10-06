@@ -38,7 +38,6 @@ export * from './PostIdentityVerificationAddressBankModel';
 export * from './PostIdentityVerificationBankModel';
 export * from './PostIdentityVerificationNameBankModel';
 export * from './PostQuoteBankModel';
-export * from './PostRewardBankModel';
 export * from './PostTradeBankModel';
 export * from './PostTransferBankModel';
 export * from './PostWorkflowBankModel';
