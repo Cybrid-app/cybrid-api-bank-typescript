@@ -11,37 +11,24 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ExternalWalletBankModel,
-} from './';
+/**
+ * @export
+ * @interface PatchCustomerBankModel
+ */
+export interface PatchCustomerBankModel {
+    /**
+     * The customer\'s state.
+     * @type {string}
+     * @memberof PatchCustomerBankModel
+     */
+    state?: PatchCustomerBankModelStateEnum;
+}
 
 /**
  * @export
- * @interface ExternalWalletListBankModel
+ * @enum {string}
  */
-export interface ExternalWalletListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalWalletListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalWalletListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalWalletListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of external wallet entities
-     * @type {Array<ExternalWalletBankModel>}
-     * @memberof ExternalWalletListBankModel
-     */
-    objects: Array<ExternalWalletBankModel>;
+export enum PatchCustomerBankModelStateEnum {
+    Unverified = 'unverified'
 }
+
