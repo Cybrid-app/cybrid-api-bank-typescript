@@ -12,34 +12,21 @@
  */
 
 /**
- * The destination account in the transfer.
+ * Balance information for the account.
  * @export
- * @interface TransferDestinationAccountBankModel
+ * @interface ExternalBankAccountBalancesBankModel
  */
-export interface TransferDestinationAccountBankModel {
+export interface ExternalBankAccountBalancesBankModel {
     /**
-     * Auto-generated unique identifier for the transfer account.
-     * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * The available balance in the account.
+     * @type {number}
+     * @memberof ExternalBankAccountBalancesBankModel
      */
-    guid?: string;
+    available_balance?: number | null;
     /**
-     * The type of transfer account.
-     * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * The current balance in the account including pending transactions.
+     * @type {number}
+     * @memberof ExternalBankAccountBalancesBankModel
      */
-    type?: TransferDestinationAccountBankModelTypeEnum;
+    current_balance?: number | null;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum TransferDestinationAccountBankModelTypeEnum {
-    Trading = 'trading',
-    Fiat = 'fiat',
-    ExternalBankAccount = 'external_bank_account',
-    ExternalWallet = 'external_wallet',
-    OneTimeAddress = 'one_time_address'
-}
-

@@ -11,35 +11,37 @@
  * Do not edit the class manually.
  */
 
-/**
- * The destination account in the transfer.
- * @export
- * @interface TransferDestinationAccountBankModel
- */
-export interface TransferDestinationAccountBankModel {
-    /**
-     * Auto-generated unique identifier for the transfer account.
-     * @type {string}
-     * @memberof TransferDestinationAccountBankModel
-     */
-    guid?: string;
-    /**
-     * The type of transfer account.
-     * @type {string}
-     * @memberof TransferDestinationAccountBankModel
-     */
-    type?: TransferDestinationAccountBankModelTypeEnum;
-}
+import type {
+    ExternalBankAccountPiiInnerAddressesInnerBankModel,
+} from './';
 
 /**
  * @export
- * @enum {string}
+ * @interface ExternalBankAccountPiiInnerBankModel
  */
-export enum TransferDestinationAccountBankModelTypeEnum {
-    Trading = 'trading',
-    Fiat = 'fiat',
-    ExternalBankAccount = 'external_bank_account',
-    ExternalWallet = 'external_wallet',
-    OneTimeAddress = 'one_time_address'
+export interface ExternalBankAccountPiiInnerBankModel {
+    /**
+     * Array of names on the account
+     * @type {Array<string>}
+     * @memberof ExternalBankAccountPiiInnerBankModel
+     */
+    names?: Array<string> | null;
+    /**
+     * Array of addresses associated to the account
+     * @type {Array<ExternalBankAccountPiiInnerAddressesInnerBankModel>}
+     * @memberof ExternalBankAccountPiiInnerBankModel
+     */
+    addresses?: Array<ExternalBankAccountPiiInnerAddressesInnerBankModel> | null;
+    /**
+     * Array of email addresses associated to the account
+     * @type {Array<string>}
+     * @memberof ExternalBankAccountPiiInnerBankModel
+     */
+    email_addresses?: Array<string> | null;
+    /**
+     * Array of phone numbers associated to the account
+     * @type {Array<string>}
+     * @memberof ExternalBankAccountPiiInnerBankModel
+     */
+    phone_numbers?: Array<string> | null;
 }
-

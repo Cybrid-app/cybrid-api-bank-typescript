@@ -12,34 +12,44 @@
  */
 
 /**
- * The destination account in the transfer.
  * @export
- * @interface TransferDestinationAccountBankModel
+ * @interface ExternalBankAccountPiiInnerAddressesInnerBankModel
  */
-export interface TransferDestinationAccountBankModel {
+export interface ExternalBankAccountPiiInnerAddressesInnerBankModel {
     /**
-     * Auto-generated unique identifier for the transfer account.
+     * The first line of the address.
      * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
      */
-    guid?: string;
+    street?: string;
     /**
-     * The type of transfer account.
+     * The optional second line of the address.
      * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
      */
-    type?: TransferDestinationAccountBankModelTypeEnum;
+    street2?: string | null;
+    /**
+     * The city of the address.
+     * @type {string}
+     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     */
+    city?: string;
+    /**
+     * The provide/state/region of the address; not used by all countries.
+     * @type {string}
+     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     */
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     */
+    country_code?: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum TransferDestinationAccountBankModelTypeEnum {
-    Trading = 'trading',
-    Fiat = 'fiat',
-    ExternalBankAccount = 'external_bank_account',
-    ExternalWallet = 'external_wallet',
-    OneTimeAddress = 'one_time_address'
-}
-
