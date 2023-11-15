@@ -11,37 +11,27 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ExternalBankAccountBankModel,
-} from './';
-
 /**
  * @export
- * @interface ExternalBankAccountListBankModel
+ * @interface PostDepositBankAccountBankModel
  */
-export interface ExternalBankAccountListBankModel {
+export interface PostDepositBankAccountBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The trading account guid.
+     * @type {string}
+     * @memberof PostDepositBankAccountBankModel
      */
-    total: number;
+    account_guid: string;
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The unique identifier for the customer.
+     * @type {string}
+     * @memberof PostDepositBankAccountBankModel
      */
-    page: number;
+    customer_guid?: string | null;
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The labels associated with the address.
+     * @type {Array<string>}
+     * @memberof PostDepositBankAccountBankModel
      */
-    per_page: number;
-    /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    objects: Array<ExternalBankAccountBankModel>;
+    labels?: Array<string> | null;
 }

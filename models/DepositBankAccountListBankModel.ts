@@ -12,36 +12,35 @@
  */
 
 import type {
-    ExternalBankAccountBankModel,
+    DepositBankAccountBankModel,
 } from './';
 
 /**
  * @export
- * @interface ExternalBankAccountListBankModel
+ * @interface DepositBankAccountListBankModel
  */
-export interface ExternalBankAccountListBankModel {
+export interface DepositBankAccountListBankModel {
     /**
      * The total number of records available.
      * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * @memberof DepositBankAccountListBankModel
      */
     total: number;
     /**
      * The page index to retrieve.
      * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * @memberof DepositBankAccountListBankModel
      */
     page: number;
     /**
      * The number of entities per page to return.
      * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * @memberof DepositBankAccountListBankModel
      */
     per_page: number;
     /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
+     * @type {Array<DepositBankAccountBankModel>}
+     * @memberof DepositBankAccountListBankModel
      */
-    objects: Array<ExternalBankAccountBankModel>;
+    objects: Array<DepositBankAccountBankModel>;
 }

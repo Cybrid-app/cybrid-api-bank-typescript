@@ -12,36 +12,101 @@
  */
 
 import type {
-    ExternalBankAccountBankModel,
+    DepositBankAccountAccountDetailsInnerBankModel,
+    DepositBankAccountCounterpartyAddressBankModel,
+    DepositBankAccountRoutingDetailsInnerBankModel,
 } from './';
 
 /**
  * @export
- * @interface ExternalBankAccountListBankModel
+ * @interface DepositBankAccountBankModel
  */
-export interface ExternalBankAccountListBankModel {
+export interface DepositBankAccountBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * Auto-generated unique identifier for the identity verification.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
      */
-    total: number;
+    guid?: string;
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The address\' bank identifier.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
      */
-    page: number;
+    bank_guid?: string;
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The address\' customer identifier.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
      */
-    per_page: number;
+    customer_guid?: string | null;
     /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
+     * The address\' account identifier.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
      */
-    objects: Array<ExternalBankAccountBankModel>;
+    account_guid?: string;
+    /**
+     * ISO8601 datetime the address was created at.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
+     */
+    created_at?: string;
+    /**
+     * The asset the transfer is related to, e.g., USD.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
+     */
+    asset?: string;
+    /**
+     * The state of the address.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
+     */
+    state?: DepositBankAccountBankModelStateEnum;
+    /**
+     * The unique memo identifier for the address. This is used to identify the recipient when sending funds to the account. This value MUST be included in all wire transfers to this account.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
+     */
+    unique_memo_id?: string;
+    /**
+     * The name of the account holder.
+     * @type {string}
+     * @memberof DepositBankAccountBankModel
+     */
+    counterparty_name?: string | null;
+    /**
+     * @type {DepositBankAccountCounterpartyAddressBankModel}
+     * @memberof DepositBankAccountBankModel
+     */
+    counterparty_address?: DepositBankAccountCounterpartyAddressBankModel | null;
+    /**
+     * The account details for the bank account.
+     * @type {Array<DepositBankAccountAccountDetailsInnerBankModel>}
+     * @memberof DepositBankAccountBankModel
+     */
+    account_details?: Array<DepositBankAccountAccountDetailsInnerBankModel> | null;
+    /**
+     * The account details for the bank account.
+     * @type {Array<DepositBankAccountRoutingDetailsInnerBankModel>}
+     * @memberof DepositBankAccountBankModel
+     */
+    routing_details?: Array<DepositBankAccountRoutingDetailsInnerBankModel> | null;
+    /**
+     * The labels associated with the address.
+     * @type {Array<string>}
+     * @memberof DepositBankAccountBankModel
+     */
+    labels?: Array<string> | null;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum DepositBankAccountBankModelStateEnum {
+    Storing = 'storing',
+    Created = 'created'
+}
+

@@ -3,6 +3,7 @@ export * from './AssetsBankApi';
 export * from './BanksBankApi';
 export * from './CustomersBankApi';
 export * from './DepositAddressesBankApi';
+export * from './DepositBankAccountsBankApi';
 export * from './ExternalBankAccountsBankApi';
 export * from './ExternalWalletsBankApi';
 export * from './IdentityVerificationsBankApi';

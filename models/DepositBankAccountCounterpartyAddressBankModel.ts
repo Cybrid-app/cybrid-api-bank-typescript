@@ -11,37 +11,46 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ExternalBankAccountBankModel,
-} from './';
-
 /**
+ * The counterparty\'s address on the account.
  * @export
- * @interface ExternalBankAccountListBankModel
+ * @interface DepositBankAccountCounterpartyAddressBankModel
  */
-export interface ExternalBankAccountListBankModel {
+export interface DepositBankAccountCounterpartyAddressBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The first line of the address.
+     * @type {string}
+     * @memberof DepositBankAccountCounterpartyAddressBankModel
      */
-    total: number;
+    street: string;
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The optional second line of the address.
+     * @type {string}
+     * @memberof DepositBankAccountCounterpartyAddressBankModel
      */
-    page: number;
+    street2?: string | null;
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The city of the address.
+     * @type {string}
+     * @memberof DepositBankAccountCounterpartyAddressBankModel
      */
-    per_page: number;
+    city: string;
     /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
+     * The provide/state/region of the address; not used by all countries.
+     * @type {string}
+     * @memberof DepositBankAccountCounterpartyAddressBankModel
      */
-    objects: Array<ExternalBankAccountBankModel>;
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof DepositBankAccountCounterpartyAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof DepositBankAccountCounterpartyAddressBankModel
+     */
+    country_code: string;
 }

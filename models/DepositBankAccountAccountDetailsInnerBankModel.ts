@@ -11,37 +11,15 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ExternalBankAccountBankModel,
-} from './';
-
 /**
  * @export
- * @interface ExternalBankAccountListBankModel
+ * @interface DepositBankAccountAccountDetailsInnerBankModel
  */
-export interface ExternalBankAccountListBankModel {
+export interface DepositBankAccountAccountDetailsInnerBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * The account number.
+     * @type {string}
+     * @memberof DepositBankAccountAccountDetailsInnerBankModel
      */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    objects: Array<ExternalBankAccountBankModel>;
+    account_number: string;
 }

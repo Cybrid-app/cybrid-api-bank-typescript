@@ -11,37 +11,32 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ExternalBankAccountBankModel,
-} from './';
+/**
+ * @export
+ * @interface DepositBankAccountRoutingDetailsInnerBankModel
+ */
+export interface DepositBankAccountRoutingDetailsInnerBankModel {
+    /**
+     * The type of routing number.
+     * @type {string}
+     * @memberof DepositBankAccountRoutingDetailsInnerBankModel
+     */
+    routing_number_type: DepositBankAccountRoutingDetailsInnerBankModelRoutingNumberTypeEnum;
+    /**
+     * The routing number.
+     * @type {string}
+     * @memberof DepositBankAccountRoutingDetailsInnerBankModel
+     */
+    routing_number: string;
+}
 
 /**
  * @export
- * @interface ExternalBankAccountListBankModel
+ * @enum {string}
  */
-export interface ExternalBankAccountListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    objects: Array<ExternalBankAccountBankModel>;
+export enum DepositBankAccountRoutingDetailsInnerBankModelRoutingNumberTypeEnum {
+    Cpa = 'CPA',
+    Aba = 'ABA',
+    Swift = 'SWIFT'
 }
+

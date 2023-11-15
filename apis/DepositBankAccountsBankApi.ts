@@ -11,37 +11,129 @@
  * Do not edit the class manually.
  */
 
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
-    ExternalBankAccountBankModel,
-} from './';
+    DepositBankAccountBankModel,
+    DepositBankAccountListBankModel,
+    ErrorResponseBankModel,
+    PostDepositBankAccountBankModel,
+} from '../models';
+
+export interface CreateDepositBankAccountRequest {
+    postDepositBankAccountBankModel: PostDepositBankAccountBankModel;
+}
+
+export interface GetDepositBankAccountRequest {
+    depositBankAccountGuid: string;
+}
+
+export interface ListDepositBankAccountsRequest {
+    page?: number;
+    perPage?: number;
+    guid?: string;
+    bankGuid?: string;
+    customerGuid?: string;
+    label?: string;
+}
 
 /**
- * @export
- * @interface ExternalBankAccountListBankModel
+ * no description
  */
-export interface ExternalBankAccountListBankModel {
+export class DepositBankAccountsBankApi extends BaseAPI {
+
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * Creates a deposit bank account.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the deposit bank account details in our private store | | created | The Platform has created the deposit bank account |    Required scope: **deposit_bank_accounts:execute**
+     * Create Deposit Bank Account
      */
-    total: number;
+    createDepositBankAccount({ postDepositBankAccountBankModel }: CreateDepositBankAccountRequest): Observable<DepositBankAccountBankModel>
+    createDepositBankAccount({ postDepositBankAccountBankModel }: CreateDepositBankAccountRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositBankAccountBankModel>>
+    createDepositBankAccount({ postDepositBankAccountBankModel }: CreateDepositBankAccountRequest, opts?: OperationOpts): Observable<DepositBankAccountBankModel | AjaxResponse<DepositBankAccountBankModel>> {
+        throwIfNullOrUndefined(postDepositBankAccountBankModel, 'postDepositBankAccountBankModel', 'createDepositBankAccount');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['deposit_bank_accounts:execute'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<DepositBankAccountBankModel>({
+            url: '/api/deposit_bank_accounts',
+            method: 'POST',
+            headers,
+            body: postDepositBankAccountBankModel,
+        }, opts?.responseOpts);
+    };
+
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * Retrieves a deposit bank account.  Required scope: **deposit_bank_accounts:read**
+     * Get Deposit Bank Account
      */
-    page: number;
+    getDepositBankAccount({ depositBankAccountGuid }: GetDepositBankAccountRequest): Observable<DepositBankAccountBankModel>
+    getDepositBankAccount({ depositBankAccountGuid }: GetDepositBankAccountRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositBankAccountBankModel>>
+    getDepositBankAccount({ depositBankAccountGuid }: GetDepositBankAccountRequest, opts?: OperationOpts): Observable<DepositBankAccountBankModel | AjaxResponse<DepositBankAccountBankModel>> {
+        throwIfNullOrUndefined(depositBankAccountGuid, 'depositBankAccountGuid', 'getDepositBankAccount');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['deposit_bank_accounts:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<DepositBankAccountBankModel>({
+            url: '/api/deposit_bank_accounts/{deposit_bank_account_guid}'.replace('{deposit_bank_account_guid}', encodeURI(depositBankAccountGuid)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof ExternalBankAccountListBankModel
+     * Retrieves a list of deposit bank accounts.  Required scope: **deposit_bank_accounts:read**
+     * List Deposit Bank Accounts
      */
-    per_page: number;
-    /**
-     * Array of external bank account entities
-     * @type {Array<ExternalBankAccountBankModel>}
-     * @memberof ExternalBankAccountListBankModel
-     */
-    objects: Array<ExternalBankAccountBankModel>;
+    listDepositBankAccounts({ page, perPage, guid, bankGuid, customerGuid, label }: ListDepositBankAccountsRequest): Observable<DepositBankAccountListBankModel>
+    listDepositBankAccounts({ page, perPage, guid, bankGuid, customerGuid, label }: ListDepositBankAccountsRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositBankAccountListBankModel>>
+    listDepositBankAccounts({ page, perPage, guid, bankGuid, customerGuid, label }: ListDepositBankAccountsRequest, opts?: OperationOpts): Observable<DepositBankAccountListBankModel | AjaxResponse<DepositBankAccountListBankModel>> {
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['deposit_bank_accounts:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (perPage != null) { query['per_page'] = perPage; }
+        if (guid != null) { query['guid'] = guid; }
+        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
+        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+        if (label != null) { query['label'] = label; }
+
+        return this.request<DepositBankAccountListBankModel>({
+            url: '/api/deposit_bank_accounts',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
 }
