@@ -12,12 +12,54 @@
  */
 
 /**
- * The owner of the entity.
+ * @export
+ * @interface VerificationCheckBankModel
+ */
+export interface VerificationCheckBankModel {
+    /**
+     * The type of verification check.
+     * @type {string}
+     * @memberof VerificationCheckBankModel
+     */
+    type: VerificationCheckBankModelTypeEnum;
+    /**
+     * The state of the verification check.
+     * @type {string}
+     * @memberof VerificationCheckBankModel
+     */
+    state: VerificationCheckBankModelStateEnum;
+    /**
+     * The reason codes explaining the outcome.
+     * @type {Array<string>}
+     * @memberof VerificationCheckBankModel
+     */
+    failure_codes?: Array<string> | null;
+}
+
+/**
  * @export
  * @enum {string}
  */
-export enum ListRequestOwnerBankModel {
-    Bank = 'bank',
-    Customer = 'customer'
+export enum VerificationCheckBankModelTypeEnum {
+    BusinessWatchlists = 'business_watchlists',
+    BusinessVerification = 'business_verification',
+    BusinessTaxIdVerification = 'business_tax_id_verification',
+    PersonAttested = 'person_attested',
+    PersonTaxIdAttested = 'person_tax_id_attested',
+    PersonWatchlists = 'person_watchlists',
+    PersonVerification = 'person_verification',
+    PersonAuthentication = 'person_authentication',
+    PersonGovIdVerification = 'person_gov_id_verification',
+    PersonTaxIdVerification = 'person_tax_id_verification'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum VerificationCheckBankModelStateEnum {
+    Passed = 'passed',
+    Failed = 'failed',
+    Expired = 'expired',
+    Invalidated = 'invalidated'
 }
 

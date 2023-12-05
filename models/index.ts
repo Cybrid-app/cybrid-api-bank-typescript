@@ -60,6 +60,7 @@ export * from './TransferBankModel';
 export * from './TransferDestinationAccountBankModel';
 export * from './TransferListBankModel';
 export * from './TransferSourceAccountBankModel';
+export * from './VerificationCheckBankModel';
 export * from './WorkflowBankModel';
 export * from './WorkflowWithDetailsAllOfBankModel';
 export * from './WorkflowWithDetailsBankModel';
