@@ -27,7 +27,6 @@ export * from './IdentityVerificationBankModel';
 export * from './IdentityVerificationListBankModel';
 export * from './IdentityVerificationWithDetailsAllOfBankModel';
 export * from './IdentityVerificationWithDetailsBankModel';
-export * from './ListRequestOwnerBankModel';
 export * from './PatchBankBankModel';
 export * from './PatchCustomerBankModel';
 export * from './PatchExternalBankAccountBankModel';
