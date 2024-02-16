@@ -11,115 +11,81 @@
  * Do not edit the class manually.
  */
 
-import type {
-    PostIdentificationNumberBankModel,
-    PostIdentityVerificationAddressBankModel,
-    PostIdentityVerificationNameBankModel,
-} from './';
-
 /**
  * @export
- * @interface PostIdentityVerificationBankModel
+ * @interface InvoiceBankModel
  */
-export interface PostIdentityVerificationBankModel {
+export interface InvoiceBankModel {
     /**
-     * The type of identity verification.
+     * Auto-generated unique identifier for the payment instruction.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    type: PostIdentityVerificationBankModelTypeEnum;
+    guid?: string;
     /**
-     * The identity verification method.
+     * The customer identifier.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    method: PostIdentityVerificationBankModelMethodEnum;
-    /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
     customer_guid?: string | null;
     /**
-     * The ISO 3166 country 2-Alpha country the customer is being verified in; required when method is set to \'id_and_selfie\'. If not present, will default to the Bank\'s configured country code.
+     * The account payment will ultimately be received into.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    country_code?: string | null;
+    account_guid?: string;
     /**
-     * @type {PostIdentityVerificationNameBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    name?: PostIdentityVerificationNameBankModel | null;
-    /**
-     * @type {PostIdentityVerificationAddressBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    address?: PostIdentityVerificationAddressBankModel | null;
-    /**
-     * The customer\'s date of birth; required when method is set to \'attested\'.
+     * ISO8601 datetime the record was created at.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    date_of_birth?: string | null;
+    created_at?: string;
     /**
-     * The customer\'s phone number.
+     * ISO8601 datetime the record was last updated at.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    phone_number?: string | null;
+    updated_at?: string;
     /**
-     * The customer\'s email address.
+     * The type of invoice; one of lightning.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    email_address?: string | null;
+    invoice_type?: string;
     /**
-     * The customer\'s identification numbers; required when method is set to \'attested\'.
-     * @type {Array<PostIdentificationNumberBankModel>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    identification_numbers?: Array<PostIdentificationNumberBankModel> | null;
-    /**
-     * The external bank account\'s identifier. Required for \'bank_account\' type.
+     * The asset code the customer will receive the funds in.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    external_bank_account_guid?: string | null;
+    asset?: string;
     /**
-     * The optional expected behaviour to simulate.
+     * The amount to be received in base units of the asset, i.e., the amount the customer will receive after fees. ONLY one of receive_amount or deliver_amount is required.
+     * @type {number}
+     * @memberof InvoiceBankModel
+     */
+    receive_amount?: number | null;
+    /**
+     * The amount to be delivered in base units of the asset, i.e., the amount the customer will receive before fees. ONLY one of receive_amount or deliver_amount is required.
+     * @type {number}
+     * @memberof InvoiceBankModel
+     */
+    deliver_amount?: number | null;
+    /**
+     * The fee associated with this invoice in base units of the asset.
+     * @type {number}
+     * @memberof InvoiceBankModel
+     */
+    fee?: number | null;
+    /**
+     * The state of the invoice; one of storing, unpaid, cancelling, cancelled, settling, or paid.
+     * @type {string}
+     * @memberof InvoiceBankModel
+     */
+    state?: string;
+    /**
+     * The labels associated with the invoice.
      * @type {Array<string>}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof InvoiceBankModel
      */
-    expected_behaviours?: Array<PostIdentityVerificationBankModelExpectedBehavioursEnum>;
+    labels?: Array<string> | null;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelTypeEnum {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelMethodEnum {
-    BusinessRegistration = 'business_registration',
-    IdAndSelfie = 'id_and_selfie',
-    Attested = 'attested',
-    PlaidIdentityMatch = 'plaid_identity_match',
-    DocumentSubmission = 'document_submission'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelExpectedBehavioursEnum {
-    PassedImmediately = 'passed_immediately',
-    FailedImmediately = 'failed_immediately',
-    TaxIdNotChecked = 'tax_id_not_checked'
-}
-

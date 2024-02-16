@@ -11,115 +11,129 @@
  * Do not edit the class manually.
  */
 
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
-    PostIdentificationNumberBankModel,
-    PostIdentityVerificationAddressBankModel,
-    PostIdentityVerificationNameBankModel,
-} from './';
+    ErrorResponseBankModel,
+    PaymentInstructionBankModel,
+    PaymentInstructionListBankModel,
+    PostPaymentInstructionBankModel,
+} from '../models';
 
-/**
- * @export
- * @interface PostIdentityVerificationBankModel
- */
-export interface PostIdentityVerificationBankModel {
-    /**
-     * The type of identity verification.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    type: PostIdentityVerificationBankModelTypeEnum;
-    /**
-     * The identity verification method.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    method: PostIdentityVerificationBankModelMethodEnum;
-    /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    customer_guid?: string | null;
-    /**
-     * The ISO 3166 country 2-Alpha country the customer is being verified in; required when method is set to \'id_and_selfie\'. If not present, will default to the Bank\'s configured country code.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    country_code?: string | null;
-    /**
-     * @type {PostIdentityVerificationNameBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    name?: PostIdentityVerificationNameBankModel | null;
-    /**
-     * @type {PostIdentityVerificationAddressBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    address?: PostIdentityVerificationAddressBankModel | null;
-    /**
-     * The customer\'s date of birth; required when method is set to \'attested\'.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    date_of_birth?: string | null;
-    /**
-     * The customer\'s phone number.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    phone_number?: string | null;
-    /**
-     * The customer\'s email address.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    email_address?: string | null;
-    /**
-     * The customer\'s identification numbers; required when method is set to \'attested\'.
-     * @type {Array<PostIdentificationNumberBankModel>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    identification_numbers?: Array<PostIdentificationNumberBankModel> | null;
-    /**
-     * The external bank account\'s identifier. Required for \'bank_account\' type.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    external_bank_account_guid?: string | null;
-    /**
-     * The optional expected behaviour to simulate.
-     * @type {Array<string>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    expected_behaviours?: Array<PostIdentityVerificationBankModelExpectedBehavioursEnum>;
+export interface CreatePaymentInstructionRequest {
+    postPaymentInstructionBankModel: PostPaymentInstructionBankModel;
+}
+
+export interface GetPaymentInstructionRequest {
+    paymentInstructionGuid: string;
+}
+
+export interface ListPaymentInstructionsRequest {
+    page?: number;
+    perPage?: number;
+    guid?: string;
+    bankGuid?: string;
+    customerGuid?: string;
+    invoiceGuid?: string;
 }
 
 /**
- * @export
- * @enum {string}
+ * no description
  */
-export enum PostIdentityVerificationBankModelTypeEnum {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelMethodEnum {
-    BusinessRegistration = 'business_registration',
-    IdAndSelfie = 'id_and_selfie',
-    Attested = 'attested',
-    PlaidIdentityMatch = 'plaid_identity_match',
-    DocumentSubmission = 'document_submission'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelExpectedBehavioursEnum {
-    PassedImmediately = 'passed_immediately',
-    FailedImmediately = 'failed_immediately',
-    TaxIdNotChecked = 'tax_id_not_checked'
-}
+export class PaymentInstructionsBankApi extends BaseAPI {
 
+    /**
+     * Creates a payment instruction.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the payment instruction details in our private store | | created | The Platform has created the payment instruction | | expired | The PaymentInstruction is no longer valid |    Required scope: **invoices:write**
+     * Create Payment Instruction
+     */
+    createPaymentInstruction({ postPaymentInstructionBankModel }: CreatePaymentInstructionRequest): Observable<PaymentInstructionBankModel>
+    createPaymentInstruction({ postPaymentInstructionBankModel }: CreatePaymentInstructionRequest, opts?: OperationOpts): Observable<AjaxResponse<PaymentInstructionBankModel>>
+    createPaymentInstruction({ postPaymentInstructionBankModel }: CreatePaymentInstructionRequest, opts?: OperationOpts): Observable<PaymentInstructionBankModel | AjaxResponse<PaymentInstructionBankModel>> {
+        throwIfNullOrUndefined(postPaymentInstructionBankModel, 'postPaymentInstructionBankModel', 'createPaymentInstruction');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['invoices:write'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<PaymentInstructionBankModel>({
+            url: '/api/payment_instructions',
+            method: 'POST',
+            headers,
+            body: postPaymentInstructionBankModel,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves a payment_instruction.  Required scope: **invoices:read**
+     * Get Payment Instruction
+     */
+    getPaymentInstruction({ paymentInstructionGuid }: GetPaymentInstructionRequest): Observable<PaymentInstructionBankModel>
+    getPaymentInstruction({ paymentInstructionGuid }: GetPaymentInstructionRequest, opts?: OperationOpts): Observable<AjaxResponse<PaymentInstructionBankModel>>
+    getPaymentInstruction({ paymentInstructionGuid }: GetPaymentInstructionRequest, opts?: OperationOpts): Observable<PaymentInstructionBankModel | AjaxResponse<PaymentInstructionBankModel>> {
+        throwIfNullOrUndefined(paymentInstructionGuid, 'paymentInstructionGuid', 'getPaymentInstruction');
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['invoices:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<PaymentInstructionBankModel>({
+            url: '/api/payment_instructions/{payment_instruction_guid}'.replace('{payment_instruction_guid}', encodeURI(paymentInstructionGuid)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieves a list of payment instructions.  Required scope: **invoices:read**
+     * List Payment Instructions
+     */
+    listPaymentInstructions({ page, perPage, guid, bankGuid, customerGuid, invoiceGuid }: ListPaymentInstructionsRequest): Observable<PaymentInstructionListBankModel>
+    listPaymentInstructions({ page, perPage, guid, bankGuid, customerGuid, invoiceGuid }: ListPaymentInstructionsRequest, opts?: OperationOpts): Observable<AjaxResponse<PaymentInstructionListBankModel>>
+    listPaymentInstructions({ page, perPage, guid, bankGuid, customerGuid, invoiceGuid }: ListPaymentInstructionsRequest, opts?: OperationOpts): Observable<PaymentInstructionListBankModel | AjaxResponse<PaymentInstructionListBankModel>> {
+
+        const headers: HttpHeaders = {
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['invoices:read'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (perPage != null) { query['per_page'] = perPage; }
+        if (guid != null) { query['guid'] = guid; }
+        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
+        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
+        if (invoiceGuid != null) { query['invoice_guid'] = invoiceGuid; }
+
+        return this.request<PaymentInstructionListBankModel>({
+            url: '/api/payment_instructions',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
+}

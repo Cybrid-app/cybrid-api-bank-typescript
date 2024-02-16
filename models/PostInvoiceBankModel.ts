@@ -11,115 +11,39 @@
  * Do not edit the class manually.
  */
 
-import type {
-    PostIdentificationNumberBankModel,
-    PostIdentityVerificationAddressBankModel,
-    PostIdentityVerificationNameBankModel,
-} from './';
-
 /**
  * @export
- * @interface PostIdentityVerificationBankModel
+ * @interface PostInvoiceBankModel
  */
-export interface PostIdentityVerificationBankModel {
+export interface PostInvoiceBankModel {
     /**
-     * The type of identity verification.
+     * The asset code the customer will receive the funds in.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PostInvoiceBankModel
      */
-    type: PostIdentityVerificationBankModelTypeEnum;
+    asset: string;
     /**
-     * The identity verification method.
+     * The unique identifier for the customer.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    method: PostIdentityVerificationBankModelMethodEnum;
-    /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PostInvoiceBankModel
      */
     customer_guid?: string | null;
     /**
-     * The ISO 3166 country 2-Alpha country the customer is being verified in; required when method is set to \'id_and_selfie\'. If not present, will default to the Bank\'s configured country code.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * The amount to be received in base units of the asset, i.e., the amount the customer will receive after fees. ONLY one of receive_amount or deliver_amount is required.
+     * @type {number}
+     * @memberof PostInvoiceBankModel
      */
-    country_code?: string | null;
+    receive_amount?: number | null;
     /**
-     * @type {PostIdentityVerificationNameBankModel}
-     * @memberof PostIdentityVerificationBankModel
+     * The amount to be delivered in base units of the asset, i.e., the amount the customer will receive before fees. ONLY one of receive_amount or deliver_amount is required.
+     * @type {number}
+     * @memberof PostInvoiceBankModel
      */
-    name?: PostIdentityVerificationNameBankModel | null;
+    deliver_amount?: number | null;
     /**
-     * @type {PostIdentityVerificationAddressBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    address?: PostIdentityVerificationAddressBankModel | null;
-    /**
-     * The customer\'s date of birth; required when method is set to \'attested\'.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    date_of_birth?: string | null;
-    /**
-     * The customer\'s phone number.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    phone_number?: string | null;
-    /**
-     * The customer\'s email address.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    email_address?: string | null;
-    /**
-     * The customer\'s identification numbers; required when method is set to \'attested\'.
-     * @type {Array<PostIdentificationNumberBankModel>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    identification_numbers?: Array<PostIdentificationNumberBankModel> | null;
-    /**
-     * The external bank account\'s identifier. Required for \'bank_account\' type.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    external_bank_account_guid?: string | null;
-    /**
-     * The optional expected behaviour to simulate.
+     * The labels associated with the customer.
      * @type {Array<string>}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PostInvoiceBankModel
      */
-    expected_behaviours?: Array<PostIdentityVerificationBankModelExpectedBehavioursEnum>;
+    labels?: Array<string> | null;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelTypeEnum {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelMethodEnum {
-    BusinessRegistration = 'business_registration',
-    IdAndSelfie = 'id_and_selfie',
-    Attested = 'attested',
-    PlaidIdentityMatch = 'plaid_identity_match',
-    DocumentSubmission = 'document_submission'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelExpectedBehavioursEnum {
-    PassedImmediately = 'passed_immediately',
-    FailedImmediately = 'failed_immediately',
-    TaxIdNotChecked = 'tax_id_not_checked'
-}
-

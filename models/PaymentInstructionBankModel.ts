@@ -11,115 +11,69 @@
  * Do not edit the class manually.
  */
 
-import type {
-    PostIdentificationNumberBankModel,
-    PostIdentityVerificationAddressBankModel,
-    PostIdentityVerificationNameBankModel,
-} from './';
-
 /**
  * @export
- * @interface PostIdentityVerificationBankModel
+ * @interface PaymentInstructionBankModel
  */
-export interface PostIdentityVerificationBankModel {
+export interface PaymentInstructionBankModel {
     /**
-     * The type of identity verification.
+     * Auto-generated unique identifier for the payment instruction.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
-    type: PostIdentityVerificationBankModelTypeEnum;
+    guid?: string;
     /**
-     * The identity verification method.
+     * The customer identifier.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    method: PostIdentityVerificationBankModelMethodEnum;
-    /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
     customer_guid?: string | null;
     /**
-     * The ISO 3166 country 2-Alpha country the customer is being verified in; required when method is set to \'id_and_selfie\'. If not present, will default to the Bank\'s configured country code.
+     * The invoice identifier.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
-    country_code?: string | null;
+    invoice_guid?: string;
     /**
-     * @type {PostIdentityVerificationNameBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    name?: PostIdentityVerificationNameBankModel | null;
-    /**
-     * @type {PostIdentityVerificationAddressBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    address?: PostIdentityVerificationAddressBankModel | null;
-    /**
-     * The customer\'s date of birth; required when method is set to \'attested\'.
+     * ISO8601 datetime the record was created at.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
-    date_of_birth?: string | null;
+    created_at?: string;
     /**
-     * The customer\'s phone number.
+     * ISO8601 datetime the record was last updated at.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
-    phone_number?: string | null;
+    updated_at?: string;
     /**
-     * The customer\'s email address.
+     * ISO8601 datetime the instructions expired at.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
-    email_address?: string | null;
+    expired_at?: string | null;
     /**
-     * The customer\'s identification numbers; required when method is set to \'attested\'.
-     * @type {Array<PostIdentificationNumberBankModel>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    identification_numbers?: Array<PostIdentificationNumberBankModel> | null;
-    /**
-     * The external bank account\'s identifier. Required for \'bank_account\' type.
+     * The network address to pay the invoice to.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PaymentInstructionBankModel
      */
-    external_bank_account_guid?: string | null;
+    network_address?: string | null;
     /**
-     * The optional expected behaviour to simulate.
-     * @type {Array<string>}
-     * @memberof PostIdentityVerificationBankModel
+     * The asset the payor must pay the invoice in, e.g., BTC.
+     * @type {string}
+     * @memberof PaymentInstructionBankModel
      */
-    expected_behaviours?: Array<PostIdentityVerificationBankModelExpectedBehavioursEnum>;
+    expected_payment_asset?: string | null;
+    /**
+     * The amount to be paid in base units of expected_payment_asset.
+     * @type {number}
+     * @memberof PaymentInstructionBankModel
+     */
+    expected_payment_amount?: number | null;
+    /**
+     * The state of the payment instruction; one of storing, created, or expired.
+     * @type {string}
+     * @memberof PaymentInstructionBankModel
+     */
+    state?: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelTypeEnum {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelMethodEnum {
-    BusinessRegistration = 'business_registration',
-    IdAndSelfie = 'id_and_selfie',
-    Attested = 'attested',
-    PlaidIdentityMatch = 'plaid_identity_match',
-    DocumentSubmission = 'document_submission'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelExpectedBehavioursEnum {
-    PassedImmediately = 'passed_immediately',
-    FailedImmediately = 'failed_immediately',
-    TaxIdNotChecked = 'tax_id_not_checked'
-}
-

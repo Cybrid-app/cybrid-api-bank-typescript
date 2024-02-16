@@ -11,115 +11,21 @@
  * Do not edit the class manually.
  */
 
-import type {
-    PostIdentificationNumberBankModel,
-    PostIdentityVerificationAddressBankModel,
-    PostIdentityVerificationNameBankModel,
-} from './';
-
 /**
  * @export
- * @interface PostIdentityVerificationBankModel
+ * @interface PostPaymentInstructionBankModel
  */
-export interface PostIdentityVerificationBankModel {
+export interface PostPaymentInstructionBankModel {
     /**
-     * The type of identity verification.
+     * The invoice guid.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PostPaymentInstructionBankModel
      */
-    type: PostIdentityVerificationBankModelTypeEnum;
+    invoice_guid: string;
     /**
-     * The identity verification method.
+     * The unique identifier for the customer.
      * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    method: PostIdentityVerificationBankModelMethodEnum;
-    /**
-     * The customer\'s identifier.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
+     * @memberof PostPaymentInstructionBankModel
      */
     customer_guid?: string | null;
-    /**
-     * The ISO 3166 country 2-Alpha country the customer is being verified in; required when method is set to \'id_and_selfie\'. If not present, will default to the Bank\'s configured country code.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    country_code?: string | null;
-    /**
-     * @type {PostIdentityVerificationNameBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    name?: PostIdentityVerificationNameBankModel | null;
-    /**
-     * @type {PostIdentityVerificationAddressBankModel}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    address?: PostIdentityVerificationAddressBankModel | null;
-    /**
-     * The customer\'s date of birth; required when method is set to \'attested\'.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    date_of_birth?: string | null;
-    /**
-     * The customer\'s phone number.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    phone_number?: string | null;
-    /**
-     * The customer\'s email address.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    email_address?: string | null;
-    /**
-     * The customer\'s identification numbers; required when method is set to \'attested\'.
-     * @type {Array<PostIdentificationNumberBankModel>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    identification_numbers?: Array<PostIdentificationNumberBankModel> | null;
-    /**
-     * The external bank account\'s identifier. Required for \'bank_account\' type.
-     * @type {string}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    external_bank_account_guid?: string | null;
-    /**
-     * The optional expected behaviour to simulate.
-     * @type {Array<string>}
-     * @memberof PostIdentityVerificationBankModel
-     */
-    expected_behaviours?: Array<PostIdentityVerificationBankModelExpectedBehavioursEnum>;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelTypeEnum {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelMethodEnum {
-    BusinessRegistration = 'business_registration',
-    IdAndSelfie = 'id_and_selfie',
-    Attested = 'attested',
-    PlaidIdentityMatch = 'plaid_identity_match',
-    DocumentSubmission = 'document_submission'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostIdentityVerificationBankModelExpectedBehavioursEnum {
-    PassedImmediately = 'passed_immediately',
-    FailedImmediately = 'failed_immediately',
-    TaxIdNotChecked = 'tax_id_not_checked'
-}
-
