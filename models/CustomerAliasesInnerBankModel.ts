@@ -12,14 +12,32 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface CustomerAliasesInnerBankModel
  */
-export enum QuoteSideBankModel {
-    Buy = 'buy',
-    Sell = 'sell',
-    Deposit = 'deposit',
-    Withdrawal = 'withdrawal'
+export interface CustomerAliasesInnerBankModel {
+    /**
+     * The customer\'s first name.
+     * @type {string}
+     * @memberof CustomerAliasesInnerBankModel
+     */
+    first?: string | null;
+    /**
+     * The customer\'s middle name.
+     * @type {string}
+     * @memberof CustomerAliasesInnerBankModel
+     */
+    middle?: string | null;
+    /**
+     * The customer\'s last name.
+     * @type {string}
+     * @memberof CustomerAliasesInnerBankModel
+     */
+    last?: string | null;
+    /**
+     * The customer\'s full name.
+     * @type {string}
+     * @memberof CustomerAliasesInnerBankModel
+     */
+    full?: string | null;
 }
-
