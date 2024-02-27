@@ -67,6 +67,7 @@ export * from './PostExternalBankAccountCounterpartyAddressBankModel';
 export * from './PostExternalBankAccountCounterpartyBankAccountBankModel';
 export * from './PostExternalBankAccountCounterpartyNameBankModel';
 export * from './PostExternalWalletBankModel';
+export * from './PostFeeBankModel';
 export * from './PostIdentificationNumberBankModel';
 export * from './PostIdentityVerificationAddressBankModel';
 export * from './PostIdentityVerificationBankModel';

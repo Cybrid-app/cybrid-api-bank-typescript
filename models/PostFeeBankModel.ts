@@ -11,133 +11,37 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    AccountBankModel,
-    AccountListBankModel,
-    ErrorResponseBankModel,
-    PostAccountBankModel,
-} from '../models';
-
-export interface CreateAccountRequest {
-    postAccountBankModel: PostAccountBankModel;
-}
-
-export interface GetAccountRequest {
-    accountGuid: string;
-}
-
-export interface ListAccountsRequest {
-    page?: number;
-    perPage?: number;
-    owner?: string;
-    guid?: string;
-    type?: string;
-    bankGuid?: string;
-    customerGuid?: string;
-    label?: string;
+/**
+ * @export
+ * @interface PostFeeBankModel
+ */
+export interface PostFeeBankModel {
+    /**
+     * The fee\'s type
+     * @type {string}
+     * @memberof PostFeeBankModel
+     */
+    type: PostFeeBankModelTypeEnum;
+    /**
+     * The percentage amount, in basis points, to apply when charging a fee.
+     * @type {number}
+     * @memberof PostFeeBankModel
+     */
+    spread_fee?: number;
+    /**
+     * The fixed amount to apply when charging a fee; for trades, the fiat asset is used.
+     * @type {number}
+     * @memberof PostFeeBankModel
+     */
+    fixed_fee?: number;
 }
 
 /**
- * no description
+ * @export
+ * @enum {string}
  */
-export class AccountsBankApi extends BaseAPI {
-
-    /**
-     * Creates an account.  ## Account Type  An Account is tied to a specific cryptocurrency or fiat and is comprised of transactions and a current balance.  An account is required to allow a Bank or Customer to hold cryptocurrency or a Customer to hold fiat on the Cybrid Platform.  At present, account\'s can be created as `trading` or `fiat ` accounts and are required before a Customer can generate quotes or execute a `trade` or `transfer`.  To create accounts for your Bank, omit the `customer_guid` parameter in the request body. To create accounts for your Customers, include the `customer_guid` parameter in the request body.  ## Asset  The asset is the specific cryptocurrency or fiat that the account holds, e.g., \'BTC\' for Bitcoin or `USD` for US dollars. See the Symbols API for a complete list of cryptocurrencies and fiat supported.   ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the account details in our private store | | created | The Platform has created the account |    Required scope: **accounts:execute**
-     * Create Account
-     */
-    createAccount({ postAccountBankModel }: CreateAccountRequest): Observable<AccountBankModel>
-    createAccount({ postAccountBankModel }: CreateAccountRequest, opts?: OperationOpts): Observable<AjaxResponse<AccountBankModel>>
-    createAccount({ postAccountBankModel }: CreateAccountRequest, opts?: OperationOpts): Observable<AccountBankModel | AjaxResponse<AccountBankModel>> {
-        throwIfNullOrUndefined(postAccountBankModel, 'postAccountBankModel', 'createAccount');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['accounts:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<AccountBankModel>({
-            url: '/api/accounts',
-            method: 'POST',
-            headers,
-            body: postAccountBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves an account.  Required scope: **accounts:read**
-     * Get Account
-     */
-    getAccount({ accountGuid }: GetAccountRequest): Observable<AccountBankModel>
-    getAccount({ accountGuid }: GetAccountRequest, opts?: OperationOpts): Observable<AjaxResponse<AccountBankModel>>
-    getAccount({ accountGuid }: GetAccountRequest, opts?: OperationOpts): Observable<AccountBankModel | AjaxResponse<AccountBankModel>> {
-        throwIfNullOrUndefined(accountGuid, 'accountGuid', 'getAccount');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['accounts:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<AccountBankModel>({
-            url: '/api/accounts/{account_guid}'.replace('{account_guid}', encodeURI(accountGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a list of accounts.  Required scope: **accounts:read**
-     * List Accounts
-     */
-    listAccounts({ page, perPage, owner, guid, type, bankGuid, customerGuid, label }: ListAccountsRequest): Observable<AccountListBankModel>
-    listAccounts({ page, perPage, owner, guid, type, bankGuid, customerGuid, label }: ListAccountsRequest, opts?: OperationOpts): Observable<AjaxResponse<AccountListBankModel>>
-    listAccounts({ page, perPage, owner, guid, type, bankGuid, customerGuid, label }: ListAccountsRequest, opts?: OperationOpts): Observable<AccountListBankModel | AjaxResponse<AccountListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['accounts:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (owner != null) { query['owner'] = owner; }
-        if (guid != null) { query['guid'] = guid; }
-        if (type != null) { query['type'] = type; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-        if (label != null) { query['label'] = label; }
-
-        return this.request<AccountListBankModel>({
-            url: '/api/accounts',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+export enum PostFeeBankModelTypeEnum {
+    Spread = 'spread',
+    Fixed = 'fixed'
 }
+
