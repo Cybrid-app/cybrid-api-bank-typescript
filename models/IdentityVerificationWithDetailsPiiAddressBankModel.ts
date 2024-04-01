@@ -12,45 +12,45 @@
  */
 
 /**
- * The customer\'s address. Only available for GET operations when \'include_pii\' is set.
+ * The attested address.
  * @export
- * @interface CustomerAddressBankModel
+ * @interface IdentityVerificationWithDetailsPiiAddressBankModel
  */
-export interface CustomerAddressBankModel {
+export interface IdentityVerificationWithDetailsPiiAddressBankModel {
     /**
      * The first line of the address.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiAddressBankModel
      */
-    street?: string | null;
+    street: string;
     /**
      * The optional second line of the address.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiAddressBankModel
      */
     street2?: string | null;
     /**
      * The city of the address.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiAddressBankModel
      */
-    city?: string | null;
+    city: string;
     /**
      * The provide/state/region of the address; not used by all countries.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiAddressBankModel
      */
     subdivision?: string | null;
     /**
      * The postal/post/zip code of the address; not used by all countries.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiAddressBankModel
      */
     postal_code?: string | null;
     /**
      * The ISO 3166 country 2-Alpha country code of the address.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiAddressBankModel
      */
-    country_code?: string | null;
+    country_code: string;
 }

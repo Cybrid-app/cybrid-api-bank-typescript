@@ -11,46 +11,43 @@
  * Do not edit the class manually.
  */
 
+import type {
+    IdentityVerificationWithDetailsPiiAddressBankModel,
+    IdentityVerificationWithDetailsPiiNameBankModel,
+} from './';
+
 /**
- * The customer\'s address. Only available for GET operations when \'include_pii\' is set.
+ * The personally identifiable information associated with the identity verification.
  * @export
- * @interface CustomerAddressBankModel
+ * @interface IdentityVerificationWithDetailsPiiBankModel
  */
-export interface CustomerAddressBankModel {
+export interface IdentityVerificationWithDetailsPiiBankModel {
     /**
-     * The first line of the address.
-     * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @type {IdentityVerificationWithDetailsPiiNameBankModel}
+     * @memberof IdentityVerificationWithDetailsPiiBankModel
      */
-    street?: string | null;
+    name?: IdentityVerificationWithDetailsPiiNameBankModel | null;
     /**
-     * The optional second line of the address.
-     * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @type {IdentityVerificationWithDetailsPiiAddressBankModel}
+     * @memberof IdentityVerificationWithDetailsPiiBankModel
      */
-    street2?: string | null;
+    address?: IdentityVerificationWithDetailsPiiAddressBankModel | null;
     /**
-     * The city of the address.
+     * The attested date of birth.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiBankModel
      */
-    city?: string | null;
+    date_of_birth?: string | null;
     /**
-     * The provide/state/region of the address; not used by all countries.
+     * The attested phone number.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiBankModel
      */
-    subdivision?: string | null;
+    phone_number?: string | null;
     /**
-     * The postal/post/zip code of the address; not used by all countries.
+     * The attested email address.
      * @type {string}
-     * @memberof CustomerAddressBankModel
+     * @memberof IdentityVerificationWithDetailsPiiBankModel
      */
-    postal_code?: string | null;
-    /**
-     * The ISO 3166 country 2-Alpha country code of the address.
-     * @type {string}
-     * @memberof CustomerAddressBankModel
-     */
-    country_code?: string | null;
+    email_address?: string | null;
 }
