@@ -12,44 +12,20 @@
  */
 
 /**
+ * 
  * @export
- * @interface ExternalBankAccountPiiInnerAddressesInnerBankModel
+ * @enum {string}
  */
-export interface ExternalBankAccountPiiInnerAddressesInnerBankModel {
-    /**
-     * The first line of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    street?: string;
-    /**
-     * The optional second line of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    street2?: string | null;
-    /**
-     * The city of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    city?: string;
-    /**
-     * The provide/state/region of the address; not used by all countries.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    subdivision?: string | null;
-    /**
-     * The postal/post/zip code of the address; not used by all countries.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    postal_code?: string | null;
-    /**
-     * The ISO 3166 country 2-Alpha country code of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    country_code?: string;
+export enum TransferFailureCodeBankModel {
+    NonSufficientFunds = 'non_sufficient_funds',
+    RefreshRequired = 'refresh_required',
+    PartyNameInvalid = 'party_name_invalid',
+    PaymentRailInvalid = 'payment_rail_invalid',
+    ComplianceRejection = 'compliance_rejection',
+    Cancelled = 'cancelled',
+    Reversed = 'reversed',
+    LimitExceeded = 'limit_exceeded',
+    NetworkFeeTooLow = 'network_fee_too_low',
+    AmountTooLow = 'amount_too_low'
 }
+
