@@ -1,6 +1,7 @@
 export * from './AccountsBankApi';
 export * from './AssetsBankApi';
 export * from './BanksBankApi';
+export * from './CounterpartiesBankApi';
 export * from './CustomersBankApi';
 export * from './DepositAddressesBankApi';
 export * from './DepositBankAccountsBankApi';
