@@ -12,12 +12,26 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface ComplianceCheckBankModel
  */
-export enum IdentityVerificationOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed'
+export interface ComplianceCheckBankModel {
+    /**
+     * The type of compliance check; one of business_watchlists, business_verification, business_tax_id_verification, person_attested, person_tax_id_attested, person_watchlists, person_verification, person_authentication, person_gov_id_verification, person_tax_id_verification, external_bank_account_verification, or external_bank_account_attested.
+     * @type {string}
+     * @memberof ComplianceCheckBankModel
+     */
+    type: string;
+    /**
+     * The outcome of the compliance check; one of passed, failed, or inconclusive.
+     * @type {string}
+     * @memberof ComplianceCheckBankModel
+     */
+    outcome?: string;
+    /**
+     * The reason codes explaining the outcome.
+     * @type {Array<string>}
+     * @memberof ComplianceCheckBankModel
+     */
+    failure_codes?: Array<string> | null;
 }
-

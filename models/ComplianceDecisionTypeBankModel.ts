@@ -16,8 +16,18 @@
  * @export
  * @enum {string}
  */
-export enum IdentityVerificationOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed'
+export enum ComplianceDecisionTypeBankModel {
+    BusinessWatchlists = 'business_watchlists',
+    BusinessVerification = 'business_verification',
+    BusinessTaxIdVerification = 'business_tax_id_verification',
+    PersonAttested = 'person_attested',
+    PersonTaxIdAttested = 'person_tax_id_attested',
+    PersonWatchlists = 'person_watchlists',
+    PersonVerification = 'person_verification',
+    PersonAuthentication = 'person_authentication',
+    PersonGovIdVerification = 'person_gov_id_verification',
+    PersonTaxIdVerification = 'person_tax_id_verification',
+    ExternalBankAccountVerification = 'external_bank_account_verification',
+    ExternalBankAccountAttested = 'external_bank_account_attested'
 }
 

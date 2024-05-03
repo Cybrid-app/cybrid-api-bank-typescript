@@ -16,8 +16,10 @@
  * @export
  * @enum {string}
  */
-export enum IdentityVerificationOutcomeBankModel {
+export enum ComplianceDecisionStateBankModel {
     Passed = 'passed',
-    Failed = 'failed'
+    Failed = 'failed',
+    Expired = 'expired',
+    Invalidated = 'invalidated'
 }
 
