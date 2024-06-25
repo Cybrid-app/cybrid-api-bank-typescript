@@ -11,110 +11,15 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ComplianceCheckBankModel,
-    ComplianceDecisionBankModel,
-    IdentityVerificationWithDetailsPiiBankModel,
-} from './';
-
 /**
+ * The activity type 
  * @export
- * @interface IdentityVerificationWithDetailsBankModel
+ * @enum {string}
  */
-export interface IdentityVerificationWithDetailsBankModel {
-    /**
-     * Auto-generated unique identifier for the identity verification.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    guid?: string;
-    /**
-     * The identity verification type; one of kyc, bank_account, or counterparty.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    type?: string;
-    /**
-     * The identity verification method; one of business_registration, id_and_selfie, tax_id_and_selfie, attested, attested_ownership, account_ownership, plaid_identity_match, document_submission, or watchlists.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    method?: string;
-    /**
-     * ISO8601 datetime the record was created at.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    created_at?: string;
-    /**
-     * ISO8601 datetime the record was last updated at.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    updated_at?: string;
-    /**
-     * The identity verification\'s identifier.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    customer_guid?: string | null;
-    /**
-     * The identity verification\'s identifier.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    counterparty_guid?: string | null;
-    /**
-     * The identity verification\'s identifier.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    external_bank_account_guid?: string | null;
-    /**
-     * The identity verification state; one of storing, waiting, pending, reviewing, expired, or completed.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    state?: string;
-    /**
-     * The identity verification outcome; one of passed or failed.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    outcome?: string | null;
-    /**
-     * The reason codes explaining the outcome.
-     * @type {Array<string>}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    failure_codes?: Array<string> | null;
-    /**
-     * The compliance checks associated with the identity verification.
-     * @type {Array<ComplianceCheckBankModel>}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    compliance_checks?: Array<ComplianceCheckBankModel>;
-    /**
-     * The compliance decisions associated with the identity verification.
-     * @type {Array<ComplianceDecisionBankModel>}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    compliance_decisions?: Array<ComplianceDecisionBankModel>;
-    /**
-     * The Persona identifier of the backing inquiry.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    persona_inquiry_id?: string | null;
-    /**
-     * The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    persona_state?: string | null;
-    /**
-     * @type {IdentityVerificationWithDetailsPiiBankModel}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    pii?: IdentityVerificationWithDetailsPiiBankModel | null;
+export enum ActivityTypeBankModel {
+    Trading = 'trading',
+    Funding = 'funding',
+    BookTransfer = 'book_transfer',
+    CryptoTransfer = 'crypto_transfer'
 }
+

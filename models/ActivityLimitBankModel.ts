@@ -11,110 +11,39 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ComplianceCheckBankModel,
-    ComplianceDecisionBankModel,
-    IdentityVerificationWithDetailsPiiBankModel,
-} from './';
-
 /**
  * @export
- * @interface IdentityVerificationWithDetailsBankModel
+ * @interface ActivityLimitBankModel
  */
-export interface IdentityVerificationWithDetailsBankModel {
+export interface ActivityLimitBankModel {
     /**
-     * Auto-generated unique identifier for the identity verification.
+     * The name of the limit.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
+     * @memberof ActivityLimitBankModel
      */
-    guid?: string;
+    name?: string;
     /**
-     * The identity verification type; one of kyc, bank_account, or counterparty.
+     * The asset code for the limit.
      * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
+     * @memberof ActivityLimitBankModel
      */
-    type?: string;
+    asset?: string;
     /**
-     * The identity verification method; one of business_registration, id_and_selfie, tax_id_and_selfie, attested, attested_ownership, account_ownership, plaid_identity_match, document_submission, or watchlists.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
+     * The limit amount for the asset.
+     * @type {number}
+     * @memberof ActivityLimitBankModel
      */
-    method?: string;
+    amount?: number;
     /**
-     * ISO8601 datetime the record was created at.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
+     * The limit interval in seconds for the asset.
+     * @type {number}
+     * @memberof ActivityLimitBankModel
      */
-    created_at?: string;
+    interval?: number;
     /**
-     * ISO8601 datetime the record was last updated at.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    updated_at?: string;
-    /**
-     * The identity verification\'s identifier.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    customer_guid?: string | null;
-    /**
-     * The identity verification\'s identifier.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    counterparty_guid?: string | null;
-    /**
-     * The identity verification\'s identifier.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    external_bank_account_guid?: string | null;
-    /**
-     * The identity verification state; one of storing, waiting, pending, reviewing, expired, or completed.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    state?: string;
-    /**
-     * The identity verification outcome; one of passed or failed.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    outcome?: string | null;
-    /**
-     * The reason codes explaining the outcome.
+     * The activities associated with the limit.
      * @type {Array<string>}
-     * @memberof IdentityVerificationWithDetailsBankModel
+     * @memberof ActivityLimitBankModel
      */
-    failure_codes?: Array<string> | null;
-    /**
-     * The compliance checks associated with the identity verification.
-     * @type {Array<ComplianceCheckBankModel>}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    compliance_checks?: Array<ComplianceCheckBankModel>;
-    /**
-     * The compliance decisions associated with the identity verification.
-     * @type {Array<ComplianceDecisionBankModel>}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    compliance_decisions?: Array<ComplianceDecisionBankModel>;
-    /**
-     * The Persona identifier of the backing inquiry.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    persona_inquiry_id?: string | null;
-    /**
-     * The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    persona_state?: string | null;
-    /**
-     * @type {IdentityVerificationWithDetailsPiiBankModel}
-     * @memberof IdentityVerificationWithDetailsBankModel
-     */
-    pii?: IdentityVerificationWithDetailsPiiBankModel | null;
+    activities?: Array<string>;
 }
