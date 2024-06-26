@@ -13,55 +13,25 @@
 
 /**
  * @export
- * @interface WorkflowBankModel
+ * @interface TransferParticipantBankModel
  */
-export interface WorkflowBankModel {
+export interface TransferParticipantBankModel {
     /**
-     * Auto-generated unique identifier for the workflow.
+     * The type of participant; one of unknown, bank, customer, or counterparty.
      * @type {string}
-     * @memberof WorkflowBankModel
+     * @memberof TransferParticipantBankModel
+     */
+    type: string;
+    /**
+     * The amount in base units of the asset.
+     * @type {number}
+     * @memberof TransferParticipantBankModel
+     */
+    amount: number;
+    /**
+     * The participant\'s identifier.
+     * @type {string}
+     * @memberof TransferParticipantBankModel
      */
     guid?: string;
-    /**
-     * The associated banks\'s identifier.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    bank_guid?: string | null;
-    /**
-     * The associated customer\'s identifier.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    customer_guid?: string | null;
-    /**
-     * The type of workflow; one of plaid.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    type?: string;
-    /**
-     * The state of the workflow; one of storing, completed, or failed.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    state?: string;
-    /**
-     * The failure code for failed workflows.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    failure_code?: string | null;
-    /**
-     * ISO8601 datetime the record was created at.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    created_at?: string;
-    /**
-     * ISO8601 datetime the record was last updated at.
-     * @type {string}
-     * @memberof WorkflowBankModel
-     */
-    updated_at?: string;
 }

@@ -114,6 +114,7 @@ export * from './TransferBankModel';
 export * from './TransferDestinationAccountBankModel';
 export * from './TransferFailureCodeBankModel';
 export * from './TransferListBankModel';
+export * from './TransferParticipantBankModel';
 export * from './TransferSideBankModel';
 export * from './TransferSourceAccountBankModel';
 export * from './TransferStateBankModel';
