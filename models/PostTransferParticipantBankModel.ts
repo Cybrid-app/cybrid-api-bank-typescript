@@ -12,33 +12,37 @@
  */
 
 /**
- * The destination account in the transfer.
  * @export
- * @interface TransferDestinationAccountBankModel
+ * @interface PostTransferParticipantBankModel
  */
-export interface TransferDestinationAccountBankModel {
+export interface PostTransferParticipantBankModel {
     /**
-     * Auto-generated unique identifier for the transfer account.
+     * The type of participant
      * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * @memberof PostTransferParticipantBankModel
      */
-    guid?: string;
+    type: PostTransferParticipantBankModelTypeEnum;
     /**
-     * The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, or gas.
-     * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * The amount in base units of the asset.
+     * @type {number}
+     * @memberof PostTransferParticipantBankModel
      */
-    type?: string;
+    amount: number;
     /**
-     * The account\'s identifier.
+     * The participant\'s identifier.
      * @type {string}
-     * @memberof TransferDestinationAccountBankModel
+     * @memberof PostTransferParticipantBankModel
      */
-    bank_guid?: string | null;
-    /**
-     * The account\'s identifier.
-     * @type {string}
-     * @memberof TransferDestinationAccountBankModel
-     */
-    customer_guid?: string | null;
+    guid: string;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostTransferParticipantBankModelTypeEnum {
+    Bank = 'bank',
+    Customer = 'customer',
+    Counterparty = 'counterparty'
+}
+

@@ -97,6 +97,7 @@ export * from './PostPaymentInstructionBankModel';
 export * from './PostQuoteBankModel';
 export * from './PostTradeBankModel';
 export * from './PostTransferBankModel';
+export * from './PostTransferParticipantBankModel';
 export * from './PostWorkflowBankModel';
 export * from './QuoteBankModel';
 export * from './QuoteListBankModel';
