@@ -11,143 +11,21 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    PostTradeBankModel,
-    TradeBankModel,
-    TradeListBankModel,
-} from '../models';
-
-export interface CreateTradeRequest {
-    postTradeBankModel: PostTradeBankModel;
-}
-
-export interface GetTradeRequest {
-    tradeGuid: string;
-}
-
-export interface ListTradesRequest {
-    page?: number;
-    perPage?: number;
-    guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
-    accountGuid?: string;
-    state?: string;
-    side?: string;
-    label?: string;
-    createdAtGte?: string;
-    createdAtLt?: string;
-    updatedAtGte?: string;
-    updatedAtLt?: string;
-}
-
 /**
- * no description
+ * @export
+ * @interface ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
  */
-export class TradesBankApi extends BaseAPI {
-
+export interface ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel {
     /**
-     * Creates a trade.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | pending | The Platform is executing the trade | | cancelled | The Platform has cancelled the trade | | settling | The Platform is settling the trade | | completed | The Platform has successfully completed the trade | | failed | The Platform was not able to successfully complete the trade |  ## Failure codes  | Code | Description | |------|-------------| | non_sufficient_funds | The delivery account does not have enough funds to complete the trade | | unsupported | The trading pair is not supported for this customer | | limit_exceeded | The customer is over the limits that have been set for them for this activity | | expired_quote | The quote expired before it could be executed | | market_volatility | The quote could not be executed due to market volatility |    Required scope: **trades:execute**
-     * Create Trade
+     * The type of routing number; one of CPA or ABA.
+     * @type {string}
+     * @memberof ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
      */
-    createTrade({ postTradeBankModel }: CreateTradeRequest): Observable<TradeBankModel>
-    createTrade({ postTradeBankModel }: CreateTradeRequest, opts?: OperationOpts): Observable<AjaxResponse<TradeBankModel>>
-    createTrade({ postTradeBankModel }: CreateTradeRequest, opts?: OperationOpts): Observable<TradeBankModel | AjaxResponse<TradeBankModel>> {
-        throwIfNullOrUndefined(postTradeBankModel, 'postTradeBankModel', 'createTrade');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['trades:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<TradeBankModel>({
-            url: '/api/trades',
-            method: 'POST',
-            headers,
-            body: postTradeBankModel,
-        }, opts?.responseOpts);
-    };
-
+    routing_number_type: string;
     /**
-     * Retrieves a trade.  Required scope: **trades:read**
-     * Get Trade
+     * The routing number.
+     * @type {string}
+     * @memberof ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
      */
-    getTrade({ tradeGuid }: GetTradeRequest): Observable<TradeBankModel>
-    getTrade({ tradeGuid }: GetTradeRequest, opts?: OperationOpts): Observable<AjaxResponse<TradeBankModel>>
-    getTrade({ tradeGuid }: GetTradeRequest, opts?: OperationOpts): Observable<TradeBankModel | AjaxResponse<TradeBankModel>> {
-        throwIfNullOrUndefined(tradeGuid, 'tradeGuid', 'getTrade');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['trades:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<TradeBankModel>({
-            url: '/api/trades/{trade_guid}'.replace('{trade_guid}', encodeURI(tradeGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a listing of trades.  Required scope: **trades:read**
-     * Get trades list
-     */
-    listTrades({ page, perPage, guid, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt }: ListTradesRequest): Observable<TradeListBankModel>
-    listTrades({ page, perPage, guid, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt }: ListTradesRequest, opts?: OperationOpts): Observable<AjaxResponse<TradeListBankModel>>
-    listTrades({ page, perPage, guid, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt }: ListTradesRequest, opts?: OperationOpts): Observable<TradeListBankModel | AjaxResponse<TradeListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['trades:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-        if (accountGuid != null) { query['account_guid'] = accountGuid; }
-        if (state != null) { query['state'] = state; }
-        if (side != null) { query['side'] = side; }
-        if (label != null) { query['label'] = label; }
-        if (createdAtGte != null) { query['created_at_gte'] = createdAtGte; }
-        if (createdAtLt != null) { query['created_at_lt'] = createdAtLt; }
-        if (updatedAtGte != null) { query['updated_at_gte'] = updatedAtGte; }
-        if (updatedAtLt != null) { query['updated_at_lt'] = updatedAtLt; }
-
-        return this.request<TradeListBankModel>({
-            url: '/api/trades',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+    routing_number: string;
 }

@@ -49,6 +49,7 @@ export * from './ExternalBankAccountKindBankModel';
 export * from './ExternalBankAccountListBankModel';
 export * from './ExternalBankAccountPiiInnerAddressesInnerBankModel';
 export * from './ExternalBankAccountPiiInnerBankModel';
+export * from './ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel';
 export * from './ExternalBankAccountStateBankModel';
 export * from './ExternalWalletBankModel';
 export * from './ExternalWalletEnvironmentBankModel';
