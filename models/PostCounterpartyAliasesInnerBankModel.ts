@@ -11,37 +11,15 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TransferBankModel,
-} from './';
-
 /**
  * @export
- * @interface TransferListBankModel
+ * @interface PostCounterpartyAliasesInnerBankModel
  */
-export interface TransferListBankModel {
+export interface PostCounterpartyAliasesInnerBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The counterparty\'s full name; optional for business counterparties..
+     * @type {string}
+     * @memberof PostCounterpartyAliasesInnerBankModel
      */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TransferBankModel>}
-     * @memberof TransferListBankModel
-     */
-    objects: Array<TransferBankModel>;
+    full?: string | null;
 }

@@ -11,37 +11,45 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TransferBankModel,
-} from './';
-
 /**
  * @export
- * @interface TransferListBankModel
+ * @interface PostCounterpartyAddressBankModel
  */
-export interface TransferListBankModel {
+export interface PostCounterpartyAddressBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The first line of the address.
+     * @type {string}
+     * @memberof PostCounterpartyAddressBankModel
      */
-    total: number;
+    street: string;
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The optional second line of the address.
+     * @type {string}
+     * @memberof PostCounterpartyAddressBankModel
      */
-    page: number;
+    street2?: string | null;
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The city of the address.
+     * @type {string}
+     * @memberof PostCounterpartyAddressBankModel
      */
-    per_page: number;
+    city: string;
     /**
-     * Array of trade entities
-     * @type {Array<TransferBankModel>}
-     * @memberof TransferListBankModel
+     * The ISO 3166-2 subdivision code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostCounterpartyAddressBankModel
      */
-    objects: Array<TransferBankModel>;
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PostCounterpartyAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof PostCounterpartyAddressBankModel
+     */
+    country_code: string;
 }

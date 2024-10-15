@@ -76,6 +76,8 @@ export * from './PaymentInstructionBankModel';
 export * from './PaymentInstructionListBankModel';
 export * from './PostAccountBankModel';
 export * from './PostBankBankModel';
+export * from './PostCounterpartyAddressBankModel';
+export * from './PostCounterpartyAliasesInnerBankModel';
 export * from './PostCounterpartyBankModel';
 export * from './PostCounterpartyNameBankModel';
 export * from './PostCustomerAddressBankModel';
