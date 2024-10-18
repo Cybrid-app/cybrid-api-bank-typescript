@@ -11,13 +11,36 @@
  * Do not edit the class manually.
  */
 
-/**
- * 
- * @export
- * @enum {string}
- */
-export enum IdentityVerificationOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed'
-}
+import type {
+    QuoteEntrySourceAccountBankModel,
+    TransferEntryDestinationAccountBankModel,
+} from './';
 
+/**
+ * @export
+ * @interface TransferEntryBankModel
+ */
+export interface TransferEntryBankModel {
+    /**
+     * The actual amount in base units of the asset.
+     * @type {number}
+     * @memberof TransferEntryBankModel
+     */
+    amount: number | null;
+    /**
+     * The fee associated with the transfer entry.
+     * @type {number}
+     * @memberof TransferEntryBankModel
+     */
+    fee: number;
+    /**
+     * @type {QuoteEntrySourceAccountBankModel}
+     * @memberof TransferEntryBankModel
+     */
+    source_account: QuoteEntrySourceAccountBankModel | null;
+    /**
+     * @type {TransferEntryDestinationAccountBankModel}
+     * @memberof TransferEntryBankModel
+     */
+    destination_account: TransferEntryDestinationAccountBankModel | null;
+}

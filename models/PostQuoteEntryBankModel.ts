@@ -12,12 +12,42 @@
  */
 
 /**
- * 
+ * Request body for quote account creation.
+ * @export
+ * @interface PostQuoteEntryBankModel
+ */
+export interface PostQuoteEntryBankModel {
+    /**
+     * The type of account
+     * @type {string}
+     * @memberof PostQuoteEntryBankModel
+     */
+    type: PostQuoteEntryBankModelTypeEnum;
+    /**
+     * The guid of the account
+     * @type {string}
+     * @memberof PostQuoteEntryBankModel
+     */
+    guid: string;
+    /**
+     * The amount to be received in base units of the currency: currency is \"asset\" for buy and \"counter_asset\" for sell for trade quotes.
+     * @type {number}
+     * @memberof PostQuoteEntryBankModel
+     */
+    receive_amount?: number | null;
+    /**
+     * The amount to be delivered in base units of the currency: currency is \"counter_asset\" for buy and \"asset\" for sell for trade quotes.
+     * @type {number}
+     * @memberof PostQuoteEntryBankModel
+     */
+    deliver_amount?: number | null;
+}
+
+/**
  * @export
  * @enum {string}
  */
-export enum IdentityVerificationOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed'
+export enum PostQuoteEntryBankModelTypeEnum {
+    ExternalWallet = 'external_wallet'
 }
 

@@ -12,12 +12,33 @@
  */
 
 /**
- * 
+ * The destination account entry in the batch transfer.
  * @export
- * @enum {string}
+ * @interface QuoteEntryDestinationAccountBankModel
  */
-export enum IdentityVerificationOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed'
+export interface QuoteEntryDestinationAccountBankModel {
+    /**
+     * Auto-generated unique identifier for the transfer account.
+     * @type {string}
+     * @memberof QuoteEntryDestinationAccountBankModel
+     */
+    guid?: string;
+    /**
+     * The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, or gas.
+     * @type {string}
+     * @memberof QuoteEntryDestinationAccountBankModel
+     */
+    type?: string;
+    /**
+     * The account\'s identifier.
+     * @type {string}
+     * @memberof QuoteEntryDestinationAccountBankModel
+     */
+    bank_guid?: string | null;
+    /**
+     * The account\'s identifier.
+     * @type {string}
+     * @memberof QuoteEntryDestinationAccountBankModel
+     */
+    customer_guid?: string | null;
 }
-
