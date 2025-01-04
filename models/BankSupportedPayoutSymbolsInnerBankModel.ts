@@ -11,177 +11,33 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    InvoiceBankModel,
-    InvoiceListBankModel,
-    PostInvoiceBankModel,
-} from '../models';
-
-export interface CancelInvoiceRequest {
-    invoiceGuid: string;
-}
-
-export interface CreateInvoiceRequest {
-    postInvoiceBankModel: PostInvoiceBankModel;
-}
-
-export interface GetInvoiceRequest {
-    invoiceGuid: string;
-}
-
-export interface ListInvoicesRequest {
-    page?: number;
-    perPage?: number;
-    guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
-    accountGuid?: string;
-    state?: string;
-    asset?: string;
-    environment?: ListInvoicesEnvironmentEnum;
-    label?: string;
-}
-
-/**
- * no description
- */
-export class InvoicesBankApi extends BaseAPI {
-
-    /**
-     * Cancels an invoice.  Required scope: **invoices:execute**
-     * Cancel Invoice
-     */
-    cancelInvoice({ invoiceGuid }: CancelInvoiceRequest): Observable<InvoiceBankModel>
-    cancelInvoice({ invoiceGuid }: CancelInvoiceRequest, opts?: OperationOpts): Observable<AjaxResponse<InvoiceBankModel>>
-    cancelInvoice({ invoiceGuid }: CancelInvoiceRequest, opts?: OperationOpts): Observable<InvoiceBankModel | AjaxResponse<InvoiceBankModel>> {
-        throwIfNullOrUndefined(invoiceGuid, 'invoiceGuid', 'cancelInvoice');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['invoices:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<InvoiceBankModel>({
-            url: '/api/invoices/{invoice_guid}'.replace('{invoice_guid}', encodeURI(invoiceGuid)),
-            method: 'DELETE',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Creates a invoice.  ## State  | State | Description | |-------|-------------| | storing    | The Platform is storing the invoice details in our private store | | unpaid     | The invoice is unpaid. Payment instructions can be generated for an invoice in this state | | cancelling | The invocie is in the process of being cancelled | | cancelled  | The invoice has been cancelled |  | settling   | The invoice has been paid and the funds associated with this invoice are in the process of being settled | | paid       | The invoice has been paid and the funds associated with this invoice have been settled |     Required scope: **invoices:execute**
-     * Create Invoice
-     */
-    createInvoice({ postInvoiceBankModel }: CreateInvoiceRequest): Observable<InvoiceBankModel>
-    createInvoice({ postInvoiceBankModel }: CreateInvoiceRequest, opts?: OperationOpts): Observable<AjaxResponse<InvoiceBankModel>>
-    createInvoice({ postInvoiceBankModel }: CreateInvoiceRequest, opts?: OperationOpts): Observable<InvoiceBankModel | AjaxResponse<InvoiceBankModel>> {
-        throwIfNullOrUndefined(postInvoiceBankModel, 'postInvoiceBankModel', 'createInvoice');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['invoices:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<InvoiceBankModel>({
-            url: '/api/invoices',
-            method: 'POST',
-            headers,
-            body: postInvoiceBankModel,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a invoice.  Required scope: **invoices:read**
-     * Get Invoice
-     */
-    getInvoice({ invoiceGuid }: GetInvoiceRequest): Observable<InvoiceBankModel>
-    getInvoice({ invoiceGuid }: GetInvoiceRequest, opts?: OperationOpts): Observable<AjaxResponse<InvoiceBankModel>>
-    getInvoice({ invoiceGuid }: GetInvoiceRequest, opts?: OperationOpts): Observable<InvoiceBankModel | AjaxResponse<InvoiceBankModel>> {
-        throwIfNullOrUndefined(invoiceGuid, 'invoiceGuid', 'getInvoice');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['invoices:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<InvoiceBankModel>({
-            url: '/api/invoices/{invoice_guid}'.replace('{invoice_guid}', encodeURI(invoiceGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     * Retrieves a list of invoices.  Required scope: **invoices:read**
-     * List Invoices
-     */
-    listInvoices({ page, perPage, guid, bankGuid, customerGuid, accountGuid, state, asset, environment, label }: ListInvoicesRequest): Observable<InvoiceListBankModel>
-    listInvoices({ page, perPage, guid, bankGuid, customerGuid, accountGuid, state, asset, environment, label }: ListInvoicesRequest, opts?: OperationOpts): Observable<AjaxResponse<InvoiceListBankModel>>
-    listInvoices({ page, perPage, guid, bankGuid, customerGuid, accountGuid, state, asset, environment, label }: ListInvoicesRequest, opts?: OperationOpts): Observable<InvoiceListBankModel | AjaxResponse<InvoiceListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['invoices:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-        if (accountGuid != null) { query['account_guid'] = accountGuid; }
-        if (state != null) { query['state'] = state; }
-        if (asset != null) { query['asset'] = asset; }
-        if (environment != null) { query['environment'] = environment; }
-        if (label != null) { query['label'] = label; }
-
-        return this.request<InvoiceListBankModel>({
-            url: '/api/invoices',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
-}
-
 /**
  * @export
- * @enum {string}
+ * @interface BankSupportedPayoutSymbolsInnerBankModel
  */
-export enum ListInvoicesEnvironmentEnum {
-    Sandbox = 'sandbox',
-    Production = 'production'
+export interface BankSupportedPayoutSymbolsInnerBankModel {
+    /**
+     * The payout symbol code.
+     * @type {string}
+     * @memberof BankSupportedPayoutSymbolsInnerBankModel
+     */
+    symbol?: string;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the payout symbol.
+     * @type {string}
+     * @memberof BankSupportedPayoutSymbolsInnerBankModel
+     */
+    country_code?: string;
+    /**
+     * The participants type; one of C2C, C2B, B2C, or B2B.
+     * @type {string}
+     * @memberof BankSupportedPayoutSymbolsInnerBankModel
+     */
+    participants_type?: string;
+    /**
+     * The payout symbol route; one of bank_account or mobile_wallet.
+     * @type {string}
+     * @memberof BankSupportedPayoutSymbolsInnerBankModel
+     */
+    route?: string;
 }
