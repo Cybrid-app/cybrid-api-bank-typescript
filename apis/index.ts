@@ -7,6 +7,7 @@ export * from './DepositAddressesBankApi';
 export * from './DepositBankAccountsBankApi';
 export * from './ExternalBankAccountsBankApi';
 export * from './ExternalWalletsBankApi';
+export * from './FilesBankApi';
 export * from './IdentityVerificationsBankApi';
 export * from './InvoicesBankApi';
 export * from './PaymentInstructionsBankApi';
