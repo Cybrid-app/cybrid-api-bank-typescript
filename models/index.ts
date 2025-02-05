@@ -105,6 +105,7 @@ export * from './PostInvoiceBankModel';
 export * from './PostPaymentInstructionBankModel';
 export * from './PostQuoteBankModel';
 export * from './PostQuoteEntryBankModel';
+export * from './PostSupportedPayoutSymbolsBankModel';
 export * from './PostTradeBankModel';
 export * from './PostTransferBankModel';
 export * from './PostTransferParticipantBankModel';

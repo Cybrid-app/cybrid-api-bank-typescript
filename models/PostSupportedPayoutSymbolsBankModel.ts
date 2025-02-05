@@ -11,37 +11,60 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TransferBankModel,
-} from './';
+/**
+ * Supported payout symbols details.
+ * @export
+ * @interface PostSupportedPayoutSymbolsBankModel
+ */
+export interface PostSupportedPayoutSymbolsBankModel {
+    /**
+     * The primary asset of the payout symbol, e.g., MXN.
+     * @type {string}
+     * @memberof PostSupportedPayoutSymbolsBankModel
+     */
+    primary_asset: string;
+    /**
+     * The counter asset of the payout symbol, e.g., USD.
+     * @type {string}
+     * @memberof PostSupportedPayoutSymbolsBankModel
+     */
+    counter_asset: string;
+    /**
+     * The ISO 3166 country 2-Alpha country code is permitted in, e.g., MX.
+     * @type {string}
+     * @memberof PostSupportedPayoutSymbolsBankModel
+     */
+    country_code: string;
+    /**
+     * The participants the symbol is permitted for.
+     * @type {string}
+     * @memberof PostSupportedPayoutSymbolsBankModel
+     */
+    participants_type: PostSupportedPayoutSymbolsBankModelParticipantsTypeEnum;
+    /**
+     * The route the symbol is permitted for.
+     * @type {string}
+     * @memberof PostSupportedPayoutSymbolsBankModel
+     */
+    route: PostSupportedPayoutSymbolsBankModelRouteEnum;
+}
 
 /**
  * @export
- * @interface TransferListBankModel
+ * @enum {string}
  */
-export interface TransferListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TransferListBankModel
-     */
-    per_page: number;
-    /**
-     * Array of trade entities
-     * @type {Array<TransferBankModel>}
-     * @memberof TransferListBankModel
-     */
-    objects: Array<TransferBankModel>;
+export enum PostSupportedPayoutSymbolsBankModelParticipantsTypeEnum {
+    C2C = 'C2C',
+    C2B = 'C2B',
+    B2C = 'B2C',
+    B2B = 'B2B'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PostSupportedPayoutSymbolsBankModelRouteEnum {
+    BankAccount = 'bank_account',
+    MobileWallet = 'mobile_wallet'
+}
+
