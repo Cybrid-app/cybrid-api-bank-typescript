@@ -73,6 +73,8 @@ export * from './InvoiceListBankModel';
 export * from './PatchBankBankModel';
 export * from './PatchCustomerBankModel';
 export * from './PatchExternalBankAccountBankModel';
+export * from './PatchTransferBankModel';
+export * from './PatchTransferParticipantBankModel';
 export * from './PaymentInstructionBankModel';
 export * from './PaymentInstructionListBankModel';
 export * from './PlatformFileBankModel';

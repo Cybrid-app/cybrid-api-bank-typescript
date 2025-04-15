@@ -12,15 +12,38 @@
  */
 
 /**
- * 
+ * Request body for a transfer participant.
+ * @export
+ * @interface PatchTransferParticipantBankModel
+ */
+export interface PatchTransferParticipantBankModel {
+    /**
+     * The type of participant.
+     * @type {string}
+     * @memberof PatchTransferParticipantBankModel
+     */
+    type: PatchTransferParticipantBankModelTypeEnum;
+    /**
+     * The amount in base units of the asset.
+     * @type {number}
+     * @memberof PatchTransferParticipantBankModel
+     */
+    amount: number;
+    /**
+     * The participant\'s identifier.
+     * @type {string}
+     * @memberof PatchTransferParticipantBankModel
+     */
+    guid: string;
+}
+
+/**
  * @export
  * @enum {string}
  */
-export enum CustomerStateBankModel {
-    Storing = 'storing',
-    Unverified = 'unverified',
-    Verified = 'verified',
-    Rejected = 'rejected',
-    Frozen = 'frozen'
+export enum PatchTransferParticipantBankModelTypeEnum {
+    Bank = 'bank',
+    Customer = 'customer',
+    Counterparty = 'counterparty'
 }
 

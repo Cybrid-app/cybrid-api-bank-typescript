@@ -11,16 +11,26 @@
  * Do not edit the class manually.
  */
 
-/**
- * 
- * @export
- * @enum {string}
- */
-export enum CustomerStateBankModel {
-    Storing = 'storing',
-    Unverified = 'unverified',
-    Verified = 'verified',
-    Rejected = 'rejected',
-    Frozen = 'frozen'
-}
+import type {
+    PatchTransferParticipantBankModel,
+} from './';
 
+/**
+ * Request body for transfer modification.
+ * @export
+ * @interface PatchTransferBankModel
+ */
+export interface PatchTransferBankModel {
+    /**
+     * The source participants for the transfer.
+     * @type {Array<PatchTransferParticipantBankModel>}
+     * @memberof PatchTransferBankModel
+     */
+    source_participants?: Array<PatchTransferParticipantBankModel> | null;
+    /**
+     * The destination participants for the transfer.
+     * @type {Array<PatchTransferParticipantBankModel>}
+     * @memberof PatchTransferBankModel
+     */
+    destination_participants?: Array<PatchTransferParticipantBankModel> | null;
+}
