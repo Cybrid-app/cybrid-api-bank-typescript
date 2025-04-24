@@ -11,39 +11,43 @@
  * Do not edit the class manually.
  */
 
+import type {
+    PlatformFileBankModel,
+} from './';
+
 /**
  * @export
- * @interface AssetBankModel
+ * @interface IdentityVerificationDocumentBankModel
  */
-export interface AssetBankModel {
+export interface IdentityVerificationDocumentBankModel {
     /**
-     * The asset type; one of fiat or crypto.
+     * Auto-generated unique identifier for the document.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationDocumentBankModel
      */
-    type: string;
+    guid?: string;
     /**
-     * The unique code for the asset.
+     * The document type; one of drivers_license, passport, passport_card, residence_card, visa, social_security_number, tax_identification_number, selfie, proof_of_address, formation_document, or employer_identification_number.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationDocumentBankModel
      */
-    code: string;
+    type?: string;
     /**
-     * The name of the asset.
+     * Whether the document has been validated.
+     * @type {boolean}
+     * @memberof IdentityVerificationDocumentBankModel
+     */
+    validated?: boolean;
+    /**
+     * The document expiration date.
      * @type {string}
-     * @memberof AssetBankModel
+     * @memberof IdentityVerificationDocumentBankModel
      */
-    name: string;
+    expiration_date?: string | null;
     /**
-     * The currency symbol for the asset.
-     * @type {string}
-     * @memberof AssetBankModel
+     * The files associated with the document.
+     * @type {Array<PlatformFileBankModel>}
+     * @memberof IdentityVerificationDocumentBankModel
      */
-    symbol: string;
-    /**
-     * The number of decimals for the default unit of the asset.
-     * @type {number}
-     * @memberof AssetBankModel
-     */
-    decimals: number;
+    files?: Array<PlatformFileBankModel>;
 }

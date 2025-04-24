@@ -58,6 +58,7 @@ export * from './ExternalWalletListBankModel';
 export * from './ExternalWalletStateBankModel';
 export * from './IdentificationNumberBankModel';
 export * from './IdentityVerificationBankModel';
+export * from './IdentityVerificationDocumentBankModel';
 export * from './IdentityVerificationListBankModel';
 export * from './IdentityVerificationMethodBankModel';
 export * from './IdentityVerificationOutcomeBankModel';
