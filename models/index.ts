@@ -3,6 +3,7 @@ export * from './AccountListBankModel';
 export * from './AccountStateBankModel';
 export * from './AccountTypeBankModel';
 export * from './ActivityLimitBankModel';
+export * from './ActivitySideBankModel';
 export * from './ActivityTypeBankModel';
 export * from './AssetBankModel';
 export * from './AssetListBankModel';

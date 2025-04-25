@@ -11,36 +11,13 @@
  * Do not edit the class manually.
  */
 
-import type {
-    InvoiceBankModel,
-} from './';
-
 /**
+ * The activity side
  * @export
- * @interface InvoiceListBankModel
+ * @enum {string}
  */
-export interface InvoiceListBankModel {
-    /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof InvoiceListBankModel
-     */
-    total: number;
-    /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof InvoiceListBankModel
-     */
-    page: number;
-    /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof InvoiceListBankModel
-     */
-    per_page: number;
-    /**
-     * @type {Array<InvoiceBankModel>}
-     * @memberof InvoiceListBankModel
-     */
-    objects: Array<InvoiceBankModel>;
+export enum ActivitySideBankModel {
+    Deposit = 'deposit',
+    Withdrawal = 'withdrawal'
 }
+
