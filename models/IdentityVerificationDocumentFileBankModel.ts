@@ -13,25 +13,31 @@
 
 /**
  * @export
- * @interface ComplianceDecisionBankModel
+ * @interface IdentityVerificationDocumentFileBankModel
  */
-export interface ComplianceDecisionBankModel {
+export interface IdentityVerificationDocumentFileBankModel {
     /**
-     * The type of verification check; one of business_watchlists, business_verification, business_tax_id_verification, business_attested, person_attested, person_tax_id_attested, person_watchlists, person_verification, person_authentication, person_gov_id_verification, person_tax_id_verification, external_bank_account_verification, or external_bank_account_attested.
+     * The unique identifier for the file.
      * @type {string}
-     * @memberof ComplianceDecisionBankModel
+     * @memberof IdentityVerificationDocumentFileBankModel
      */
-    type: string;
+    guid?: string;
     /**
-     * The state of the verification check; one of passed, failed, expired, or invalidated.
+     * The file type; one of drivers_license_front, drivers_license_back, passport, identification_card, residence_card, selfie, selfie_video, selfie_left, selfie_right, proof_of_address, or incorporation_certificate.
      * @type {string}
-     * @memberof ComplianceDecisionBankModel
+     * @memberof IdentityVerificationDocumentFileBankModel
      */
-    state: string;
+    type?: string;
     /**
-     * The reason codes explaining the outcome.
-     * @type {Array<string>}
-     * @memberof ComplianceDecisionBankModel
+     * The media type; one of image/jpeg, image/png, application/pdf, application/json, or video/mp4.
+     * @type {string}
+     * @memberof IdentityVerificationDocumentFileBankModel
      */
-    failure_codes?: Array<string> | null;
+    content_type?: string;
+    /**
+     * The name of the file.
+     * @type {string}
+     * @memberof IdentityVerificationDocumentFileBankModel
+     */
+    filename?: string;
 }

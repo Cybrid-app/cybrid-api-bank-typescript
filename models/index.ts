@@ -60,6 +60,7 @@ export * from './ExternalWalletStateBankModel';
 export * from './IdentificationNumberBankModel';
 export * from './IdentityVerificationBankModel';
 export * from './IdentityVerificationDocumentBankModel';
+export * from './IdentityVerificationDocumentFileBankModel';
 export * from './IdentityVerificationListBankModel';
 export * from './IdentityVerificationMethodBankModel';
 export * from './IdentityVerificationOutcomeBankModel';
