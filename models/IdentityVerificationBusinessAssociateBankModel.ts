@@ -11,37 +11,33 @@
  * Do not edit the class manually.
  */
 
-import type {
-    TransferBankModel,
-} from './';
-
 /**
  * @export
- * @interface TransferListBankModel
+ * @interface IdentityVerificationBusinessAssociateBankModel
  */
-export interface TransferListBankModel {
+export interface IdentityVerificationBusinessAssociateBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The Persona identifier of the business associate backing inquiry.
+     * @type {string}
+     * @memberof IdentityVerificationBusinessAssociateBankModel
      */
-    total: number;
+    persona_inquiry_id?: string;
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.
+     * @type {string}
+     * @memberof IdentityVerificationBusinessAssociateBankModel
      */
-    page: number;
+    persona_state?: string | null;
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof TransferListBankModel
+     * The business associate role; one of director or owner.
+     * @type {string}
+     * @memberof IdentityVerificationBusinessAssociateBankModel
      */
-    per_page: number;
+    role?: string;
     /**
-     * Array of trade entities
-     * @type {Array<TransferBankModel>}
-     * @memberof TransferListBankModel
+     * The business associate email address.
+     * @type {string}
+     * @memberof IdentityVerificationBusinessAssociateBankModel
      */
-    objects: Array<TransferBankModel>;
+    email_address?: string;
 }
