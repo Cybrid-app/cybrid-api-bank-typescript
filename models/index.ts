@@ -70,6 +70,7 @@ export * from './IdentityVerificationStateBankModel';
 export * from './IdentityVerificationTypeBankModel';
 export * from './IdentityVerificationWithDetailsBankModel';
 export * from './IdentityVerificationWithDetailsPiiAddressBankModel';
+export * from './IdentityVerificationWithDetailsPiiAliasesInnerBankModel';
 export * from './IdentityVerificationWithDetailsPiiBankModel';
 export * from './IdentityVerificationWithDetailsPiiNameBankModel';
 export * from './InvoiceBankModel';

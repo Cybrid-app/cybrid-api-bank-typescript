@@ -11,42 +11,15 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI } from '../runtime';
-import type { OperationOpts, HttpHeaders } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-} from '../models';
-
 /**
- * no description
+ * @export
+ * @interface IdentityVerificationWithDetailsPiiAliasesInnerBankModel
  */
-export class SymbolsBankApi extends BaseAPI {
-
+export interface IdentityVerificationWithDetailsPiiAliasesInnerBankModel {
     /**
-     * Retrieves a listing of symbols.Required scope: **prices:read**
-     * Get Symbols list
+     * The full name.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiAliasesInnerBankModel
      */
-    listSymbols(): Observable<Array<string>>
-    listSymbols(opts?: OperationOpts): Observable<AjaxResponse<Array<string>>>
-    listSymbols(opts?: OperationOpts): Observable<Array<string> | AjaxResponse<Array<string>>> {
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['prices:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<Array<string>>({
-            url: '/api/symbols',
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
+    full?: string | null;
 }
