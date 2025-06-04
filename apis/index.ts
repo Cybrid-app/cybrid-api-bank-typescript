@@ -11,6 +11,7 @@ export * from './FilesBankApi';
 export * from './IdentityVerificationsBankApi';
 export * from './InvoicesBankApi';
 export * from './PaymentInstructionsBankApi';
+export * from './PersonaSessionsBankApi';
 export * from './PricesBankApi';
 export * from './QuotesBankApi';
 export * from './SymbolsBankApi';

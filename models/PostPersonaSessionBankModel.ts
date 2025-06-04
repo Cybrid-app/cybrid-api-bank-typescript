@@ -12,13 +12,26 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface PostPersonaSessionBankModel
  */
-export enum ComplianceCheckOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed',
-    Inconclusive = 'inconclusive'
+export interface PostPersonaSessionBankModel {
+    /**
+     * The unique identifier for the Persona inquiry.
+     * @type {string}
+     * @memberof PostPersonaSessionBankModel
+     */
+    persona_inquiry_id: string;
+    /**
+     * The unique identifier for the customer.
+     * @type {string}
+     * @memberof PostPersonaSessionBankModel
+     */
+    customer_guid: string;
+    /**
+     * The unique identifier for the identity verification.
+     * @type {string}
+     * @memberof PostPersonaSessionBankModel
+     */
+    identity_verification_guid: string;
 }
-

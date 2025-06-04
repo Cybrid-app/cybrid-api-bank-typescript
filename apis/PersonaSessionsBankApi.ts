@@ -11,14 +11,52 @@
  * Do not edit the class manually.
  */
 
-/**
- * 
- * @export
- * @enum {string}
- */
-export enum ComplianceCheckOutcomeBankModel {
-    Passed = 'passed',
-    Failed = 'failed',
-    Inconclusive = 'inconclusive'
+import type { Observable } from 'rxjs';
+import type { AjaxResponse } from 'rxjs/ajax';
+import { BaseAPI, throwIfNullOrUndefined } from '../runtime';
+import type { OperationOpts, HttpHeaders } from '../runtime';
+import type {
+    ErrorResponseBankModel,
+    PersonaSessionBankModel,
+    PostPersonaSessionBankModel,
+} from '../models';
+
+export interface CreatePersonaSessionRequest {
+    postPersonaSessionBankModel: PostPersonaSessionBankModel;
 }
 
+/**
+ * no description
+ */
+export class PersonaSessionsBankApi extends BaseAPI {
+
+    /**
+     * Create a Persona session.  Required scope: **persona_sessions:execute**
+     * Create Persona Session
+     */
+    createPersonaSession({ postPersonaSessionBankModel }: CreatePersonaSessionRequest): Observable<PersonaSessionBankModel>
+    createPersonaSession({ postPersonaSessionBankModel }: CreatePersonaSessionRequest, opts?: OperationOpts): Observable<AjaxResponse<PersonaSessionBankModel>>
+    createPersonaSession({ postPersonaSessionBankModel }: CreatePersonaSessionRequest, opts?: OperationOpts): Observable<PersonaSessionBankModel | AjaxResponse<PersonaSessionBankModel>> {
+        throwIfNullOrUndefined(postPersonaSessionBankModel, 'postPersonaSessionBankModel', 'createPersonaSession');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
+            // oauth required
+            ...(this.configuration.accessToken != null
+                ? { Authorization: typeof this.configuration.accessToken === 'function'
+                    ? this.configuration.accessToken('oauth2', ['persona_sessions:execute'])
+                    : this.configuration.accessToken }
+                : undefined
+            ),
+        };
+
+        return this.request<PersonaSessionBankModel>({
+            url: '/api/persona_sessions',
+            method: 'POST',
+            headers,
+            body: postPersonaSessionBankModel,
+        }, opts?.responseOpts);
+    };
+
+}
