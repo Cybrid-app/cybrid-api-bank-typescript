@@ -11,129 +11,28 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
-import type {
-    DepositAddressBankModel,
-    DepositAddressListBankModel,
-    ErrorResponseBankModel,
-    PostDepositAddressBankModel,
-} from '../models';
-
-export interface CreateDepositAddressRequest {
-    postDepositAddressBankModel: PostDepositAddressBankModel;
-}
-
-export interface GetDepositAddressRequest {
-    depositAddressGuid: string;
-}
-
-export interface ListDepositAddressesRequest {
-    page?: number;
-    perPage?: number;
-    guid?: string;
-    bankGuid?: string;
-    customerGuid?: string;
-    label?: string;
-}
-
 /**
- * no description
+ * The hold details if a transfer is or will be placed on a hold.
+ * @export
+ * @interface TransferHoldDetailsBankModel
  */
-export class DepositAddressesBankApi extends BaseAPI {
-
+export interface TransferHoldDetailsBankModel {
     /**
-     * Creates a deposit address.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the deposit address details in our private store | | created | The Platform has created the deposit address |    Required scope: **deposit_addresses:execute**
-     * Create Deposit Address
+     * The list of hold types that are applicable for the transfer; one of administrative or non_administrative.
+     * @type {Array<string>}
+     * @memberof TransferHoldDetailsBankModel
      */
-    createDepositAddress({ postDepositAddressBankModel }: CreateDepositAddressRequest): Observable<DepositAddressBankModel>
-    createDepositAddress({ postDepositAddressBankModel }: CreateDepositAddressRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositAddressBankModel>>
-    createDepositAddress({ postDepositAddressBankModel }: CreateDepositAddressRequest, opts?: OperationOpts): Observable<DepositAddressBankModel | AjaxResponse<DepositAddressBankModel>> {
-        throwIfNullOrUndefined(postDepositAddressBankModel, 'postDepositAddressBankModel', 'createDepositAddress');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['deposit_addresses:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<DepositAddressBankModel>({
-            url: '/api/deposit_addresses',
-            method: 'POST',
-            headers,
-            body: postDepositAddressBankModel,
-        }, opts?.responseOpts);
-    };
-
+    applicable_types?: Array<string> | null;
     /**
-     * Retrieves a deposit address.  Required scope: **deposit_addresses:read**
-     * Get Deposit Address
+     * The approximate time (in seconds) that the transfer will be held for.
+     * @type {number}
+     * @memberof TransferHoldDetailsBankModel
      */
-    getDepositAddress({ depositAddressGuid }: GetDepositAddressRequest): Observable<DepositAddressBankModel>
-    getDepositAddress({ depositAddressGuid }: GetDepositAddressRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositAddressBankModel>>
-    getDepositAddress({ depositAddressGuid }: GetDepositAddressRequest, opts?: OperationOpts): Observable<DepositAddressBankModel | AjaxResponse<DepositAddressBankModel>> {
-        throwIfNullOrUndefined(depositAddressGuid, 'depositAddressGuid', 'getDepositAddress');
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['deposit_addresses:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<DepositAddressBankModel>({
-            url: '/api/deposit_addresses/{deposit_address_guid}'.replace('{deposit_address_guid}', encodeURI(depositAddressGuid)),
-            method: 'GET',
-            headers,
-        }, opts?.responseOpts);
-    };
-
+    duration?: number | null;
     /**
-     * Retrieves a list of deposit addresses.  Required scope: **deposit_addresses:read**
-     * List Deposit Addresses
+     * ISO8601 datetime the transfer hold was started at.
+     * @type {string}
+     * @memberof TransferHoldDetailsBankModel
      */
-    listDepositAddresses({ page, perPage, guid, bankGuid, customerGuid, label }: ListDepositAddressesRequest): Observable<DepositAddressListBankModel>
-    listDepositAddresses({ page, perPage, guid, bankGuid, customerGuid, label }: ListDepositAddressesRequest, opts?: OperationOpts): Observable<AjaxResponse<DepositAddressListBankModel>>
-    listDepositAddresses({ page, perPage, guid, bankGuid, customerGuid, label }: ListDepositAddressesRequest, opts?: OperationOpts): Observable<DepositAddressListBankModel | AjaxResponse<DepositAddressListBankModel>> {
-
-        const headers: HttpHeaders = {
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['deposit_addresses:read'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        const query: HttpQuery = {};
-
-        if (page != null) { query['page'] = page; }
-        if (perPage != null) { query['per_page'] = perPage; }
-        if (guid != null) { query['guid'] = guid; }
-        if (bankGuid != null) { query['bank_guid'] = bankGuid; }
-        if (customerGuid != null) { query['customer_guid'] = customerGuid; }
-        if (label != null) { query['label'] = label; }
-
-        return this.request<DepositAddressListBankModel>({
-            url: '/api/deposit_addresses',
-            method: 'GET',
-            headers,
-            query,
-        }, opts?.responseOpts);
-    };
-
+    started_at?: string | null;
 }

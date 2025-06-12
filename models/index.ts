@@ -140,6 +140,7 @@ export * from './TransferDestinationAccountBankModel';
 export * from './TransferEntryBankModel';
 export * from './TransferEntryDestinationAccountBankModel';
 export * from './TransferFailureCodeBankModel';
+export * from './TransferHoldDetailsBankModel';
 export * from './TransferListBankModel';
 export * from './TransferParticipantBankModel';
 export * from './TransferSideBankModel';
