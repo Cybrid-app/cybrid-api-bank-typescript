@@ -12,12 +12,15 @@
  */
 
 /**
- * 
+ * Options for the identity verification.
  * @export
- * @enum {string}
+ * @interface IdentityVerificationOptionsBankModel
  */
-export enum AccountStateBankModel {
-    Storing = 'storing',
-    Created = 'created'
+export interface IdentityVerificationOptionsBankModel {
+    /**
+     * Whether the tax ID was enforced during identity verification.
+     * @type {boolean}
+     * @memberof IdentityVerificationOptionsBankModel
+     */
+    require_tax_id?: boolean | null;
 }
-

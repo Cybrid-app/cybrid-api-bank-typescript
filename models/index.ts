@@ -64,6 +64,7 @@ export * from './IdentityVerificationDocumentBankModel';
 export * from './IdentityVerificationDocumentFileBankModel';
 export * from './IdentityVerificationListBankModel';
 export * from './IdentityVerificationMethodBankModel';
+export * from './IdentityVerificationOptionsBankModel';
 export * from './IdentityVerificationOutcomeBankModel';
 export * from './IdentityVerificationPersonaStateBankModel';
 export * from './IdentityVerificationStateBankModel';
