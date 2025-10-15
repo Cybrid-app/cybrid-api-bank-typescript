@@ -38,9 +38,7 @@ export class ServerConfiguration<T extends { [key: string]: string }> {
     }
 }
 
-const server1 = new ServerConfiguration<{  }>("http://api-platform-bank.local.cybrid.com:3002", {  }, "Local environment for internal development");
-const server2 = new ServerConfiguration<{  }>("https://bank.staging.cybrid.app", {  }, "Staging environment is for internal use");
-const server3 = new ServerConfiguration<{  }>("https://bank.sandbox.cybrid.app", {  }, "Sandbox environment is simulated money movement");
-const server4 = new ServerConfiguration<{  }>("https://bank.production.cybrid.app", {  }, "Production environment is real money movement");
+const server1 = new ServerConfiguration<{  }>("https://bank.sandbox.cybrid.app", {  }, "Sandbox environment is simulated money movement");
+const server2 = new ServerConfiguration<{  }>("https://bank.production.cybrid.app", {  }, "Production environment is real money movement");
 
-export const servers = [server1, server2, server3, server4];
+export const servers = [server1, server2];

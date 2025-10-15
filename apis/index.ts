@@ -10,7 +10,6 @@ export * from './ExternalBankAccountsBankApi';
 export * from './ExternalWalletsBankApi';
 export * from './FilesBankApi';
 export * from './IdentityVerificationsBankApi';
-export * from './InternalBankApi';
 export * from './InvoicesBankApi';
 export * from './PaymentInstructionsBankApi';
 export * from './PersonaSessionsBankApi';
