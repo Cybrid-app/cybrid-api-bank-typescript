@@ -11,98 +11,32 @@
  * Do not edit the class manually.
  */
 
-import type {
-    AccountAssociationBankModel,
-    FeeAssociationBankModel,
-    PlanTravelRuleInfoBankModel,
-    StageBankModel,
-} from './';
+/**
+ * @export
+ * @interface TransferIdentifiersInnerBankModel
+ */
+export interface TransferIdentifiersInnerBankModel {
+    /**
+     * Type of identifier (txn_hash, imad, omad)
+     * @type {string}
+     * @memberof TransferIdentifiersInnerBankModel
+     */
+    type?: TransferIdentifiersInnerBankModelTypeEnum;
+    /**
+     * The identifier value
+     * @type {string}
+     * @memberof TransferIdentifiersInnerBankModel
+     */
+    value?: string;
+}
 
 /**
- * 
  * @export
- * @interface PlanBankModel
+ * @enum {string}
  */
-export interface PlanBankModel {
-    /**
-     * Auto-generated unique identifier for the entity.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    guid: string;
-    /**
-     * The type of product the plan is for; one of remittance.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    type: string;
-    /**
-     * The unique identifier for the bank.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    bank_guid?: string | null;
-    /**
-     * The unique identifier for the customer.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    customer_guid?: string | null;
-    /**
-     * ISO8601 datetime the record was created at.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    created_at: string;
-    /**
-     * ISO8601 datetime the record was last updated at.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    updated_at: string;
-    /**
-     * ISO8601 datetime the plan will expire at.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    expires_at: string;
-    /**
-     * The state of the plan; one of storing, planning, completed, or failed.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    state: string;
-    /**
-     * The failure code for failed plans.
-     * @type {string}
-     * @memberof PlanBankModel
-     */
-    failure_code?: string | null;
-    /**
-     * @type {AccountAssociationBankModel}
-     * @memberof PlanBankModel
-     */
-    source_account: AccountAssociationBankModel;
-    /**
-     * @type {AccountAssociationBankModel}
-     * @memberof PlanBankModel
-     */
-    destination_account: AccountAssociationBankModel;
-    /**
-     * The stages of the plan.
-     * @type {Array<StageBankModel>}
-     * @memberof PlanBankModel
-     */
-    stages: Array<StageBankModel>;
-    /**
-     * The fees associated with the plan.
-     * @type {Array<FeeAssociationBankModel>}
-     * @memberof PlanBankModel
-     */
-    fees: Array<FeeAssociationBankModel>;
-    /**
-     * @type {PlanTravelRuleInfoBankModel}
-     * @memberof PlanBankModel
-     */
-    travel_rule_info: PlanTravelRuleInfoBankModel;
+export enum TransferIdentifiersInnerBankModelTypeEnum {
+    TxnHash = 'txn_hash',
+    Imad = 'imad',
+    Omad = 'omad'
 }
+

@@ -154,6 +154,7 @@ export * from './TransferEntryBankModel';
 export * from './TransferEntryDestinationAccountBankModel';
 export * from './TransferFailureCodeBankModel';
 export * from './TransferHoldDetailsBankModel';
+export * from './TransferIdentifiersInnerBankModel';
 export * from './TransferListBankModel';
 export * from './TransferParticipantBankModel';
 export * from './TransferSideBankModel';
