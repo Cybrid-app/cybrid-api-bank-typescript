@@ -12,35 +12,35 @@
  */
 
 import type {
-    InvoiceBankModel,
+    PlanBankModel,
 } from './';
 
 /**
  * @export
- * @interface InvoiceListBankModel
+ * @interface PlanListBankModel
  */
-export interface InvoiceListBankModel {
+export interface PlanListBankModel {
     /**
      * The total number of records available.
      * @type {number}
-     * @memberof InvoiceListBankModel
+     * @memberof PlanListBankModel
      */
     total: number;
     /**
      * The page index to retrieve.
      * @type {number}
-     * @memberof InvoiceListBankModel
+     * @memberof PlanListBankModel
      */
     page: number;
     /**
      * The number of entities per page to return.
      * @type {number}
-     * @memberof InvoiceListBankModel
+     * @memberof PlanListBankModel
      */
     per_page: number;
     /**
-     * @type {Array<InvoiceBankModel>}
-     * @memberof InvoiceListBankModel
+     * @type {Array<PlanBankModel>}
+     * @memberof PlanListBankModel
      */
-    objects: Array<InvoiceBankModel>;
+    objects: Array<PlanBankModel>;
 }
