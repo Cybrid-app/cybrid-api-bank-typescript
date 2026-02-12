@@ -11,75 +11,26 @@
  * Do not edit the class manually.
  */
 
-import type {
-    IdentificationNumberBankModel,
-    IdentityVerificationWithDetailsPiiAddressBankModel,
-    IdentityVerificationWithDetailsPiiAliasesInnerBankModel,
-    IdentityVerificationWithDetailsPiiNameBankModel,
-} from './';
+/**
+ * File metadata (e.g., {\"part\": \"front\"})
+ * @export
+ * @interface PostFileMetadataBankModel
+ */
+export interface PostFileMetadataBankModel {
+    /**
+     * The part of the file (e.g., \"front\", \"back\")
+     * @type {string}
+     * @memberof PostFileMetadataBankModel
+     */
+    part?: PostFileMetadataBankModelPartEnum;
+}
 
 /**
- * The personally identifiable information associated with the identity verification.
  * @export
- * @interface IdentityVerificationWithDetailsPiiBankModel
+ * @enum {string}
  */
-export interface IdentityVerificationWithDetailsPiiBankModel {
-    /**
-     * @type {IdentityVerificationWithDetailsPiiNameBankModel}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    name?: IdentityVerificationWithDetailsPiiNameBankModel | null;
-    /**
-     * The business attested aliases.
-     * @type {Array<IdentityVerificationWithDetailsPiiAliasesInnerBankModel>}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    aliases?: Array<IdentityVerificationWithDetailsPiiAliasesInnerBankModel> | null;
-    /**
-     * @type {IdentityVerificationWithDetailsPiiAddressBankModel}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    address?: IdentityVerificationWithDetailsPiiAddressBankModel | null;
-    /**
-     * The attested date of birth.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    date_of_birth?: string | null;
-    /**
-     * The attested phone number.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    phone_number?: string | null;
-    /**
-     * The attested email address.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    email_address?: string | null;
-    /**
-     * The attested occupation.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    occupation?: string | null;
-    /**
-     * The attested website.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    website?: string | null;
-    /**
-     * The attested nature of business.
-     * @type {string}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    nature_of_business?: string | null;
-    /**
-     * The attested identification numbers.
-     * @type {Array<IdentificationNumberBankModel>}
-     * @memberof IdentityVerificationWithDetailsPiiBankModel
-     */
-    identification_numbers?: Array<IdentificationNumberBankModel> | null;
+export enum PostFileMetadataBankModelPartEnum {
+    Front = 'front',
+    Back = 'back'
 }
+
