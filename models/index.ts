@@ -67,6 +67,7 @@ export * from './IdentityVerificationBankModel';
 export * from './IdentityVerificationBusinessAssociateBankModel';
 export * from './IdentityVerificationDocumentBankModel';
 export * from './IdentityVerificationDocumentFileBankModel';
+export * from './IdentityVerificationDocumentFileMetadataBankModel';
 export * from './IdentityVerificationListBankModel';
 export * from './IdentityVerificationMethodBankModel';
 export * from './IdentityVerificationOptionsBankModel';

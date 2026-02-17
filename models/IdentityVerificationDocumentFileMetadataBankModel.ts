@@ -12,33 +12,25 @@
  */
 
 /**
- * The destination account entry in the batch transfer.
+ * File metadata (e.g., {\"part\": \"front\"})
  * @export
- * @interface TransferEntryDestinationAccountBankModel
+ * @interface IdentityVerificationDocumentFileMetadataBankModel
  */
-export interface TransferEntryDestinationAccountBankModel {
+export interface IdentityVerificationDocumentFileMetadataBankModel {
     /**
-     * Auto-generated unique identifier for the transfer account.
+     * The part of the file (e.g., \"front\", \"back\")
      * @type {string}
-     * @memberof TransferEntryDestinationAccountBankModel
+     * @memberof IdentityVerificationDocumentFileMetadataBankModel
      */
-    guid?: string;
-    /**
-     * The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, gas, or storage.
-     * @type {string}
-     * @memberof TransferEntryDestinationAccountBankModel
-     */
-    type?: string;
-    /**
-     * The account\'s identifier.
-     * @type {string}
-     * @memberof TransferEntryDestinationAccountBankModel
-     */
-    bank_guid?: string | null;
-    /**
-     * The account\'s identifier.
-     * @type {string}
-     * @memberof TransferEntryDestinationAccountBankModel
-     */
-    customer_guid?: string | null;
+    part?: IdentityVerificationDocumentFileMetadataBankModelPartEnum;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum IdentityVerificationDocumentFileMetadataBankModelPartEnum {
+    Front = 'front',
+    Back = 'back'
+}
+
