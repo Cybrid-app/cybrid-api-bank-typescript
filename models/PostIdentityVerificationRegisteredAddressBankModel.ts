@@ -12,59 +12,45 @@
  */
 
 /**
- * Supported payout symbols details.
+ * The customer\'s registered address. Required for attested business registration V3. Optional when type is kyc and method is attested_business_registration.
  * @export
- * @interface PostSupportedPayoutSymbolsBankModel
+ * @interface PostIdentityVerificationRegisteredAddressBankModel
  */
-export interface PostSupportedPayoutSymbolsBankModel {
+export interface PostIdentityVerificationRegisteredAddressBankModel {
     /**
-     * The primary asset of the payout symbol, e.g., MXN.
+     * The first line of the address. Required when type is kyc and method is attested_business_registration.
      * @type {string}
-     * @memberof PostSupportedPayoutSymbolsBankModel
+     * @memberof PostIdentityVerificationRegisteredAddressBankModel
      */
-    primary_asset: string;
+    street?: string | null;
     /**
-     * The counter asset of the payout symbol, e.g., USD.
+     * The optional second line of the address. Optional when type is kyc and method is attested_business_registration.
      * @type {string}
-     * @memberof PostSupportedPayoutSymbolsBankModel
+     * @memberof PostIdentityVerificationRegisteredAddressBankModel
      */
-    counter_asset: string;
+    street2?: string | null;
     /**
-     * The ISO 3166 country 2-Alpha country code is permitted in, e.g., MX.
+     * The city of the address. Required when type is kyc and method is attested_business_registration.
      * @type {string}
-     * @memberof PostSupportedPayoutSymbolsBankModel
+     * @memberof PostIdentityVerificationRegisteredAddressBankModel
      */
-    country_code: string;
+    city?: string | null;
     /**
-     * The participants the symbol is permitted for.
+     * The ISO 3166-2 subdivision code of the address. Applicable only for countries that use subnational states, provinces, lands, oblasts or regions. Optional when type is kyc and method is attested_business_registration.
      * @type {string}
-     * @memberof PostSupportedPayoutSymbolsBankModel
+     * @memberof PostIdentityVerificationRegisteredAddressBankModel
      */
-    participants_type: PostSupportedPayoutSymbolsBankModelParticipantsTypeEnum;
+    subdivision?: string | null;
     /**
-     * The route the symbol is permitted for.
+     * The postal, zip or post code of the address. Applicable only for countries that use postal, zip or post codes. Optional when type is kyc and method is attested_business_registration.
      * @type {string}
-     * @memberof PostSupportedPayoutSymbolsBankModel
+     * @memberof PostIdentityVerificationRegisteredAddressBankModel
      */
-    route: PostSupportedPayoutSymbolsBankModelRouteEnum;
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address. Required when type is kyc and method is attested_business_registration.
+     * @type {string}
+     * @memberof PostIdentityVerificationRegisteredAddressBankModel
+     */
+    country_code?: string | null;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PostSupportedPayoutSymbolsBankModelParticipantsTypeEnum {
-    C2C = 'C2C',
-    C2B = 'C2B',
-    B2C = 'B2C',
-    B2B = 'B2B'
-}
-/**
- * @export
- * @enum {string}
- */
-export enum PostSupportedPayoutSymbolsBankModelRouteEnum {
-    BankAccount = 'bank_account',
-    MobileWallet = 'mobile_wallet'
-}
-
