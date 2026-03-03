@@ -11,36 +11,46 @@
  * Do not edit the class manually.
  */
 
-import type {
-    DepositAddressBankModel,
-} from './';
-
 /**
+ * The attested registered address.
  * @export
- * @interface DepositAddressListBankModel
+ * @interface IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
  */
-export interface DepositAddressListBankModel {
+export interface IdentityVerificationWithDetailsPiiRegisteredAddressBankModel {
     /**
-     * The total number of records available.
-     * @type {number}
-     * @memberof DepositAddressListBankModel
+     * The first line of the address.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
      */
-    total: number;
+    street: string | null;
     /**
-     * The page index to retrieve.
-     * @type {number}
-     * @memberof DepositAddressListBankModel
+     * The optional second line of the address.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
      */
-    page: number;
+    street2?: string | null;
     /**
-     * The number of entities per page to return.
-     * @type {number}
-     * @memberof DepositAddressListBankModel
+     * The city of the address.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
      */
-    per_page: number;
+    city: string | null;
     /**
-     * @type {Array<DepositAddressBankModel>}
-     * @memberof DepositAddressListBankModel
+     * The ISO 3166-2 subdivision code of the address; not used by all countries.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
      */
-    objects: Array<DepositAddressBankModel>;
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof IdentityVerificationWithDetailsPiiRegisteredAddressBankModel
+     */
+    country_code: string | null;
 }
