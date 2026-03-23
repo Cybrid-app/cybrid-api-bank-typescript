@@ -62,6 +62,7 @@ export * from './ExternalWalletEnvironmentBankModel';
 export * from './ExternalWalletListBankModel';
 export * from './ExternalWalletStateBankModel';
 export * from './FeeAssociationBankModel';
+export * from './FeeDetailBankModel';
 export * from './IdentificationNumberBankModel';
 export * from './IdentityVerificationBankModel';
 export * from './IdentityVerificationBusinessAssociateBankModel';
