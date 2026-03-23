@@ -12,21 +12,37 @@
  */
 
 /**
- * Travel rule information
  * @export
- * @interface PostPlanTravelRuleInfoBankModel
+ * @interface FeeDetailBankModel
  */
-export interface PostPlanTravelRuleInfoBankModel {
+export interface FeeDetailBankModel {
     /**
-     * The unique identifier for the ultimate originating party.
+     * The type of fee; one of bank, platform, or network.
      * @type {string}
-     * @memberof PostPlanTravelRuleInfoBankModel
+     * @memberof FeeDetailBankModel
      */
-    ultimate_originating_party_guid?: string | null;
+    type: FeeDetailBankModelTypeEnum;
     /**
-     * The unique identifier for the ultimate receiving party.
+     * The asset the fee is denominated in, e.g., USD.
      * @type {string}
-     * @memberof PostPlanTravelRuleInfoBankModel
+     * @memberof FeeDetailBankModel
      */
-    ultimate_receiving_party_guid?: string | null;
+    asset: string;
+    /**
+     * The fee amount in base units of the asset.
+     * @type {number}
+     * @memberof FeeDetailBankModel
+     */
+    amount: number;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum FeeDetailBankModelTypeEnum {
+    Bank = 'bank',
+    Platform = 'platform',
+    Network = 'network'
+}
+
