@@ -13,31 +13,19 @@
 
 /**
  * @export
- * @interface TransferIdentifiersInnerBankModel
+ * @interface StageIdentifierBankModel
  */
-export interface TransferIdentifiersInnerBankModel {
+export interface StageIdentifierBankModel {
     /**
-     * Type of identifier (txn_hash, imad, omad, gateway_url)
+     * The kind of identifier.
      * @type {string}
-     * @memberof TransferIdentifiersInnerBankModel
+     * @memberof StageIdentifierBankModel
      */
-    type?: TransferIdentifiersInnerBankModelTypeEnum;
+    type: string;
     /**
-     * The identifier value
+     * The identifier value as issued by the rail.
      * @type {string}
-     * @memberof TransferIdentifiersInnerBankModel
+     * @memberof StageIdentifierBankModel
      */
-    value?: string;
+    value: string;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum TransferIdentifiersInnerBankModelTypeEnum {
-    TxnHash = 'txn_hash',
-    Imad = 'imad',
-    Omad = 'omad',
-    GatewayUrl = 'gateway_url'
-}
-

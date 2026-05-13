@@ -147,6 +147,8 @@ export * from './QuoteListBankModel';
 export * from './QuoteSideBankModel';
 export * from './QuoteTypeBankModel';
 export * from './StageBankModel';
+export * from './StageIdentifierBankModel';
+export * from './StageLinkBankModel';
 export * from './SymbolPriceBankModel';
 export * from './TradeBankModel';
 export * from './TradeFailureCodeBankModel';
