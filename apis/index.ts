@@ -16,6 +16,7 @@ export * from './PersonaSessionsBankApi';
 export * from './PlansBankApi';
 export * from './PricesBankApi';
 export * from './QuotesBankApi';
+export * from './SardineSessionsBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
 export * from './TransfersBankApi';
