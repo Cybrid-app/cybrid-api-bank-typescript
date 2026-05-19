@@ -11,31 +11,40 @@
  * Do not edit the class manually.
  */
 
+import type {
+    SupportingDocumentFileBankModel,
+} from './';
+
 /**
- * 
+ * @export
+ * @interface SupportingDocumentBankModel
+ */
+export interface SupportingDocumentBankModel {
+    /**
+     * Auto-generated unique identifier for the document.
+     * @type {string}
+     * @memberof SupportingDocumentBankModel
+     */
+    guid: string;
+    /**
+     * The kind of supporting document; one of invoice.
+     * @type {string}
+     * @memberof SupportingDocumentBankModel
+     */
+    type: SupportingDocumentBankModelTypeEnum;
+    /**
+     * The files backing this document.
+     * @type {Array<SupportingDocumentFileBankModel>}
+     * @memberof SupportingDocumentBankModel
+     */
+    files: Array<SupportingDocumentFileBankModel>;
+}
+
+/**
  * @export
  * @enum {string}
  */
-export enum TransferFailureCodeBankModel {
-    NonSufficientFunds = 'non_sufficient_funds',
-    RefreshRequired = 'refresh_required',
-    PartyNameInvalid = 'party_name_invalid',
-    PaymentRailInvalid = 'payment_rail_invalid',
-    ComplianceRejection = 'compliance_rejection',
-    Cancelled = 'cancelled',
-    Reversed = 'reversed',
-    LimitExceeded = 'limit_exceeded',
-    NetworkFeeTooLow = 'network_fee_too_low',
-    AmountTooLow = 'amount_too_low',
-    InternalError = 'internal_error',
-    InvalidAddress = 'invalid_address',
-    InvalidDestination = 'invalid_destination',
-    CustomerActionRequired = 'customer_action_required',
-    ExternalVendorError = 'external_vendor_error',
-    PaymentRequestExpired = 'payment_request_expired',
-    ReturnRiskExceeded = 'return_risk_exceeded',
-    DailyLimitExceeded = 'daily_limit_exceeded',
-    WeeklyLimitExceeded = 'weekly_limit_exceeded',
-    MonthlyLimitExceeded = 'monthly_limit_exceeded'
+export enum SupportingDocumentBankModelTypeEnum {
+    Invoice = 'invoice'
 }
 

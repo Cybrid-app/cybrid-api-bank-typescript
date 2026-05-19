@@ -12,30 +12,30 @@
  */
 
 /**
- * 
+ * Supporting document attached to a plan.
+ * @export
+ * @interface PostSupportingDocumentBankModel
+ */
+export interface PostSupportingDocumentBankModel {
+    /**
+     * The kind of supporting document.
+     * @type {string}
+     * @memberof PostSupportingDocumentBankModel
+     */
+    type: PostSupportingDocumentBankModelTypeEnum;
+    /**
+     * File guids backing this document.
+     * @type {Array<string>}
+     * @memberof PostSupportingDocumentBankModel
+     */
+    file_guids: Array<string>;
+}
+
+/**
  * @export
  * @enum {string}
  */
-export enum TransferFailureCodeBankModel {
-    NonSufficientFunds = 'non_sufficient_funds',
-    RefreshRequired = 'refresh_required',
-    PartyNameInvalid = 'party_name_invalid',
-    PaymentRailInvalid = 'payment_rail_invalid',
-    ComplianceRejection = 'compliance_rejection',
-    Cancelled = 'cancelled',
-    Reversed = 'reversed',
-    LimitExceeded = 'limit_exceeded',
-    NetworkFeeTooLow = 'network_fee_too_low',
-    AmountTooLow = 'amount_too_low',
-    InternalError = 'internal_error',
-    InvalidAddress = 'invalid_address',
-    InvalidDestination = 'invalid_destination',
-    CustomerActionRequired = 'customer_action_required',
-    ExternalVendorError = 'external_vendor_error',
-    PaymentRequestExpired = 'payment_request_expired',
-    ReturnRiskExceeded = 'return_risk_exceeded',
-    DailyLimitExceeded = 'daily_limit_exceeded',
-    WeeklyLimitExceeded = 'weekly_limit_exceeded',
-    MonthlyLimitExceeded = 'monthly_limit_exceeded'
+export enum PostSupportingDocumentBankModelTypeEnum {
+    Invoice = 'invoice'
 }
 

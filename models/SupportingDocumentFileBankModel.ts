@@ -12,30 +12,26 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface SupportingDocumentFileBankModel
  */
-export enum TransferFailureCodeBankModel {
-    NonSufficientFunds = 'non_sufficient_funds',
-    RefreshRequired = 'refresh_required',
-    PartyNameInvalid = 'party_name_invalid',
-    PaymentRailInvalid = 'payment_rail_invalid',
-    ComplianceRejection = 'compliance_rejection',
-    Cancelled = 'cancelled',
-    Reversed = 'reversed',
-    LimitExceeded = 'limit_exceeded',
-    NetworkFeeTooLow = 'network_fee_too_low',
-    AmountTooLow = 'amount_too_low',
-    InternalError = 'internal_error',
-    InvalidAddress = 'invalid_address',
-    InvalidDestination = 'invalid_destination',
-    CustomerActionRequired = 'customer_action_required',
-    ExternalVendorError = 'external_vendor_error',
-    PaymentRequestExpired = 'payment_request_expired',
-    ReturnRiskExceeded = 'return_risk_exceeded',
-    DailyLimitExceeded = 'daily_limit_exceeded',
-    WeeklyLimitExceeded = 'weekly_limit_exceeded',
-    MonthlyLimitExceeded = 'monthly_limit_exceeded'
+export interface SupportingDocumentFileBankModel {
+    /**
+     * Auto-generated unique identifier for the file.
+     * @type {string}
+     * @memberof SupportingDocumentFileBankModel
+     */
+    guid: string;
+    /**
+     * The original filename.
+     * @type {string}
+     * @memberof SupportingDocumentFileBankModel
+     */
+    filename: string;
+    /**
+     * The MIME content type.
+     * @type {string}
+     * @memberof SupportingDocumentFileBankModel
+     */
+    content_type: string;
 }
-
