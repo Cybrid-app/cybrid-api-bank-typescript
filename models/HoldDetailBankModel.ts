@@ -11,118 +11,60 @@
  * Do not edit the class manually.
  */
 
-import type {
-    ActivityLimitBankModel,
-    ComplianceDecisionBankModel,
-    CustomerAddressBankModel,
-    CustomerAliasesInnerBankModel,
-    CustomerNameBankModel,
-    IdentificationNumberBankModel,
-} from './';
+/**
+ * @export
+ * @interface HoldDetailBankModel
+ */
+export interface HoldDetailBankModel {
+    /**
+     * The type of hold; one of customer_hold_duration, reserve_below_minimum, screening_administrative, or screening_non_administrative.
+     * @type {string}
+     * @memberof HoldDetailBankModel
+     */
+    type?: HoldDetailBankModelTypeEnum;
+    /**
+     * The state of the hold; one of active, completed, or storing
+     * @type {string}
+     * @memberof HoldDetailBankModel
+     */
+    state: HoldDetailBankModelStateEnum;
+    /**
+     * ISO8601 datetime the hold was started at.
+     * @type {string}
+     * @memberof HoldDetailBankModel
+     */
+    started_at: string;
+    /**
+     * ISO8601 datetime the hold was completed at.
+     * @type {string}
+     * @memberof HoldDetailBankModel
+     */
+    completed_at?: string | null;
+    /**
+     * ISO8601 datetime the hold is expected to complete at.
+     * @type {string}
+     * @memberof HoldDetailBankModel
+     */
+    eta_at?: string | null;
+}
 
 /**
  * @export
- * @interface CustomerBankModel
+ * @enum {string}
  */
-export interface CustomerBankModel {
-    /**
-     * Auto-generated unique identifier for the customer.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    guid?: string;
-    /**
-     * Auto-generated unique identifier for the customer\'s bank.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    bank_guid?: string;
-    /**
-     * The customer type; one of business or individual.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    type?: string;
-    /**
-     * ISO8601 datetime the record was created at.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    created_at?: string;
-    /**
-     * ISO8601 datetime the record was last updated at.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    updated_at?: string;
-    /**
-     * The customer state; one of storing, unverified, verified, rejected, or frozen.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    state?: string;
-    /**
-     * @type {CustomerNameBankModel}
-     * @memberof CustomerBankModel
-     */
-    name?: CustomerNameBankModel | null;
-    /**
-     * @type {CustomerAddressBankModel}
-     * @memberof CustomerBankModel
-     */
-    address?: CustomerAddressBankModel | null;
-    /**
-     * The customer\'s aliases. Only available for GET operations when \'include_pii\' is set.
-     * @type {Array<CustomerAliasesInnerBankModel>}
-     * @memberof CustomerBankModel
-     */
-    aliases?: Array<CustomerAliasesInnerBankModel> | null;
-    /**
-     * The customer\'s website. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    website?: string | null;
-    /**
-     * The customer\'s DOB. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    date_of_birth?: string | null;
-    /**
-     * The customer\'s phone number. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    phone_number?: string | null;
-    /**
-     * The customer\'s email address. Only available for GET operations when \'include_pii\' is set.
-     * @type {string}
-     * @memberof CustomerBankModel
-     */
-    email_address?: string | null;
-    /**
-     * The labels associated with the customer.
-     * @type {Array<string>}
-     * @memberof CustomerBankModel
-     */
-    labels?: Array<string> | null;
-    /**
-     * The compliance decisions associated with the customer.
-     * @type {Array<ComplianceDecisionBankModel>}
-     * @memberof CustomerBankModel
-     */
-    compliance_decisions?: Array<ComplianceDecisionBankModel>;
-    /**
-     * The customer\'s identification numbers. Only available for GET operations when \'include_pii\' is set and bank has access.
-     * @type {Array<IdentificationNumberBankModel>}
-     * @memberof CustomerBankModel
-     */
-    identification_numbers?: Array<IdentificationNumberBankModel> | null;
-    /**
-     * The asset limits associated with the customer.
-     * @type {Array<ActivityLimitBankModel>}
-     * @memberof CustomerBankModel
-     */
-    activity_limits?: Array<ActivityLimitBankModel>;
+export enum HoldDetailBankModelTypeEnum {
+    CustomerHoldDuration = 'customer_hold_duration',
+    ReserveBelowMinimum = 'reserve_below_minimum',
+    ScreeningAdministrative = 'screening_administrative',
+    ScreeningNonAdministrative = 'screening_non_administrative'
 }
+/**
+ * @export
+ * @enum {string}
+ */
+export enum HoldDetailBankModelStateEnum {
+    Active = 'active',
+    Completed = 'completed',
+    Storing = 'storing'
+}
+
