@@ -12,12 +12,45 @@
  */
 
 /**
- * 
+ * A physical address.
  * @export
- * @enum {string}
+ * @interface PhysicalAddressBankModel
  */
-export enum AssetTypesBankModel {
-    Fiat = 'fiat',
-    Crypto = 'crypto'
+export interface PhysicalAddressBankModel {
+    /**
+     * The first line of the address.
+     * @type {string}
+     * @memberof PhysicalAddressBankModel
+     */
+    street?: string | null;
+    /**
+     * The optional second line of the address.
+     * @type {string}
+     * @memberof PhysicalAddressBankModel
+     */
+    street2?: string | null;
+    /**
+     * The city of the address.
+     * @type {string}
+     * @memberof PhysicalAddressBankModel
+     */
+    city?: string | null;
+    /**
+     * The ISO 3166-2 subdivision code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PhysicalAddressBankModel
+     */
+    subdivision?: string | null;
+    /**
+     * The postal/post/zip code of the address; not used by all countries.
+     * @type {string}
+     * @memberof PhysicalAddressBankModel
+     */
+    postal_code?: string | null;
+    /**
+     * The ISO 3166 country 2-Alpha country code of the address.
+     * @type {string}
+     * @memberof PhysicalAddressBankModel
+     */
+    country_code?: string | null;
 }
-

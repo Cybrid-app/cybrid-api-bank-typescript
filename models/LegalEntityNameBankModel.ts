@@ -12,12 +12,33 @@
  */
 
 /**
- * 
+ * A legal entity name.
  * @export
- * @enum {string}
+ * @interface LegalEntityNameBankModel
  */
-export enum AssetTypesBankModel {
-    Fiat = 'fiat',
-    Crypto = 'crypto'
+export interface LegalEntityNameBankModel {
+    /**
+     * The legal entity\'s first name.
+     * @type {string}
+     * @memberof LegalEntityNameBankModel
+     */
+    first?: string | null;
+    /**
+     * The legal entity\'s middle name.
+     * @type {string}
+     * @memberof LegalEntityNameBankModel
+     */
+    middle?: string | null;
+    /**
+     * The legal entity\'s last name.
+     * @type {string}
+     * @memberof LegalEntityNameBankModel
+     */
+    last?: string | null;
+    /**
+     * The legal entity\'s full name.
+     * @type {string}
+     * @memberof LegalEntityNameBankModel
+     */
+    full?: string | null;
 }
-
