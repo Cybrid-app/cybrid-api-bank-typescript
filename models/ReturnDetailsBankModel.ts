@@ -13,43 +13,19 @@
 
 /**
  * @export
- * @interface ExternalBankAccountPiiInnerAddressesInnerBankModel
+ * @interface ReturnDetailsBankModel
  */
-export interface ExternalBankAccountPiiInnerAddressesInnerBankModel {
+export interface ReturnDetailsBankModel {
     /**
-     * The first line of the address.
+     * The timestamp when the return was initiated by the provider.
      * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     * @memberof ReturnDetailsBankModel
      */
-    street?: string | null;
+    returned_at: string;
     /**
-     * The optional second line of the address.
+     * The ACH/EFT return code (e.g. R01, R10) received from the provider. Absent when the provider did not report a return code.
      * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     * @memberof ReturnDetailsBankModel
      */
-    street2?: string | null;
-    /**
-     * The city of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    city?: string | null;
-    /**
-     * The ISO 3166-2 subdivision code of the address; not used by all countries.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    subdivision?: string | null;
-    /**
-     * The postal/post/zip code of the address; not used by all countries.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    postal_code?: string | null;
-    /**
-     * The ISO 3166 country 2-Alpha country code of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    country_code?: string | null;
+    return_code?: string | null;
 }

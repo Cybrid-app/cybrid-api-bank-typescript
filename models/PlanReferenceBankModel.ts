@@ -13,43 +13,29 @@
 
 /**
  * @export
- * @interface ExternalBankAccountPiiInnerAddressesInnerBankModel
+ * @interface PlanReferenceBankModel
  */
-export interface ExternalBankAccountPiiInnerAddressesInnerBankModel {
+export interface PlanReferenceBankModel {
     /**
-     * The first line of the address.
+     * The type of object being referenced; one of returned_execution or returned_stage.
      * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     * @memberof PlanReferenceBankModel
      */
-    street?: string | null;
+    type: PlanReferenceBankModelTypeEnum;
     /**
-     * The optional second line of the address.
+     * The guid of the referenced object.
      * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
+     * @memberof PlanReferenceBankModel
      */
-    street2?: string | null;
-    /**
-     * The city of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    city?: string | null;
-    /**
-     * The ISO 3166-2 subdivision code of the address; not used by all countries.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    subdivision?: string | null;
-    /**
-     * The postal/post/zip code of the address; not used by all countries.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    postal_code?: string | null;
-    /**
-     * The ISO 3166 country 2-Alpha country code of the address.
-     * @type {string}
-     * @memberof ExternalBankAccountPiiInnerAddressesInnerBankModel
-     */
-    country_code?: string | null;
+    guid: string;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PlanReferenceBankModelTypeEnum {
+    Execution = 'returned_execution',
+    Stage = 'returned_stage'
+}
+
