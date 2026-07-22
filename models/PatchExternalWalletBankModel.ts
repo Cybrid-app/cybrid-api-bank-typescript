@@ -12,31 +12,15 @@
  */
 
 /**
- * Request body for external bank account modification.
+ * Request body for external wallet modification.
  * @export
- * @interface PatchExternalBankAccountBankModel
+ * @interface PatchExternalWalletBankModel
  */
-export interface PatchExternalBankAccountBankModel {
+export interface PatchExternalWalletBankModel {
     /**
-     * The state of the external bank account. If set to \"completed,\" the returned state of the external bank account will be either \"completed\", if the bank account has been verified, or \"unverified\" if the bank account has not been verified.
+     * The name of the external wallet.
      * @type {string}
-     * @memberof PatchExternalBankAccountBankModel
-     */
-    state?: PatchExternalBankAccountBankModelStateEnum;
-    /**
-     * The name of the external bank account.
-     * @type {string}
-     * @memberof PatchExternalBankAccountBankModel
+     * @memberof PatchExternalWalletBankModel
      */
     name?: string | null;
 }
-
-/**
- * @export
- * @enum {string}
- */
-export enum PatchExternalBankAccountBankModelStateEnum {
-    Completed = 'completed',
-    RefreshRequired = 'refresh_required'
-}
-

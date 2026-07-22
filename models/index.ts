@@ -89,6 +89,7 @@ export * from './LegalEntityNameBankModel';
 export * from './PatchBankBankModel';
 export * from './PatchCustomerBankModel';
 export * from './PatchExternalBankAccountBankModel';
+export * from './PatchExternalWalletBankModel';
 export * from './PatchTransferBankModel';
 export * from './PatchTransferParticipantBankModel';
 export * from './PaymentInstructionBankModel';
