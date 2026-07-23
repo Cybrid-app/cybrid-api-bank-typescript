@@ -12,15 +12,15 @@
  */
 
 /**
- * 
+ * Request body for account modification.
  * @export
- * @enum {string}
+ * @interface PatchAccountBankModel
  */
-export enum CustomerStateBankModel {
-    Storing = 'storing',
-    Unverified = 'unverified',
-    Verified = 'verified',
-    Rejected = 'rejected',
-    Frozen = 'frozen'
+export interface PatchAccountBankModel {
+    /**
+     * The name of the account.
+     * @type {string}
+     * @memberof PatchAccountBankModel
+     */
+    name?: string | null;
 }
-

@@ -86,6 +86,7 @@ export * from './IdentityVerificationWithDetailsPiiRegisteredAddressBankModel';
 export * from './InvoiceBankModel';
 export * from './InvoiceListBankModel';
 export * from './LegalEntityNameBankModel';
+export * from './PatchAccountBankModel';
 export * from './PatchBankBankModel';
 export * from './PatchCustomerBankModel';
 export * from './PatchExternalBankAccountBankModel';
