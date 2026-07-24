@@ -12,26 +12,15 @@
  */
 
 /**
+ * Request body for deposit address modification.
  * @export
- * @interface TransferParticipantBankModel
+ * @interface PatchDepositAddressBankModel
  */
-export interface TransferParticipantBankModel {
+export interface PatchDepositAddressBankModel {
     /**
-     * The type of participant; one of unknown, bank, customer, or counterparty.
+     * The name of the deposit address.
      * @type {string}
-     * @memberof TransferParticipantBankModel
+     * @memberof PatchDepositAddressBankModel
      */
-    type: string;
-    /**
-     * The amount in base units of the asset.
-     * @type {number}
-     * @memberof TransferParticipantBankModel
-     */
-    amount: number;
-    /**
-     * The participant\'s identifier.
-     * @type {string}
-     * @memberof TransferParticipantBankModel
-     */
-    guid?: string;
+    name?: string | null;
 }
