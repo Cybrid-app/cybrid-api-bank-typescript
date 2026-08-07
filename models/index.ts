@@ -45,6 +45,7 @@ export * from './DepositBankAccountListBankModel';
 export * from './DepositBankAccountRoutingDetailsInnerBankModel';
 export * from './DepositBankAccountRoutingNumberTypeBankModel';
 export * from './DepositBankAccountStateBankModel';
+export * from './EffectiveRateBankModel';
 export * from './ErrorResponseBankModel';
 export * from './ExecutionBankModel';
 export * from './ExecutionListBankModel';
