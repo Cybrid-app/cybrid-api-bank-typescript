@@ -12,17 +12,33 @@
  */
 
 /**
- * 
+ * The effective rate, in destination units per source unit.
  * @export
- * @enum {string}
+ * @interface EffectiveRateBankModel
  */
-export enum TransferStateBankModel {
-    Storing = 'storing',
-    Pending = 'pending',
-    Holding = 'holding',
-    Reviewing = 'reviewing',
-    Completed = 'completed',
-    Failed = 'failed',
-    Cancelling = 'cancelling'
+export interface EffectiveRateBankModel {
+    /**
+     * The asset converted from, e.g., USD.
+     * @type {string}
+     * @memberof EffectiveRateBankModel
+     */
+    source_asset: string;
+    /**
+     * The asset converted to, e.g., MXN.
+     * @type {string}
+     * @memberof EffectiveRateBankModel
+     */
+    destination_asset: string;
+    /**
+     * The quoted effective rate as a decimal string. Null until quoted amounts are known.
+     * @type {string}
+     * @memberof EffectiveRateBankModel
+     */
+    quoted?: string | null;
+    /**
+     * The executed effective rate as a decimal string. Null until execution completes.
+     * @type {string}
+     * @memberof EffectiveRateBankModel
+     */
+    executed?: string | null;
 }
-
