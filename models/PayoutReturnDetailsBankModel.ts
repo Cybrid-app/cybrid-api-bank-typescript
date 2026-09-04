@@ -12,14 +12,14 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface PayoutReturnDetailsBankModel
  */
-export enum CounterpartyStateBankModel {
-    Storing = 'storing',
-    Unverified = 'unverified',
-    Verified = 'verified',
-    Rejected = 'rejected'
+export interface PayoutReturnDetailsBankModel {
+    /**
+     * The timestamp when the return was initiated by the provider.
+     * @type {string}
+     * @memberof PayoutReturnDetailsBankModel
+     */
+    returned_at: string;
 }
-
