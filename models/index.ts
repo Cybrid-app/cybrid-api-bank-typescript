@@ -98,6 +98,7 @@ export * from './PatchTransferBankModel';
 export * from './PatchTransferParticipantBankModel';
 export * from './PaymentInstructionBankModel';
 export * from './PaymentInstructionListBankModel';
+export * from './PayoutReturnDetailsBankModel';
 export * from './PersonaSessionBankModel';
 export * from './PhysicalAddressBankModel';
 export * from './PlanBankModel';
