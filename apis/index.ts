@@ -19,5 +19,6 @@ export * from './QuotesBankApi';
 export * from './SardineSessionsBankApi';
 export * from './SymbolsBankApi';
 export * from './TradesBankApi';
+export * from './TransactionsBankApi';
 export * from './TransfersBankApi';
 export * from './WorkflowsBankApi';
