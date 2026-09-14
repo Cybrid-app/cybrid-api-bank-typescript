@@ -12,13 +12,14 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface PostPlanIntermediateAccountsInnerBankModel
  */
-export enum IdentityVerificationTypeBankModel {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account',
-    Counterparty = 'counterparty'
+export interface PostPlanIntermediateAccountsInnerBankModel {
+    /**
+     * The account\'s identifier.
+     * @type {string}
+     * @memberof PostPlanIntermediateAccountsInnerBankModel
+     */
+    guid: string;
 }
-

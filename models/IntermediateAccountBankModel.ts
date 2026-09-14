@@ -12,13 +12,50 @@
  */
 
 /**
- * 
  * @export
- * @enum {string}
+ * @interface IntermediateAccountBankModel
  */
-export enum IdentityVerificationTypeBankModel {
-    Kyc = 'kyc',
-    BankAccount = 'bank_account',
-    Counterparty = 'counterparty'
+export interface IntermediateAccountBankModel {
+    /**
+     * Auto-generated unique identifier for the transfer account.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    guid: string;
+    /**
+     * The type of transfer account; one of trading, fiat, external_bank_account, or external_wallet.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    type: string;
+    /**
+     * The account\'s organization identifier.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    organization_guid?: string | null;
+    /**
+     * The account\'s bank identifier.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    bank_guid?: string | null;
+    /**
+     * The account\'s customer identifier.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    customer_guid?: string | null;
+    /**
+     * The account\'s counterparty identifier.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    counterparty_guid?: string | null;
+    /**
+     * The account asset, e.g., USD.
+     * @type {string}
+     * @memberof IntermediateAccountBankModel
+     */
+    asset: string;
 }
-
