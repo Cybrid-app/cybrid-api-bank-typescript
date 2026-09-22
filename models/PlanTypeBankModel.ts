@@ -11,52 +11,18 @@
  * Do not edit the class manually.
  */
 
-import type { Observable } from 'rxjs';
-import type { AjaxResponse } from 'rxjs/ajax';
-import { BaseAPI, throwIfNullOrUndefined } from '../runtime';
-import type { OperationOpts, HttpHeaders } from '../runtime';
-import type {
-    ErrorResponseBankModel,
-    PostSardineSessionBankModel,
-    SardineSessionBankModel,
-} from '../models';
-
-export interface CreateSardineSessionRequest {
-    postSardineSessionBankModel: PostSardineSessionBankModel;
-}
-
 /**
- * no description
+ * 
+ * @export
+ * @enum {string}
  */
-export class SardineSessionsBankApi extends BaseAPI {
-
-    /**
-     * Create a Sardine session.  Required scope: **sardine_sessions:execute**
-     * Create Sardine Session
-     */
-    createSardineSession({ postSardineSessionBankModel }: CreateSardineSessionRequest): Observable<SardineSessionBankModel>
-    createSardineSession({ postSardineSessionBankModel }: CreateSardineSessionRequest, opts?: OperationOpts): Observable<AjaxResponse<SardineSessionBankModel>>
-    createSardineSession({ postSardineSessionBankModel }: CreateSardineSessionRequest, opts?: OperationOpts): Observable<SardineSessionBankModel | AjaxResponse<SardineSessionBankModel>> {
-        throwIfNullOrUndefined(postSardineSessionBankModel, 'postSardineSessionBankModel', 'createSardineSession');
-
-        const headers: HttpHeaders = {
-            'Content-Type': 'application/json',
-            ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
-            // oauth required
-            ...(this.configuration.accessToken != null
-                ? { Authorization: typeof this.configuration.accessToken === 'function'
-                    ? this.configuration.accessToken('oauth2', ['sardine_sessions:execute'])
-                    : this.configuration.accessToken }
-                : undefined
-            ),
-        };
-
-        return this.request<SardineSessionBankModel>({
-            url: '/api/sardine_sessions',
-            method: 'POST',
-            headers,
-            body: postSardineSessionBankModel,
-        }, opts?.responseOpts);
-    };
-
+export enum PlanTypeBankModel {
+    Remittance = 'remittance',
+    BillPay = 'bill_pay',
+    Disbursement = 'disbursement',
+    InvoicePay = 'invoice_pay',
+    Deposit = 'deposit',
+    Withdrawal = 'withdrawal',
+    Conversion = 'conversion'
 }
+

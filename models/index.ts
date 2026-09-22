@@ -107,6 +107,7 @@ export * from './PlanBankModel';
 export * from './PlanListBankModel';
 export * from './PlanReferenceBankModel';
 export * from './PlanTravelRuleInfoBankModel';
+export * from './PlanTypeBankModel';
 export * from './PlatformFileBankModel';
 export * from './PlatformFileListBankModel';
 export * from './PostAccountBankModel';
