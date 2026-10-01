@@ -63,10 +63,10 @@ curl -X POST https://id.production.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write bank_applications:read bank_applications:write bank_applications:execute accounts:read accounts:write accounts:execute counterparties:read counterparties:pii:read counterparties:write counterparties:execute customers:read customers:pii:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transactions:read transfers:execute transfers:read transfers:write external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:write external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:write deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:write deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:pii:read identity_verifications:write identity_verifications:execute persona_sessions:execute sardine_sessions:execute plans:execute plans:read executions:execute executions:read files:read files:pii:read files:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:read accounts:read accounts:write accounts:execute counterparties:read counterparties:pii:read counterparties:write counterparties:execute customers:read customers:pii:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transactions:read transfers:execute transfers:read transfers:write external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:write external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:write deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:write deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:pii:read identity_verifications:write identity_verifications:execute persona_sessions:execute sardine_sessions:execute plans:execute plans:read executions:execute executions:read files:read files:pii:read files:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:read organization_applications:write organization_applications:execute banks:read banks:write banks:execute bank_applications:read bank_applications:write bank_applications:execute users:read users:write users:execute counterparties:read counterparties:pii:read customers:read customers:pii:read accounts:read accounts:write prices:read quotes:execute quotes:read trades:execute trades:read transactions:read transfers:read transfers:write transfers:execute external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_wallets:read external_wallets:write workflows:read deposit_addresses:read deposit_addresses:write deposit_bank_accounts:read deposit_bank_accounts:write deposit_bank_accounts:execute invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read identity_verifications:pii:read identity_verifications:execute persona_sessions:execute sardine_sessions:execute plans:execute plans:read executions:execute executions:read files:read files:pii:read files:execute'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:read banks:read banks:write banks:execute bank_applications:read users:read users:write users:execute counterparties:read counterparties:pii:read customers:read customers:pii:read accounts:read accounts:write prices:read quotes:execute quotes:read trades:execute trades:read transactions:read transfers:read transfers:write transfers:execute external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_wallets:read external_wallets:write workflows:read deposit_addresses:read deposit_addresses:write deposit_bank_accounts:read deposit_bank_accounts:write deposit_bank_accounts:execute invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read identity_verifications:pii:read identity_verifications:execute persona_sessions:execute sardine_sessions:execute plans:execute plans:read executions:execute executions:read files:read files:pii:read files:execute'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -80,11 +80,13 @@ The following scopes are available on the platform and can be requested when gen
 |-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
 | Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)                |
 | Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                     |
+| Bank Application      | bank_applications:read (Organization, Bank)                |                                               |                                                  |
 | Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                         |
 | Counterparty          | counterparties:read (Organization, Bank, Customer)         | counterparties:write (Bank, Customer)         | counterparties:execute (Bank)                    |
 | Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)       |
 | External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer)  |
 | External Wallet       | external_wallet:read (Organization, Bank, Customer)        |                                               | external_wallet:execute (Bank, Customer)         |
+| Organization Application | organization_applications:read (Organization)              |                                               |                                                  |
 | Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                  |
 | User                  | users:read (Organization)                                  |                                               | users:execute (Organization)                     |
 | Price                 | prices:read (Bank, Customer)                               |                                               |                                                  |
@@ -94,15 +96,17 @@ The following scopes are available on the platform and can be requested when gen
 | Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)               |
 | Invoice               | invoices:read (Organization, Bank, Customer)               | invoices:write (Bank, Customer)               | invoices:execute (Bank, Customer)                |
 
+API keys are created, updated and deleted only in the Partner Portal. Tokens issued for an organization API key can list and get organization and bank applications, and tokens issued for a bank API key can list and get bank applications; neither can create, update or delete them. Requesting the `organization_applications:write`, `organization_applications:execute`, `bank_applications:write` or `bank_applications:execute` scopes alongside other scopes is tolerated: they are dropped and the token is issued with the rest.
+
 ## Available Endpoints
 
 The available APIs for the [Identity](https://id.production.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.production.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.production.cybrid.app/api/schema/swagger-ui) API services are listed below:
 
 | API Service  | Model                | API Endpoint Path              | Description                                                                                       |
 |--------------|----------------------|--------------------------------|---------------------------------------------------------------------------------------------------|
-| Identity     | Bank                 | /api/bank_applications         | Create and list banks                                                                             |
+| Identity     | Bank                 | /api/bank_applications         | Get and list bank API keys                                                                        |
 | Identity     | CustomerToken        | /api/customer_tokens           | Create customer JWT access tokens                                                                 |
-| Identity     | Organization         | /api/organization_applications | Create and list organizations                                                                     |
+| Identity     | Organization         | /api/organization_applications | Get and list organization API keys                                                                |
 | Identity     | Organization         | /api/users                     | Create and list organization users                                                                |
 | Organization | Organization         | /api/organizations             | APIs to retrieve and update organization name                                                     |
 | Bank         | Account              | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             |
@@ -146,7 +150,7 @@ An `Organization` can have multiple `banks`, in either `Sandbox` or `Production`
 `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
-## @cybrid/cybrid-api-bank-typescript@0.129.1208
+## @cybrid/cybrid-api-bank-typescript@0.129.1209
 
 This generator creates TypeScript/JavaScript client that utilizes [RxJS](https://rxjs-dev.firebaseapp.com/). The generated Node module can be used in the following environments:
 
@@ -184,7 +188,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cybrid/cybrid-api-bank-typescript@0.129.1208 --save
+npm install @cybrid/cybrid-api-bank-typescript@0.129.1209 --save
 ```
 
 _unPublished (not recommended):_
