@@ -137,8 +137,6 @@ export * from './PostIdentityVerificationAliasesInnerBankModel';
 export * from './PostIdentityVerificationBankModel';
 export * from './PostIdentityVerificationNameBankModel';
 export * from './PostIdentityVerificationRegisteredAddressBankModel';
-export * from './PostInvoiceBankModel';
-export * from './PostPaymentInstructionBankModel';
 export * from './PostPersonaSessionBankModel';
 export * from './PostPlanBankModel';
 export * from './PostPlanDestinationAccountBankModel';
