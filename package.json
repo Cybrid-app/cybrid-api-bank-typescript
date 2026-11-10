@@ -1,6 +1,6 @@
 {
   "name": "@cybrid/cybrid-api-bank-typescript",
-  "version": "0.129.1572",
+  "version": "0.129.1574",
   "description": "View our documentation at https://github.com/Cybrid-app/cybrid-api-bank-typescript/",
   "author": "Cybrid",
   "keywords": [
@@ -8,6 +8,10 @@
     "@cybrid/cybrid-api-bank-typescript"
   ],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cybrid-app/cybrid-api-bank-typescript.git"
+  },
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "files": [
